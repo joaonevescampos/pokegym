@@ -1,5 +1,4 @@
 import florestImage from "../assets/florest.png";
-import battleIcon from "../assets/battle-icon.png";
 import pokeball from "../assets/pokeball-animation.png";
 import lightCircle from "../assets/light-circle.png";
 
@@ -99,7 +98,7 @@ const PokemonBattle = () => {
       const pokemonChose = state.myPokemons.filter(
         (pokemon) => pokemon.name === param.pokemonChose,
       )[0];
-      const pokemonChoseLevel = pokemonChose.hp;
+      const pokemonChoseLevel = pokemonChose.xp;
 
       const winRate = captureRate + userTotalPokemon + pokemonChoseLevel;
       const total = maxCaptureRate + maxLevel + maxCapturedPokemons;
@@ -164,12 +163,7 @@ const PokemonBattle = () => {
               className={`flex flex-col items-center absolute left-1/2 bottom-[28%] -translate-1/2 z-0 ${
                 isFighting ? "animate-float" : ""
               }`}
-            >
-              <img src={battleIcon} alt="florest" className="w-12 h-12 " />
-              <span className="font-bold text-xl max-lg:text-sm text-center">
-                Batalha em andamento
-              </span>
-            </div>
+            ></div>
           )}
           {myPokemon && isFighting && (
             <img

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 type BasePokemon = {
   name: string;
   level: number;
-  hp: number;
+  xp: number;
   captureLevel: number;
   captured: boolean;
 };
@@ -23,7 +23,9 @@ const captureLevels = [
 const PokemonCataloge = () => {
   const { state } = usePokemon();
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
-  const [pokemonFilteredList, setPokemonFilteredList] = useState<BasePokemon[]>([]);
+  const [pokemonFilteredList, setPokemonFilteredList] = useState<BasePokemon[]>(
+    [],
+  );
 
   const getPokemonList = async () => {
     try {
@@ -44,15 +46,16 @@ const PokemonCataloge = () => {
           return {
             name: pokemon.name,
             level: 0,
-            hp: 0,
+            xp: 0,
             captureLevel: species.capture_rate,
-            captured: state.myPokemons?.some(p => p.name === pokemon.name) ?? false,
+            captured:
+              state.myPokemons?.some((p) => p.name === pokemon.name) ?? false,
           };
-        })
+        }),
       );
 
       setPokemonBaseList(basePokemons.filter(Boolean));
-      setPokemonFilteredList(basePokemons.filter(Boolean))
+      setPokemonFilteredList(basePokemons.filter(Boolean));
     } catch (error) {
       console.log("Cannot get pokemon list", error);
     }
@@ -65,29 +68,27 @@ const PokemonCataloge = () => {
     console.log("pokemons", pokemonBaseList);
   }, [pokemonBaseList]);
 
-  const filterCaptureLevel = (captureStatus : string) => {
+  const filterCaptureLevel = (captureStatus: string) => {
     if (captureStatus === "fácil") {
       return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel === 255);
     } else if (captureStatus === "médio") {
       return pokemonBaseList?.filter(
-        (pokemon) => pokemon.captureLevel < 255 && pokemon.captureLevel >= 190
+        (pokemon) => pokemon.captureLevel < 255 && pokemon.captureLevel >= 190,
       );
     } else if (captureStatus === "dificil") {
       return pokemonBaseList?.filter(
-        (pokemon) => pokemon.captureLevel < 190 && pokemon.captureLevel >= 35
+        (pokemon) => pokemon.captureLevel < 190 && pokemon.captureLevel >= 35,
       );
     } else if (captureStatus === "insano") {
-      return pokemonBaseList?.filter(
-        (pokemon) => pokemon.captureLevel < 35
-      );
+      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel < 35);
     } else {
-      return pokemonBaseList
+      return pokemonBaseList;
     }
   };
 
-  const handleSelectLevel = (captureStatus : string) => {
-    const newPokemonList = filterCaptureLevel(captureStatus)
-    setPokemonFilteredList(newPokemonList)
+  const handleSelectLevel = (captureStatus: string) => {
+    const newPokemonList = filterCaptureLevel(captureStatus);
+    setPokemonFilteredList(newPokemonList);
   };
 
   return (
@@ -100,15 +101,15 @@ const PokemonCataloge = () => {
             </Link>
           </div>
           <div className="absolute flex items-end gap-2 top-4 right-4">
-            <span className="text-sm font-bold opacity-70">x {state.userStatus.pokeball} </span>
+            <span className="text-sm font-bold opacity-70">
+              x {state.userStatus.pokeball}{" "}
+            </span>
             <img src={pokebola} alt="pokebola" width={28} />
           </div>
         </section>
         <section className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120">
-            <h1 className="text-2xl text-center font-extrabold">
-              Pokedex
-            </h1>
+            <h1 className="text-2xl text-center font-extrabold">Pokedex</h1>
             <p className="text-sm font-medium text-center opacity-70">
               1. Os pokémons são separados em níveis de captura.
             </p>
@@ -117,7 +118,8 @@ const PokemonCataloge = () => {
               pokémon.
             </p>
             <p className="text-sm font-medium text-center mb-4 opacity-70">
-              3. Escolha um dos níveis e filtre os pokémons por nível de captura.
+              3. Escolha um dos níveis e filtre os pokémons por nível de
+              captura.
             </p>
             <h1 className="text-xl text-center font-extrabold">
               Níveis de captura
@@ -146,9 +148,15 @@ const PokemonCataloge = () => {
                 name={pokemon.name}
                 buttonText={pokemon.captured ? "capturado" : "capturar"}
                 level={0}
-                buttonPath={pokemon.captured ? "" : `/pokemon-battle/${pokemon.name}`}
+                buttonPath={
+                  pokemon.captured ? "" : `/pokemon-battle/${pokemon.name}`
+                }
                 inactive={false}
-                buttonStyle={pokemon.captured ? "pointer-events-none! bg-bt-purple! text-white" : ""}
+                buttonStyle={
+                  pokemon.captured
+                    ? "pointer-events-none! bg-bt-purple! text-white"
+                    : ""
+                }
               />
             ))}
           </div>

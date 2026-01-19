@@ -21,16 +21,16 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "CAPTURE_POKEMON", payload: { name, type } });
   }
 
-  async function gainHp(name: string, hp: number) {
+  async function gainXp(name: string, xp: number) {
     const pokemon = state.myPokemons.find((p) => p.name === name);
     if (!pokemon) return;
 
     const previousLevel = pokemon.level;
 
-    dispatch({ type: "GAIN_HP", payload: { name, hp } });
+    dispatch({ type: "GAIN_XP", payload: { name, xp } });
 
-    const newHp = Math.min(pokemon.hp + hp, 100);
-    const newLevel = Math.floor(newHp / 10);
+    const newXp = Math.min(pokemon.xp + xp, 100);
+    const newLevel = Math.floor(newXp / 10);
 
     // Evolui a cada 3 levels
     if (newLevel > previousLevel && newLevel % 3 === 0) {
@@ -74,7 +74,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
       value={{
         state,
         capturePokemon,
-        gainHp,
+        gainXp,
         gainPokeball,
         usePokeball,
         resetGame,
