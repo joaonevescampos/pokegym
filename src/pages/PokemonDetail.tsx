@@ -29,7 +29,6 @@ const PokemonDetail = () => {
 
   useEffect(() => {
     formatDate();
-    console.log(state)
   }, []);
 
   useEffect(() => {
@@ -88,7 +87,6 @@ const PokemonDetail = () => {
     const newChecklist = checklist.map((item, i) =>
       i === index ? { ...item, checked: e.target.checked } : item,
     );
-    console.log(newChecklist);
     setChecklist(newChecklist);
     localStorage.setItem(
       `${pokemonName}-checklist`,
@@ -142,6 +140,17 @@ const PokemonDetail = () => {
     );
   };
 
+  const handleDeleteItem = (indexToDelete: number) => {
+    const newChecklist = checklist.filter(
+      (_item, index) => index !== indexToDelete,
+    );
+    setChecklist(newChecklist);
+    localStorage.setItem(
+      `${pokemonName}-checklist`,
+      JSON.stringify(newChecklist),
+    );
+  };
+
   return (
     <main className="flex max-lg:flex-col">
       <section
@@ -189,32 +198,32 @@ const PokemonDetail = () => {
           <span className="text-2xl font-bold">{name}</span>
           <span
             className={`font-bold text-sm ${
-          type === "electric"
-            ? "bg-amber-500"
-            : type === "grass"
-            ? "bg-emerald-700"
-            : type === "water"
-            ? "bg-blue-700"
-            : type === "fire"
-            ? "bg-red-600"
-            : type === "bug"
-            ? "bg-pink-800"
-            : type === "poison"
-            ? "bg-pink-500"
-            : type === "ground"
-            ? "bg-orange-950"
-            : type === "psychic"
-            ? "bg-black"
-            : type === "ghost"
-            ? "bg-purple-600"
-            : type === "rock"
-            ? "bg-gray-800"
-            : type === "ice"
-            ? "bg-blue-400"
-            : type === "dragon"
-            ? "bg-orange-500"
-            : "bg-amber-700"
-        } text-white rounded-2xl px-2 z-10`}
+              type === "electric"
+                ? "bg-amber-500"
+                : type === "grass"
+                  ? "bg-emerald-700"
+                  : type === "water"
+                    ? "bg-blue-700"
+                    : type === "fire"
+                      ? "bg-red-600"
+                      : type === "bug"
+                        ? "bg-pink-800"
+                        : type === "poison"
+                          ? "bg-pink-500"
+                          : type === "ground"
+                            ? "bg-orange-950"
+                            : type === "psychic"
+                              ? "bg-black"
+                              : type === "ghost"
+                                ? "bg-purple-600"
+                                : type === "rock"
+                                  ? "bg-gray-800"
+                                  : type === "ice"
+                                    ? "bg-blue-400"
+                                    : type === "dragon"
+                                      ? "bg-orange-500"
+                                      : "bg-amber-700"
+            } text-white rounded-2xl px-2 z-10`}
           >
             {type}
           </span>
@@ -244,7 +253,7 @@ const PokemonDetail = () => {
           />
           <ul className="flex flex-col gap-4 w-full">
             {checklist?.map((item, index) => (
-              <li className="flex items-center gap-4" key={index}>
+              <li className="flex items-center gap-2" key={index}>
                 <input
                   type="checkbox"
                   name={`${index}`}
@@ -263,6 +272,12 @@ const PokemonDetail = () => {
                   name={`${index}`}
                   onChange={(e) => handleChange(e, index)}
                 />
+                <button
+                  className="flex items-center justify-center opacity-70 rounded-xl cursor-pointer"
+                  onClick={() => handleDeleteItem(index)}
+                >
+                  <img src={xIcon} alt="delete" className="w-4" />
+                </button>
               </li>
             ))}
           </ul>
