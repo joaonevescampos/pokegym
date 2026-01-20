@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+html,
+body {
+  background: linear-gradient(to bottom, #000000, #010F40);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
+}
+
 @theme {
   --color-bg-blue: #060b28;
   --color-gd-orange: #e27e65;
@@ -247,12 +255,4 @@
   100% {
     opacity: 0;
   }
-}
-
-html,
-body {
-  background: linear-gradient(to bottom, #000000, #05091b);
-  box-sizing: border-box;
-  overflow-x: hidden;
-  height: 100%;
 }

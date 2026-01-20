@@ -30,8 +30,8 @@ const Home = () => {
             Batalhar, capturar e treinar todos os 150 pokémons sendo produtivo!
           </p>
           <ul className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 w-full z-10">
-            {menu.map((item) => (
-              <li className="w-full min-w-36 min-h-36 bg-bt-purple rounded-2xl">
+            {menu.map((item, index) => (
+              <li className="w-full min-w-36 min-h-36 bg-bt-purple rounded-2xl" key={index}>
                 <Link to={item.path} className="flex items-center justify-center p-2 w-full h-full text-center font-bold">{item.name}</Link>
               </li>
             ))}

@@ -8,6 +8,7 @@ export type PokemonContextType = {
   gainXp: (name: string, xp: number) => Promise<boolean>;
   gainPokeball: (gain: number) => void;
   usePokeball: (lose: number) => void;
+  registerMission: (year: number, month: number, day: number) => void;
   resetGame: () => void;
 };
 

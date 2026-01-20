@@ -1,13 +1,65 @@
-// src/context/pokemonTypes.ts
 export type Pokemon = {
   name: string;
   type: string;
   xp: number;
   level: number;
+  checklist: Checklist[];
 };
+
+export type Checklist = {
+  task: string;
+  checked: boolean;
+};
+
+export type DayOfMonth =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 21
+  | 22
+  | 23
+  | 24
+  | 25
+  | 26
+  | 27
+  | 28
+  | 29
+  | 30
+  | 31;
+
+export type Month = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+
+export type MonthEntry = {
+  [K in Month]?: DayOfMonth[];
+};
+
+export type DashboardYear = {
+  year: number;
+  months: MonthEntry[];
+};
+
+export type Dashboard = DashboardYear[];
 
 export type UserStatus = {
   pokeball: number;
+  dashboard: Dashboard;
 };
 
 export type PokemonState = {
@@ -21,4 +73,12 @@ export type PokemonAction =
   | { type: "EVOLVE_POKEMON"; payload: { name: string; newName: string } }
   | { type: "GAIN_POKEBALL"; payload: { gain: number } }
   | { type: "USE_POKEBALL"; payload: { lose: number } }
+  | {
+      type: "REGISTER_MISSION";
+      payload: {
+        year: number;
+        month: Month;
+        day: DayOfMonth;
+      };
+    }
   | { type: "RESET_GAME" };

@@ -18,7 +18,7 @@ const ChoosePokemonBattle = () => {
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
 
-  // console.log(state)
+  console.log(state)
 
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"

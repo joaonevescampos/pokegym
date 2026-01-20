@@ -10,7 +10,7 @@ interface ChecklistType {
 }
 
 const PokemonDetail = () => {
-  const { state, gainXp, gainPokeball } = usePokemon();
+  const { state, gainXp, gainPokeball, registerMission } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
   const initialList = [{ task: "escreva sua tarefa aqui", checked: false }];
@@ -26,6 +26,11 @@ const PokemonDetail = () => {
   const type = currentPokemon?.type ?? "";
   const xp = currentPokemon?.xp ?? 0;
   const level = currentPokemon?.level ?? 0;
+  const dateFunction = new Date()
+  const currYear = dateFunction.getFullYear()
+  const currMonth = dateFunction.getMonth()
+  const currDate = dateFunction.getDate()
+  const currDay = dateFunction.getDay()
 
   useEffect(() => {
     formatDate();
@@ -96,7 +101,7 @@ const PokemonDetail = () => {
 
   const handleFinish = async () => {
     if (!currentPokemon) return;
-
+    registerMission(currYear, currMonth, currDate)
     const evolved = await gainXp(currentPokemon.name, 1);
     if (evolved) {
       gainPokeball(3);
@@ -108,8 +113,6 @@ const PokemonDetail = () => {
   };
 
   const formatDate = () => {
-    const today = new Date();
-
     const week = [
       "domingo",
       "segunda",
@@ -134,9 +137,9 @@ const PokemonDetail = () => {
     ];
 
     setDate(
-      `${today.getDate()}, ${
-        month[today.getMonth()]
-      }, ${today.getFullYear()} - ${week[today.getDay()]}`,
+      `${currDate}, ${
+        month[currMonth]
+      }, ${currYear} - ${week[currDay]}`,
     );
   };
 
@@ -150,6 +153,8 @@ const PokemonDetail = () => {
       JSON.stringify(newChecklist),
     );
   };
+
+  console.log("state", state)
 
   return (
     <main className="flex max-lg:flex-col">

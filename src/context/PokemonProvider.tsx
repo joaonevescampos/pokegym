@@ -1,7 +1,7 @@
-// src/context/PokemonProvider.tsx
 import { useEffect, useReducer } from "react";
 import { PokemonContext } from "./PokemonContext";
 import { pokemonReducer, initialPokemonState } from "./pokemonReducer";
+import type { DayOfMonth, Month } from "./pokemonTypes";
 
 const STORAGE_KEY = "pokemon_game";
 
@@ -83,6 +83,23 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "USE_POKEBALL", payload: { lose } });
   }
 
+  function registerMission() {
+    const now = new Date();
+
+    const currYear = now.getFullYear();
+    const currMonth = now.getMonth() as Month; 
+    const currDay = now.getDate() as DayOfMonth; 
+
+    dispatch({
+      type: "REGISTER_MISSION",
+      payload: {
+        year: currYear,
+        month: currMonth,
+        day: currDay,
+      },
+    });
+  }
+
   function resetGame() {
     dispatch({ type: "RESET_GAME" });
   }
@@ -95,6 +112,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         gainXp,
         gainPokeball,
         usePokeball,
+        registerMission,
         resetGame,
       }}
     >
