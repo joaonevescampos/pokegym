@@ -12,20 +12,37 @@ type BasePokemon = {
   captured: boolean;
 };
 
-const captureLevels = [
-  { level: "fácil", color: "bg-green-300" },
-  { level: "médio", color: "bg-yellow-300" },
-  { level: "dificil", color: "bg-red-400" },
-  { level: "insano", color: "bg-purple-400" },
-  { level: "todos", color: "bg-white" },
-];
-
 const PokemonCataloge = () => {
   const { state } = usePokemon();
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
   const [pokemonFilteredList, setPokemonFilteredList] = useState<BasePokemon[]>(
     [],
   );
+  const [captureLevels, setCaptureLevels] = useState([
+    { level: "fácil", color: "bg-green-300", selected: false },
+    { level: "médio", color: "bg-yellow-300", selected: false },
+    { level: "dificil", color: "bg-red-400", selected: false },
+    { level: "insano", color: "bg-purple-400", selected: false },
+    { level: "todos", color: "bg-white", selected: false },
+  ]);
+
+  const isEvolutionChainCaptured = async (speciesUrl: string) => {
+    const speciesRes = await fetch(speciesUrl);
+    const speciesData = await speciesRes.json();
+
+    const chainRes = await fetch(speciesData.evolution_chain.url);
+    const chainData = await chainRes.json();
+
+    const extractNames = (node: any, acc: string[] = []) => {
+      acc.push(node.species.name);
+      node.evolves_to.forEach((e: any) => extractNames(e, acc));
+      return acc;
+    };
+
+    const evolutionNames = extractNames(chainData.chain);
+
+    return state.myPokemons.some((p) => evolutionNames.includes(p.name));
+  };
 
   const getPokemonList = async () => {
     try {
@@ -41,15 +58,14 @@ const PokemonCataloge = () => {
             return null;
           }
 
-          // console.log(state.myPokemons)
+          const captured = await isEvolutionChainCaptured(pokemon.url);
 
           return {
             name: pokemon.name,
             level: 0,
             xp: 0,
             captureLevel: species.capture_rate,
-            captured:
-              state.myPokemons?.some((p) => p.name === pokemon.name) ?? false,
+            captured,
           };
         }),
       );
@@ -63,10 +79,6 @@ const PokemonCataloge = () => {
   useEffect(() => {
     getPokemonList();
   }, []);
-
-  useEffect(() => {
-    console.log("pokemons", pokemonBaseList);
-  }, [pokemonBaseList]);
 
   const filterCaptureLevel = (captureStatus: string) => {
     if (captureStatus === "fácil") {
@@ -89,6 +101,14 @@ const PokemonCataloge = () => {
   const handleSelectLevel = (captureStatus: string) => {
     const newPokemonList = filterCaptureLevel(captureStatus);
     setPokemonFilteredList(newPokemonList);
+
+    const newCaptureLevel = captureLevels.map((item) => 
+      item.level === captureStatus
+        ? {...item, selected : true}
+        : {...item, selected : false}
+    );
+
+    setCaptureLevels(newCaptureLevel)
   };
 
   return (
@@ -128,7 +148,7 @@ const PokemonCataloge = () => {
           <ul className="flex gap-2 py-4">
             {captureLevels.map((item, index) => (
               <li
-                className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer`}
+                className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer ${item.selected ? "border-2 border-white bg-transparent! text-white" : "border-none"}`}
                 onClick={() => handleSelectLevel(item.level)}
                 key={index}
               >
