@@ -82,7 +82,9 @@ const PokemonBattle = () => {
       console.log("data 1", data1);
       console.log("TYPE api", data1.types[0].type.name);
 
-      setOponentType(data1.types[0].type.name);
+      const type = data1.types[0].type.name;
+      setOponentType(type);
+
       const responseCaptureRate: any = await fetch(
         `https://pokeapi.co/api/v2/pokemon-species/${data1.id}`,
       );
@@ -107,7 +109,7 @@ const PokemonBattle = () => {
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
-        capturePokemon(param.pokemonOponent!, oponentType);
+        capturePokemon(param.pokemonOponent!, type);
       } else {
         setWonBattle(false);
       }
@@ -127,7 +129,7 @@ const PokemonBattle = () => {
     if (showResult) {
       calculateWinner();
     }
-  }, [showResult]);
+  }, [showResult, oponentType]);
 
   return (
     <>

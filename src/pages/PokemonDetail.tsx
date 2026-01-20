@@ -23,12 +23,13 @@ const PokemonDetail = () => {
   const navigate = useNavigate();
   const currentPokemon = state.myPokemons.find((p) => p.name === pokemonName);
   const name = currentPokemon?.name ?? "";
-const type = currentPokemon?.type ?? "";
-const xp = currentPokemon?.xp ?? 0;
-const level = currentPokemon?.level ?? 0;
+  const type = currentPokemon?.type ?? "";
+  const xp = currentPokemon?.xp ?? 0;
+  const level = currentPokemon?.level ?? 0;
 
   useEffect(() => {
     formatDate();
+    console.log(state)
   }, []);
 
   useEffect(() => {
@@ -153,11 +154,27 @@ const level = currentPokemon?.level ?? 0;
                 ? "from-gd-water1 to-gd-water2"
                 : type === "fire"
                   ? "from-gd-fire1 to-gd-fire2"
-                  : "from-gd-orange to-gd-blue"
+                  : type === "bug"
+                    ? "from-yellow-300 to-pink-800"
+                    : type === "poison"
+                      ? "from-pink-400 to-purple-900"
+                      : type === "ground"
+                        ? "from-brown-500 to-orange-200"
+                        : type === "psychic"
+                          ? "from-pink-800 to-purple-600"
+                          : type === "ghost"
+                            ? "from-purple-800 to-gray-800"
+                            : type === "rock"
+                              ? "from-gray-800 to-gray-300"
+                              : type === "ice"
+                                ? "from-blue-200 to-blue-500"
+                                : type === "dragon"
+                                  ? "from-orange-400 to-green-400"
+                                  : "from-gd-orange to-gd-blue"
         }`}
       >
         <div className="absolute flex items-end gap-2 top-4 left-4">
-          <Link to="/my-pokemons" className="text-sm  font-bold opacity-70">
+          <Link to="/my-pokemons" className="text-sm text-white font-bold">
             voltar
           </Link>
         </div>
