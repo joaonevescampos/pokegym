@@ -41,12 +41,12 @@ const LandingPage = () => {
 
           <p>
             2 - Crie sua lista de tarefas do dia e conclua cada uma delas para
-            treinar seu pokémon. Só é possível treinar seu pokémon 1x no dia.
+            treinar seu pokémon.
           </p>
 
           <p>
             3 - Após concluir todas tarefas do dia, seu pokémon escolhido vai
-            ficar mais forte. Assim, ele vai ganhando níveis e com o
+            ficar mais forte ganhar 1x pokebola. Assim, ele vai ganhando XP e subindo de level e com o
             tempo podem evoluir para sua segunda e terceira forma.
           </p>
 
@@ -64,13 +64,7 @@ const LandingPage = () => {
           </p>
 
           <p>
-            5 - O pokémon que for treinado todos os dias ganha bônus de
-            experiência, evoluindo mais rápido.{" "}
-          </p>
-
-          <p>
-            6 - O pokémon que não evoluiu para sua terceira forma, se não for
-            treinado por vários dias consecutivos, pode ir baixando de nível...
+            Preparado para ser produtivo e se divertir ao mesmo tempo? Boraaaa!!
           </p>
         </div>
         <Button text="Começar" path="/choose-pokemon" />
