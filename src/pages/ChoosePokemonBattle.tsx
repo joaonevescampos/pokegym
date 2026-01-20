@@ -1,6 +1,6 @@
 import PokemonCard from "../components/PokemonCard";
 import florestImage from "../assets/florest.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
@@ -69,6 +69,11 @@ const ChoosePokemonBattle = () => {
             alt="florest"
             className="absolute w-full h-full z-0 object-cover pointer-events-none"
           />
+          <div className="absolute flex items-end gap-2 top-4 left-4">
+          <Link to="/capture-pokemon" className="text-sm font-bold ">
+            voltar
+          </Link>
+        </div>
           {imageURL && (
             <img
               src={imageURL}

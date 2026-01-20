@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { usePokemon } from "../context/usePokemon";
 import pokebola from "../assets/pokeball.png";
@@ -13,12 +13,6 @@ const PokemonDetail = () => {
   const { state, gainXp, gainPokeball } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
-  const [pokemonData, setPokemonData] = useState({
-    name: pokemonName,
-    type: "",
-    xp: 0,
-    level: 0,
-  });
   const initialList = [{ task: "escreva sua tarefa aqui", checked: false }];
   const prevList = localStorage.getItem(`${pokemonName}-checklist`);
   const [checklist, setChecklist] = useState<ChecklistType[]>(
@@ -26,11 +20,22 @@ const PokemonDetail = () => {
   );
   const [date, setDate] = useState("");
   const [alert, setAlert] = useState(false);
+  const navigate = useNavigate();
+  const currentPokemon = state.myPokemons.find((p) => p.name === pokemonName);
+  const name = currentPokemon?.name ?? "";
+const type = currentPokemon?.type ?? "";
+const xp = currentPokemon?.xp ?? 0;
+const level = currentPokemon?.level ?? 0;
 
   useEffect(() => {
-    getPokemonInfos(pokemonName!);
     formatDate();
   }, []);
+
+  useEffect(() => {
+    if (currentPokemon) {
+      getPokemonInfos(currentPokemon.name);
+    }
+  }, [currentPokemon]);
 
   useEffect(() => {
     if (alert) {
@@ -49,17 +54,10 @@ const PokemonDetail = () => {
       setpokemonImage(
         `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
       );
-
-      const updatePokemonData = state.myPokemons.filter(
-        (pokemon) => pokemon.name === pokemonName,
-      )[0];
-      setPokemonData(updatePokemonData);
     } catch (error) {
       console.log("cannot get pokemon image");
     }
   };
-
-  const { name, type, xp, level } = pokemonData;
 
   const widthXP = (xp % 10) * 10;
 
@@ -97,10 +95,17 @@ const PokemonDetail = () => {
     );
   };
 
-  const handleFinish = () => {
-    gainXp(name!, 1);
-    gainPokeball(1);
-    setAlert(true);
+  const handleFinish = async () => {
+    if (!currentPokemon) return;
+
+    const evolved = await gainXp(currentPokemon.name, 1);
+    if (evolved) {
+      gainPokeball(3);
+      navigate(`/pokemon-evolution/${currentPokemon.name}`);
+    } else {
+      gainPokeball(1);
+      setAlert(true);
+    }
   };
 
   const formatDate = () => {
@@ -152,10 +157,10 @@ const PokemonDetail = () => {
         }`}
       >
         <div className="absolute flex items-end gap-2 top-4 left-4">
-            <Link to="/my-pokemons" className="text-sm  font-bold opacity-70">
-              voltar
-            </Link>
-          </div>
+          <Link to="/my-pokemons" className="text-sm  font-bold opacity-70">
+            voltar
+          </Link>
+        </div>
         <div className="flex flex-col items-center gap-2 text-white">
           {pokemonImage && (
             <img
@@ -247,7 +252,6 @@ const PokemonDetail = () => {
               className="absolute top-2 right-2 cursor-pointer
               "
               onClick={() => {
-                window.location.reload();
                 setAlert(false);
               }}
             >

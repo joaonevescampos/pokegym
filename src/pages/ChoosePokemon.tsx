@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 
 const ChoosePokemon = () => {
-  const {  capturePokemon } = usePokemon();
-  // const navigate = useNavigate();
+  const { capturePokemon } = usePokemon();
+  const navigate = useNavigate();
   const [inactive, setinactive] = useState(true);
   const [initialPokemons, setInitialPokemons] = useState([
     { name: "pichu", type: "electric", level: 0, selected: false },
@@ -15,40 +15,40 @@ const ChoosePokemon = () => {
     { name: "charmander", type: "fire", level: 0, selected: false },
     { name: "squirtle", type: "water", level: 0, selected: false },
   ]);
-  const {state} = usePokemon()
+  const { state } = usePokemon();
 
-  // useEffect(() => {
-  //   if (state.myPokemons.length > 0) {
-  //     navigate("/home");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (state.myPokemons.length > 0) {
+      navigate("/home");
+    }
+  }, []);
 
   const handleClick = (index: number) => {
     const updateSelection = initialPokemons.map((pokemon, i) =>
       index === i
         ? { ...pokemon, selected: true }
-        : { ...pokemon, selected: false }
+        : { ...pokemon, selected: false },
     );
     setInitialPokemons(updateSelection);
   };
 
   const handleChoosePokemon = () => {
     const pokemonChose = initialPokemons.filter(
-      (pokemon) => pokemon.selected
+      (pokemon) => pokemon.selected,
     )[0];
     capturePokemon(pokemonChose.name, pokemonChose.type);
   };
 
   useEffect(() => {
     const oneSelected: boolean = initialPokemons.some(
-      (pokemon) => pokemon.selected === true
+      (pokemon) => pokemon.selected === true,
     );
     setinactive(!oneSelected);
   }, [initialPokemons]);
 
   return (
     <>
-      {/* {state.myPokemons.length === 0 && ( */}
+      {state.myPokemons.length === 0 && (
         <>
           <header className="relative w-full h-12 text-white">
             <div className="absolute flex items-end gap-2 top-4 left-4">
@@ -57,7 +57,9 @@ const ChoosePokemon = () => {
               </Link>
             </div>
             <div className="absolute flex items-end gap-2 top-4 right-4">
-              <span className="text-sm font-bold opacity-70">x {state.userStatus.pokeball} </span>
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.pokeball}{" "}
+              </span>
               <img src={pokebola} alt="pokebola" width={28} />
             </div>
           </header>
@@ -107,7 +109,7 @@ const ChoosePokemon = () => {
             </div>
           </main>
         </>
-      {/* )} */}
+      )}
     </>
   );
 };

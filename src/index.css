@@ -23,6 +23,8 @@
   --animate-circle-effect: circle-effect 0.5s ease-in-out;
   --animate-pokeball-captured: pokeball-captured 8s ease-in-out;
   --animate-pokemon-scape: pokemon-scape 1s ease-out;
+  --animate-pokemon-evolving: pokemon-evolving 10s ease-in-out;
+  --animate-desapearing: desapearing 4s ease-in-out;
 
   @keyframes attack-down {
     0% {
@@ -175,18 +177,77 @@
   }
 }
 
-  @keyframes pokemon-scape {
-    0% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translateX(150%);
-      opacity: 0.8;
-    }
+@keyframes pokemon-scape {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
   }
 
+  100% {
+    transform: translateX(150%);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pokemon-evolving {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    transform: scale(2);
+    opacity: 0.6;
+  }
+
+  40% {
+    transform: scale(2.5);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.9;
+  }
+
+  60% {
+    transform: scale(2.5);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+
+  80% {
+    transform: scale(2);
+    opacity: 0.8;
+  }
+
+  90% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(5);
+    opacity: 0.2;
+  }
+}
+
+@keyframes desapearing {
+  0% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 
 html,
 body {

@@ -8,6 +8,7 @@ import PokemonDetail from "./pages/PokemonDetail";
 import ChoosePokemonBattle from "./pages/ChoosePokemonBattle";
 import PokemonBattle from "./pages/PokemonBattle ";
 import PokemonCataloge from "./pages/PokemonCataloge";
+import PokemonEvolution from "./pages/PokemonEvolution";
 
 function AppRoutes() {
   return (
@@ -23,9 +24,11 @@ function AppRoutes() {
           path="/pokemon-battle/:pokemonOponent"
           element={<ChoosePokemonBattle />}
         />
-        <Route path="/pokemon-battle/:pokemonOponent/:pokemonChose" element={<PokemonBattle />} />
-
-        
+        <Route
+          path="/pokemon-battle/:pokemonOponent/:pokemonChose"
+          element={<PokemonBattle />}
+        />
+        <Route path="/pokemon-evolution/:pokemonName" element={<PokemonEvolution />} />
       </Routes>
     </Router>
   );
