@@ -5,7 +5,7 @@ const currYear = date.getFullYear();
 
 export const initialPokemonState: PokemonState = {
   userStatus: {
-    pokeball: 0,
+    pokeball: 3,
     dashboard: [
       {
         year: currYear,
@@ -66,7 +66,7 @@ export function pokemonReducer(
         myPokemons: state.myPokemons.map((p) => {
           if (p.name !== action.payload.name) return p;
 
-          const newXp = Math.min(p.xp + action.payload.xp, 100);
+          const newXp = Math.min(p.xp + action.payload.xp, 101);
           const newLevel = calculateLevel(newXp);
 
           return {

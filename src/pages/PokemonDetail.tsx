@@ -26,15 +26,17 @@ const PokemonDetail = () => {
   const type = currentPokemon?.type ?? "";
   const xp = currentPokemon?.xp ?? 0;
   const level = currentPokemon?.level ?? 0;
-  const dateFunction = new Date()
-  const currYear = dateFunction.getFullYear()
-  const currMonth = dateFunction.getMonth()
-  const currDate = dateFunction.getDate()
-  const currDay = dateFunction.getDay()
+  const dateFunction = new Date();
+  const currYear = dateFunction.getFullYear();
+  const currMonth = dateFunction.getMonth();
+  const currDate = dateFunction.getDate();
+  const currDay = dateFunction.getDay();
 
   useEffect(() => {
     formatDate();
   }, []);
+
+  console.log(xp);
 
   useEffect(() => {
     if (currentPokemon) {
@@ -101,13 +103,25 @@ const PokemonDetail = () => {
 
   const handleFinish = async () => {
     if (!currentPokemon) return;
-    registerMission(currYear, currMonth, currDate)
-    const evolved = await gainXp(currentPokemon.name, 1);
+    registerMission(currYear, currMonth, currDate);
+    const evolved = await gainXp(currentPokemon.name, 5);
     if (evolved) {
       gainPokeball(3);
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
-      gainPokeball(1);
+      if (
+        xp === 10 ||
+        xp === 20 ||
+        xp === 40 ||
+        xp === 50 ||
+        xp === 70 ||
+        xp === 80 ||
+        xp === 90
+      ) {
+        gainPokeball(1);
+      } else if (xp === 100) {
+        gainPokeball(5);
+      }
       setAlert(true);
     }
   };
@@ -136,11 +150,7 @@ const PokemonDetail = () => {
       "Dezembro",
     ];
 
-    setDate(
-      `${currDate}, ${
-        month[currMonth]
-      }, ${currYear} - ${week[currDay]}`,
-    );
+    setDate(`${currDate}, ${month[currMonth]}, ${currYear} - ${week[currDay]}`);
   };
 
   const handleDeleteItem = (indexToDelete: number) => {
@@ -154,7 +164,7 @@ const PokemonDetail = () => {
     );
   };
 
-  console.log("state", state)
+  console.log("state", state);
 
   return (
     <main className="flex max-lg:flex-col">
@@ -312,17 +322,74 @@ const PokemonDetail = () => {
             >
               <img src={xIcon} alt="x" className="w-4" />
             </span>
-            <h1 className="font-bold text-xl text-center text-green-400">
-              Oba! Você ganhou +1 pokebola!
-            </h1>
-            <div className="flex items-end gap-2 top-4 right-4">
-              <span className="text-sm font-bold opacity-70">+ 1</span>
-              <img src={pokebola} alt="pokebola" width={28} />
-            </div>
-            <p className="text-sm text-center">
-              Com a pokebola, você pode batalhar contra um pokemon e capturá-lo
-              para fazer parte do seu time!
-            </p>
+            {xp === 10 ||
+            xp === 20 ||
+            xp === 40 ||
+            xp === 50 ||
+            xp === 70 ||
+            xp === 80 ||
+            xp === 90 ? (
+              <>
+                <h2 className="font-bold text-center">
+                  Excelente! Você atingiu o nível {level}
+                </h2>
+                <h1 className="font-bold text-sm text-center text-green-400">
+                  Oba! Você ganhou +1 pokebola!
+                </h1>
+                <div className="flex items-end gap-2 top-4 right-4">
+                  <span className="text-sm font-bold opacity-70">+ 1</span>
+                  <img src={pokebola} alt="pokebola" width={28} />
+                </div>
+                <p className="text-sm text-center">
+                  Com a pokebola, você pode batalhar contra um pokemon e
+                  capturá-lo para fazer parte do seu time!
+                </p>
+              </>
+            ) : xp === 100 ? (
+              <>
+                <h2 className="font-bold text-center">
+                  UAUUU! Você atingiu o nível máximo: {level}
+                </h2>
+                <h1 className="font-bold text-sm text-center text-green-400">
+                  Oba! Você ganhou +5 pokebolas!
+                </h1>
+                <div className="flex items-end gap-2 top-4 right-4">
+                  <span className="text-sm font-bold opacity-70">+ 5</span>
+                  <img src={pokebola} alt="pokebola" width={28} />
+                </div>
+                <p className="text-sm text-center">
+                  Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,
+                  portanto não é mais possível ganhar recompensas treinando este
+                  pokémon! Capture e treine outros pokémons para continuar
+                  ganhando recompensas.
+                </p>
+                <p className="text-xs text-center text-green-400">
+                  DICA: use este pokémon que está bem forte para fazer suas
+                  próximas capturas!
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="font-bold text-xl text-center text-green-400 pb-4">
+                  Parabéns! Continue sendo produtivo assim!
+                </h1>
+
+                {xp > 100 ? (
+                  <p className="text-sm text-center">
+                    Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,
+                    portanto não é mais possível ganhar recompensas treinando
+                    este pokémon! Capture e treine outros pokémons para
+                    continuar ganhando recompensas.
+                  </p>
+                ) : (
+                  <p className="text-sm text-center">
+                    Se continuar assim verá seu pokémon evoluir e ficar cada vez
+                    mais forte!
+                  </p>
+                )}
+              </>
+            )}
+
             <Button text="Capturar pokemons" path="/capture-pokemon" />
           </div>
         </div>

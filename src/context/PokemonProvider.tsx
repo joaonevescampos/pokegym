@@ -43,7 +43,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
 
     dispatch({ type: "GAIN_XP", payload: { name, xp } });
 
-    const newXp = Math.min(pokemon!.xp + xp, 100);
+    const newXp = Math.min(pokemon!.xp + xp, 101);
     const newLevel = Math.floor(newXp / 10);
 
     // Evolui a cada 3 levels
