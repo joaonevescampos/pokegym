@@ -9,6 +9,10 @@ import ChoosePokemonBattle from "./pages/ChoosePokemonBattle";
 import PokemonBattle from "./pages/PokemonBattle ";
 import PokemonCataloge from "./pages/PokemonCataloge";
 import PokemonEvolution from "./pages/PokemonEvolution";
+import RocketTeamChoose from "./pages/RocketTeamChoose";
+import RocketTeamBattle from "./pages/RocketTeamBattle";
+
+
 
 function AppRoutes() {
   return (
@@ -29,6 +33,10 @@ function AppRoutes() {
           element={<PokemonBattle />}
         />
         <Route path="/pokemon-evolution/:pokemonName" element={<PokemonEvolution />} />
+
+        <Route path="/rocket-team-battle" element={<RocketTeamChoose />} />
+        <Route path="/rocket-team-battle/:pokemonName" element={<RocketTeamBattle />} />
+
       </Routes>
     </Router>
   );

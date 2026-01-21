@@ -128,7 +128,7 @@ const PokemonCataloge = () => {
           </div>
         </section>
         <section className="flex flex-col items-center justify-center w-full">
-          <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120">
+          <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120 px-4">
             <h1 className="text-2xl text-center font-extrabold">Pokedex</h1>
             <p className="text-sm font-medium text-center opacity-70">
               1. Os pokémons são separados em níveis de captura.

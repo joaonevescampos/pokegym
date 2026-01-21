@@ -26,7 +26,7 @@ const LandingPage = () => {
         <div className="flex flex-col gap-8 items-center justify-center p-8 max-w-150 max-lg:max-w-100">
           <h1 className="text-5xl pt-8 font-extrabold">POKEGYM</h1>
           <p className="text-xl font-medium text-center">
-            Se aventure nessa jormada! Seja produtivo e veja seus pokemons
+            Se aventure nessa jornada! Seja produtivo e veja seus pokemons
             evoluirem junto com você.
           </p>
         </div>
