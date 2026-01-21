@@ -24,7 +24,7 @@ const Home = () => {
       />
       <section className="flex flex-col items-center justify-center w-full h-full">
         <div className="flex flex-col gap-4 items-center justify-center text-white px-4 z-10">
-          <img src={charizardImage} alt="charizard" className="z-10" />
+          <img src={charizardImage} alt="charizard" className="z-10 max-lg:w-48" />
           <img
             src={pokeballImage}
             alt="pokeball"
