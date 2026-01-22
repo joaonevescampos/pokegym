@@ -78,9 +78,9 @@ const PokemonCard = ({
       ) : (
         <span>sem imagem</span>
       )}
-      <h2 className="font-bold z-10">{name}</h2>
+      <h2 className="font-bold z-10 text-sm">{name.toUpperCase()}</h2>
       <span
-        className={`font-bold text-sm ${
+        className={`font-bold text-xs ${
           type === "electric"
             ? "bg-amber-500"
             : type === "grass"
@@ -110,7 +110,7 @@ const PokemonCard = ({
       >
         {type}
       </span>
-      <span className="z-20 text-sm font-bold opacity-70">level : {level}</span>
+      <span className="z-20 text-xs font-bold opacity-70">level : {level === 10 ? "MAX" : level}</span>
       <Button
         text={buttonText}
         selected={pokemonSelected}

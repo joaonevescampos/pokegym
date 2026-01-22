@@ -61,8 +61,6 @@ const RocketTeamChoose = () => {
     }
   }
 
-  console.log(state);
-
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"
       ? state.myPokemons[selectedPokemonIndex]
