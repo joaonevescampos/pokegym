@@ -1,7 +1,7 @@
 import florestImage from "../assets/florest.png";
 import pokeball from "../assets/pokeball-animation.png";
 import lightCircle from "../assets/light-circle.png";
-
+import energy from "../assets/energy.png";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePokemon } from "../context/usePokemon";
@@ -10,9 +10,10 @@ import Button from "../components/Button";
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
   const [myPokemon, setMyPokemon] = useState("");
-  const { state, capturePokemon } = usePokemon();
+  const { state, capturePokemon, gainEnergy } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
+  const [pokemonReward, setPokemonReward] = useState<number>(1);
 
   const param = useParams();
 
@@ -105,6 +106,19 @@ const PokemonBattle = () => {
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
         capturePokemon(param.pokemonOponent!, type);
+        if (captureRate <= 3) {
+          gainEnergy(10);
+          setPokemonReward(10);
+        } else if (captureRate > 3 && captureRate <= 45) {
+          gainEnergy(5);
+          setPokemonReward(5);
+        } else if (captureRate > 45 && captureRate <= 190) {
+          gainEnergy(3);
+          setPokemonReward(3);
+        } else {
+          gainEnergy(1);
+          setPokemonReward(1);
+        }
       } else {
         setWonBattle(false);
       }
@@ -207,6 +221,12 @@ const PokemonBattle = () => {
               <p className="text-xl font-bold top-32 text-center ">
                 Parabéns! Mais um pokémon para o seu time!
               </p>
+              <div className="flex items-center justify-center gap-2">
+                <p className="text-center font-bold font-white">
+                  Você ganhou +{pokemonReward}
+                </p>
+                <img src={energy} alt="energy" className="w-6" />
+              </div>
               <p className="text-sm top-32 text-center ">
                 Treine-o bastante para que possa evoluir e batalhar ao seu lado.
               </p>

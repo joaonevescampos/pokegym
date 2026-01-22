@@ -1,5 +1,6 @@
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
+import energy from "../assets/energy.png";
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
@@ -121,10 +122,18 @@ const PokemonCataloge = () => {
             </Link>
           </div>
           <div className="absolute flex items-end gap-2 top-4 right-4">
-            <span className="text-sm font-bold opacity-70">
-              x {state.userStatus.pokeball}{" "}
-            </span>
-            <img src={pokebola} alt="pokebola" width={28} />
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.pokeball}{" "}
+              </span>
+              <img src={pokebola} alt="pokebola" width={28} />
+            </div>
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.energy}{" "}
+              </span>
+              <img src={energy} alt="energy" width={28} />
+            </div>
           </div>
         </section>
         <section className="flex flex-col items-center justify-center w-full">
@@ -134,12 +143,14 @@ const PokemonCataloge = () => {
               1. Os pokémons são separados em níveis de captura.
             </p>
             <p className="text-sm font-medium text-center opacity-70">
-              2. Cada nível determina o grau de dificudade da batalha contra o
-              pokémon.
+              2. Cada nível determina o grau de dificudade da batalha.
             </p>
-            <p className="text-sm font-medium text-center mb-4 opacity-70">
+            <p className="text-sm font-medium text-center opacity-70">
               3. Escolha um dos níveis e filtre os pokémons por nível de
               captura.
+            </p>
+            <p className="text-sm font-medium text-center mb-4 opacity-70">
+              4. Ao capturar um pokémon você ganha energia proporcional ao nível.
             </p>
             <h1 className="text-xl text-center font-extrabold">
               Níveis de captura

@@ -177,7 +177,7 @@ const RocketTeamBattle = () => {
                 ) : (
                   <div className="flex items-end gap-2 top-4 right-4">
                     <span className="text-sm font-bold opacity-70">+ 1</span>
-                    <img src={energy} alt="pokebola" width={28} />
+                    <img src={energy} alt="energy" width={28} />
                   </div>
                 )}
 

@@ -13,7 +13,7 @@ const currYear = date.getFullYear();
 export const initialPokemonState: PokemonState = {
   userStatus: {
     pokeball: 3,
-    energy: 0,
+    energy: 1,
     dashboard: [
       {
         year: currYear,
@@ -119,7 +119,7 @@ export function pokemonReducer(
         ...state,
         userStatus: {
           ...state.userStatus,
-          energy: state.userStatus.energy + action.payload.lose,
+          energy: state.userStatus.energy - action.payload.lose,
         },
       };
 

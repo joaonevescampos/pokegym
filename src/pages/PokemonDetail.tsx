@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { usePokemon } from "../context/usePokemon";
 import pokebola from "../assets/pokeball.png";
+import energy from "../assets/energy.png";
 import xIcon from "../assets/x.png";
 interface ChecklistType {
   task: string;
@@ -21,6 +22,7 @@ const PokemonDetail = () => {
     setTimeToRest,
     deleteTimeToRest,
     setTag,
+    useEnergy,
   } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
@@ -49,7 +51,6 @@ const PokemonDetail = () => {
 
   useEffect(() => {
     formatDate();
-    console.log(state);
   }, []);
 
   useEffect(() => {
@@ -237,6 +238,25 @@ const PokemonDetail = () => {
               Tempo restante
             </p>
             <span>{formatTime(timeLeft)}</span>
+            {state.userStatus.energy > 0 && (
+              <div className="flex flex-col gap-2 items-center justify-center pb-12">
+                <div className="flex items-center justify-center gap-2 pb-4">
+                  <span className="text-center opacity-70 font-semibold">Você tem um total de x {state.userStatus.energy}</span>
+                  <img src={energy} alt="energy" className="w-6" />
+                </div>
+                <span className="text-sm font-bold text-center">
+                  Deseja usar 1x energia para acordar seu pokémon?
+                </span>
+                <Button
+                  text="Usar energia"
+                  onClick={() => {
+                    useEnergy(1);
+                    deleteTimeToRest(pokemonName!)
+                    window.location.reload();
+                  }}
+                ></Button>
+              </div>
+            )}
             <Button
               text="voltar"
               path="/my-pokemons"

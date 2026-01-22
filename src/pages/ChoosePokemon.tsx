@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
+import energy from "../assets/energy.png";
 import { Link, useNavigate } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 
@@ -56,12 +57,20 @@ const ChoosePokemon = () => {
                 voltar
               </Link>
             </div>
-            <div className="absolute flex items-end gap-2 top-4 right-4">
+             <div className="absolute flex items-end gap-2 top-4 right-4">
+            <div className="flex items-end gap-1">
               <span className="text-sm font-bold opacity-70">
                 x {state.userStatus.pokeball}{" "}
               </span>
               <img src={pokebola} alt="pokebola" width={28} />
             </div>
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.energy}{" "}
+              </span>
+              <img src={energy} alt="energy" width={28} />
+            </div>
+          </div>
           </header>
           <main className="flex flex-col items-center justify-center h-[calc(100vh-48px)] max-lg:h-full! text-white">
             <div className="flex flex-col gap-4">

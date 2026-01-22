@@ -117,9 +117,9 @@ const RocketTeamChoose = () => {
             <h1 className="text-white font-bold text-xl text-center">
               Escolha um dos seus pokémons para batalhar contra a equipe Rocket!
             </h1>
-            <div>
+            <div className="flex flex-col gap-4 text-center">
               <p className="opacity-50 text-sm text-center">
-                Recompensas possíveis: 1 pokebola ou 3 energy
+                Recompensas possíveis: 1 pokebola ou 1 energy
               </p>
               <strong className="text-sm text-center">
                 Atenção: Você só poderá batalhar contra a equipe Rocket a cada

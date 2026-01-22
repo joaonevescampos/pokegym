@@ -5,6 +5,7 @@ import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import pokebola from "../assets/pokeball.png";
+import energy from "../assets/energy.png";
 import xIcon from "../assets/x.png";
 
 const ChoosePokemonBattle = () => {
@@ -126,12 +127,20 @@ const ChoosePokemonBattle = () => {
               <h1 className="font-bold text-xl text-center">
                 Poxa, você não pode batalhar!
               </h1>
-              <div className="flex items-end gap-2 top-4 right-4">
-                <span className="text-sm font-bold opacity-70">
-                  x {state.userStatus.pokeball}{" "}
-                </span>
-                <img src={pokebola} alt="pokebola" width={28} />
-              </div>
+             <div className="absolute flex items-end gap-2 top-4 right-4">
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.pokeball}{" "}
+              </span>
+              <img src={pokebola} alt="pokebola" width={28} />
+            </div>
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.energy}{" "}
+              </span>
+              <img src={energy} alt="energy" width={28} />
+            </div>
+          </div>
               <p className="text-sm text-center">
                 Você não tem pokebolas para batalhar e capturar um novo pokemon!
                 Lamento muito! Para conseguir pokebolas você deve treinar seu

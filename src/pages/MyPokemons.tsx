@@ -1,5 +1,6 @@
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
+import energy from "../assets/energy.png";
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 
@@ -15,8 +16,18 @@ const MyPokemons = () => {
             </Link>
           </div>
           <div className="absolute flex items-end gap-2 top-4 right-4">
-            <span className="text-sm font-bold opacity-70">x {state.userStatus.pokeball} </span>
-            <img src={pokebola} alt="pokebola" width={28} />
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.pokeball}{" "}
+              </span>
+              <img src={pokebola} alt="pokebola" width={28} />
+            </div>
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.energy}{" "}
+              </span>
+              <img src={energy} alt="energy" width={28} />
+            </div>
           </div>
         </section>
         <section className="flex items-center justify-center w-full">
@@ -31,7 +42,9 @@ const MyPokemons = () => {
         </section>
         <section className="flex flex-col gap-2 p-4 opacity-70 text-sm">
           <span>Pokemons capturados: {state.myPokemons.length}</span>
-          <span>Total para serem capturados: {68 - state.myPokemons.length}</span>
+          <span>
+            Total para serem capturados: {68 - state.myPokemons.length}
+          </span>
           <hr className="opacity-40" />
         </section>
       </header>
