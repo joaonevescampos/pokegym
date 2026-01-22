@@ -10,14 +10,26 @@ interface ChecklistType {
 }
 
 const PokemonDetail = () => {
-  const { state, gainXp, gainPokeball, registerMission } = usePokemon();
+  const {
+    state,
+    gainXp,
+    gainPokeball,
+    registerMission,
+    addChecklist,
+    setChecklist,
+    deleteChecklist,
+    setTimeToRest,
+    deleteTimeToRest,
+    // setTag,
+    // deleteTag,
+  } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
-  const initialList = [{ task: "escreva sua tarefa aqui", checked: false }];
-  const prevList = localStorage.getItem(`${pokemonName}-checklist`);
-  const [checklist, setChecklist] = useState<ChecklistType[]>(
-    prevList ? JSON.parse(prevList) : initialList,
-  );
+  const initialList = state.myPokemons.filter(
+    (pokemon) => pokemon.name === pokemonName,
+  )[0].checklist;
+  const [reactChecklist, setReactChecklist] =
+    useState<ChecklistType[]>(initialList);
   const [date, setDate] = useState("");
   const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
@@ -32,10 +44,19 @@ const PokemonDetail = () => {
   const currDate = dateFunction.getDate();
   const currDay = dateFunction.getDay();
   const [timeLeft, setTimeLeft] = useState<number>(0);
+  const timeToWait = 28800
 
   useEffect(() => {
     formatDate();
+    console.log(state);
   }, []);
+
+  useEffect(() => {
+    setReactChecklist(
+      state.myPokemons.filter((pokemon) => pokemon.name === pokemonName)[0]
+        .checklist,
+    );
+  }, [setChecklist, deleteChecklist, addChecklist]);
 
   useEffect(() => {
     if (currentPokemon) {
@@ -43,15 +64,6 @@ const PokemonDetail = () => {
     }
   }, [currentPokemon]);
 
-  useEffect(() => {
-    if (alert) {
-      setChecklist(initialList);
-      localStorage.setItem(
-        `${pokemonName}-checklist`,
-        JSON.stringify(initialList),
-      );
-    }
-  }, [alert]);
 
   const getPokemonInfos = async (name: string) => {
     try {
@@ -68,36 +80,27 @@ const PokemonDetail = () => {
   const widthXP = (xp % 10) * 10;
 
   const handleClick = () => {
-    const newChecklist = [...checklist, { task: "", checked: false }];
-    console.log(newChecklist);
-    setChecklist(newChecklist);
-    localStorage.setItem(
-      `${pokemonName}-checklist`,
-      JSON.stringify(newChecklist),
-    );
+    addChecklist(pokemonName!);
   };
 
-  const handleChange = (e: any, index: number) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     e.preventDefault();
-    const newChecklist = checklist.map((item, i) =>
-      i === index ? { ...item, task: e.target.value } : item,
-    );
-    setChecklist(newChecklist);
-    localStorage.setItem(
-      `${pokemonName}-checklist`,
-      JSON.stringify(newChecklist),
-    );
+    const checked = reactChecklist[index]?.checked ?? false;
+    const task: string = e.target.value;
+    setChecklist(pokemonName!, task, checked, index);
   };
 
-  const handleCheck = (e: any, index: number) => {
-    const newChecklist = checklist.map((item, i) =>
-      i === index ? { ...item, checked: e.target.checked } : item,
-    );
-    setChecklist(newChecklist);
-    localStorage.setItem(
-      `${pokemonName}-checklist`,
-      JSON.stringify(newChecklist),
-    );
+  const handleCheck = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    e.preventDefault();
+    const checked = e.target.checked;
+    const task: string = reactChecklist[index]?.task;
+    setChecklist(pokemonName!, task, checked, index);
   };
 
   const handleFinish = async () => {
@@ -153,18 +156,11 @@ const PokemonDetail = () => {
   };
 
   const handleDeleteItem = (indexToDelete: number) => {
-    const newChecklist = checklist.filter(
-      (_item, index) => index !== indexToDelete,
-    );
-    setChecklist(newChecklist);
-    localStorage.setItem(
-      `${pokemonName}-checklist`,
-      JSON.stringify(newChecklist),
-    );
+    deleteChecklist(pokemonName!, indexToDelete);
   };
 
   useEffect(() => {
-    const savedEndTime = localStorage.getItem(`${pokemonName}-time_to_rest`);
+    const savedEndTime = currentPokemon?.time_to_rest;
 
     if (savedEndTime) {
       const endTime = Number(savedEndTime);
@@ -190,7 +186,7 @@ const PokemonDetail = () => {
 
   function startTimer(seconds: number) {
     const endTime = Date.now() + seconds * 1000;
-    localStorage.setItem(`${pokemonName}-time_to_rest`, String(endTime));
+    setTimeToRest(pokemonName!, endTime);
 
     const interval = setInterval(() => {
       const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
@@ -198,7 +194,8 @@ const PokemonDetail = () => {
       setTimeLeft(remaining);
 
       if (remaining === 0) {
-        localStorage.removeItem(`${pokemonName}-time_to_rest`);
+        deleteTimeToRest(pokemonName!);
+
         clearInterval(interval);
       }
     }, 1000);
@@ -209,7 +206,7 @@ const PokemonDetail = () => {
     setTimeLeft(remaining);
 
     if (remaining === 0) {
-      localStorage.removeItem(`${pokemonName}-time_to_rest`);
+      deleteTimeToRest(pokemonName!);
     }
   }
 
@@ -336,8 +333,8 @@ const PokemonDetail = () => {
                 {date}
               </span>
               <p className="text-white text-center text-sm">
-                Crie seu checklist do dia, conclua todas suas tarefas e veja seu
-                pokemon ganhar experiência a cada dia
+                Crie seu reactChecklist do dia, conclua todas suas tarefas e
+                veja seu pokemon ganhar experiência a cada dia
               </p>
               <Button
                 path="/"
@@ -345,7 +342,7 @@ const PokemonDetail = () => {
                 style="w-full text-white my-8"
               />
               <ul className="flex flex-col gap-4 w-full">
-                {checklist?.map((item, index) => (
+                {reactChecklist?.map((item, index) => (
                   <li className="flex items-center gap-2" key={index}>
                     <input
                       type="checkbox"
@@ -379,7 +376,7 @@ const PokemonDetail = () => {
                 style="w-full text-black! bg-gray-400! hover:bg-gray-200!"
                 onClick={() => handleClick()}
               />
-              {checklist.every((item) => item.checked) && (
+              {reactChecklist.every((item) => item.checked) && (
                 <Button
                   text="Finalizar treino"
                   style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
@@ -397,7 +394,7 @@ const PokemonDetail = () => {
                   onClick={() => {
                     setAlert(false);
                     if (xp < 100) {
-                      startTimer(28800);
+                      startTimer(timeToWait);
                     }
                   }}
                 >
@@ -477,8 +474,7 @@ const PokemonDetail = () => {
                   text="Meus pokémons"
                   onClick={() => {
                     if (xp < 100) {
-                      console.log("executei");
-                      startTimer(28800);
+                      startTimer(timeToWait);
                     }
                     navigate("/my-pokemons");
                   }}

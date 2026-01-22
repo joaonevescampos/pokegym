@@ -4,6 +4,8 @@ export type Pokemon = {
   xp: number;
   level: number;
   checklist: Checklist[];
+  tag: string;
+  time_to_rest: null | number;
 };
 
 export type Checklist = {
@@ -59,6 +61,7 @@ export type Dashboard = DashboardYear[];
 
 export type UserStatus = {
   pokeball: number;
+  energy: number;
   dashboard: Dashboard;
 };
 
@@ -73,6 +76,30 @@ export type PokemonAction =
   | { type: "EVOLVE_POKEMON"; payload: { name: string; newName: string } }
   | { type: "GAIN_POKEBALL"; payload: { gain: number } }
   | { type: "USE_POKEBALL"; payload: { lose: number } }
+  | { type: "GAIN_ENERGY"; payload: { gain: number } }
+  | { type: "USE_ENERGY"; payload: { lose: number } }
+  | { type: "SET_TAG"; payload: { name: string; tag: string } }
+  | { type: "DELETE_TAG"; payload: { name: string } }
+  | {
+      type: "ADD_CHECKLIST";
+      payload: { name: string};
+    }
+  | {
+      type: "SET_CHECKLIST";
+      payload: { name: string; task: string; checked: boolean; index: number };
+    }
+  | {
+      type: "DELETE_CHECKLIST";
+      payload: { name: string; index: number };
+    }
+  | {
+      type: "SET_TIME_TO_REST";
+      payload: { name: string; time_to_rest: number };
+    }
+  | {
+      type: "DELETE_TIME_TO_REST";
+      payload: { name: string };
+    }
   | {
       type: "REGISTER_MISSION";
       payload: {

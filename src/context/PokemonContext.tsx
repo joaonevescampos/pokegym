@@ -9,6 +9,15 @@ export type PokemonContextType = {
   gainPokeball: (gain: number) => void;
   usePokeball: (lose: number) => void;
   registerMission: (year: number, month: number, day: number) => void;
+  gainEnergy: (gain: number) => void;
+  useEnergy: (lose: number) => void;
+  setTag: (name: string, tag: string) => void;
+  deleteTag: (name: string) => void;
+  addChecklist: (name: string) => void;
+  setChecklist: (name: string, task: string, checked: boolean, index: number) => void;
+  deleteChecklist: (name: string, index: number) => void;
+  setTimeToRest: (name: string, time_to_rest: number) => void;
+  deleteTimeToRest: (name: string) => void;
   resetGame: () => void;
 };
 

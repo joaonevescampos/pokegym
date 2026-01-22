@@ -83,12 +83,48 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "USE_POKEBALL", payload: { lose } });
   }
 
+  function gainEnergy(gain: number) {
+    dispatch({ type: "GAIN_ENERGY", payload: { gain } });
+  }
+
+  function useEnergy(lose: number) {
+    dispatch({ type: "USE_ENERGY", payload: { lose } });
+  }
+
+  function setTag(name: string, tag: string) {
+    dispatch({ type: "SET_TAG", payload: { name, tag } });
+  }
+
+  function deleteTag(name: string) {
+    dispatch({ type: "DELETE_TAG", payload: { name } });
+  }
+
+    function addChecklist(name: string) {
+    dispatch({ type: "ADD_CHECKLIST", payload: { name } });
+  }
+
+  function setChecklist(name: string, task: string, checked: boolean, index : number) {
+    dispatch({ type: "SET_CHECKLIST", payload: { name, task, checked, index } });
+  }
+
+  function deleteChecklist(name: string, index: number) {
+    dispatch({ type: "DELETE_CHECKLIST", payload: { name, index } });
+  }
+
+  function setTimeToRest(name: string, time_to_rest: number) {
+    dispatch({ type: "SET_TIME_TO_REST", payload: { name, time_to_rest } });
+  }
+
+  function deleteTimeToRest(name: string) {
+    dispatch({ type: "DELETE_TIME_TO_REST", payload: { name } });
+  }
+
   function registerMission() {
     const now = new Date();
 
     const currYear = now.getFullYear();
-    const currMonth = now.getMonth() as Month; 
-    const currDay = now.getDate() as DayOfMonth; 
+    const currMonth = now.getMonth() as Month;
+    const currDay = now.getDate() as DayOfMonth;
 
     dispatch({
       type: "REGISTER_MISSION",
@@ -114,6 +150,15 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         usePokeball,
         registerMission,
         resetGame,
+        deleteChecklist,
+        addChecklist,
+        setChecklist,
+        gainEnergy,
+        useEnergy,
+        setTag,
+        deleteTag,
+        setTimeToRest,
+        deleteTimeToRest,
       }}
     >
       {children}
