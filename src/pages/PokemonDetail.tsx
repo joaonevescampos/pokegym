@@ -20,7 +20,7 @@ const PokemonDetail = () => {
     deleteChecklist,
     setTimeToRest,
     deleteTimeToRest,
-    setTag
+    setTag,
   } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
@@ -340,11 +340,13 @@ const PokemonDetail = () => {
                 {date}
               </span>
               <p className="text-white text-center">
-                Crie seu checklist do dia, conclua todas suas tarefas e
-                veja seu pokemon ganhar experiência a cada dia
+                Crie seu checklist do dia, conclua todas suas tarefas e veja seu
+                pokemon ganhar experiência a cada dia.
               </p>
 
-              <strong className="text-white text-center text-sm">Lembrando que seu pokémon só pode treinar 1x a cada 8h.</strong>
+              <strong className="text-white text-center text-sm">
+                Lembrando que seu pokémon só pode treinar 1x a cada 8h.
+              </strong>
 
               <div className="flex flex-col gap-2 ">
                 {caractere === 0 ? (
@@ -356,45 +358,49 @@ const PokemonDetail = () => {
                 )}
                 <input
                   type="text"
-                  maxLength={10}
+                  value={currentPokemon?.tag ?? ""}
+                  onChange={(e) => {
+                    const value = e.target.value;
+
+                    if (value.length <= 10) {
+                      handleChangeTag(e);
+                    }
+                  }}
                   className={`h-8 w-32 text-white font-bold text-center ${
-              type === "electric"
-                ? "bg-amber-700"
-                : type === "grass"
-                  ? "bg-emerald-700"
-                  : type === "water"
-                    ? "bg-blue-800"
-                    : type === "fire"
-                      ? "bg-red-700"
-                      : type === "bug"
-                        ? "bg-pink-800"
-                        : type === "poison"
-                          ? "bg-pink-600"
-                          : type === "ground"
-                            ? "bg-orange-950"
-                            : type === "psychic"
-                              ? "bg-black"
-                              : type === "ghost"
-                                ? "bg-purple-700"
-                                : type === "rock"
-                                  ? "bg-gray-800"
-                                  : type === "ice"
-                                    ? "bg-blue-600"
-                                    : type === "dragon"
-                                      ? "bg-orange-600"
-                                      : "bg-gray-600"
-            } rounded-3xl p-4 m-auto`}
-                  value={currentPokemon?.tag}
-                  onChange={(e) => handleChangeTag(e)}
+                    type === "electric"
+                      ? "bg-amber-700"
+                      : type === "grass"
+                        ? "bg-emerald-700"
+                        : type === "water"
+                          ? "bg-blue-800"
+                          : type === "fire"
+                            ? "bg-red-700"
+                            : type === "bug"
+                              ? "bg-pink-800"
+                              : type === "poison"
+                                ? "bg-pink-600"
+                                : type === "ground"
+                                  ? "bg-orange-950"
+                                  : type === "psychic"
+                                    ? "bg-black"
+                                    : type === "ghost"
+                                      ? "bg-purple-700"
+                                      : type === "rock"
+                                        ? "bg-gray-800"
+                                        : type === "ice"
+                                          ? "bg-blue-600"
+                                          : type === "dragon"
+                                            ? "bg-orange-600"
+                                            : "bg-gray-600"
+                  } rounded-3xl p-4 m-auto`}
                 />
                 {caractere! >= 10 ? (
-                <span className="text-green-400 text-center text-xs">
-                  máximo de caracteres atingido
-                </span>
+                  <span className="text-green-400 text-center text-xs">
+                    máximo de caracteres atingido
+                  </span>
                 ) : (
                   <span className="h-5"></span>
                 )}
-
               </div>
 
               <Button
