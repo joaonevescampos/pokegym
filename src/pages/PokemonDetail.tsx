@@ -389,20 +389,19 @@ const PokemonDetail = () => {
             </div>
           </section>
           {alert && (
-            <div className="absolute h-full w-full bg-[#000000d3] z-20">
+            <div className="absolute h-full w-full top-0 left-0 bg-[#000000d3] z-20">
               <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
-                <span
+                {xp > 100 && (
+                  <span
                   className="absolute top-2 right-2 cursor-pointer
               "
                   onClick={() => {
                     setAlert(false);
-                    if(xp < 100) {
-                      startTimer(3600);
-                    }
                   }}
                 >
                   <img src={xIcon} alt="x" className="w-4" />
                 </span>
+                )}
                 {xp === 10 ||
                 xp === 20 ||
                 xp === 40 ||
@@ -472,13 +471,13 @@ const PokemonDetail = () => {
                 )}
 
                 <Button
-                  text="Capturar pokemons"
+                  text="Meus pokémons"
                   onClick={() => {
                     if(xp < 100) {
-                      startTimer(3600);
+                      startTimer(60 * 60 * 8);
                     }
                   }}
-                  path="/capture-pokemon"
+                  path="/my-pokemons"
                 />
               </div>
             </div>

@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import pokebola from "../assets/pokeball.png";
-import xIcon from "../assets/x.png";
 import rocketTeam from "../assets/team-rocket-3d.png";
 
 const STORAGE_KEY = "timer_end_time";
@@ -16,7 +14,6 @@ const RocketTeamChoose = () => {
     number | undefined
   >(undefined);
   const navigate = useNavigate();
-  const [alert, setAlert] = useState(false);
   const timeToWait = 8 * 60 * 60;
 
   const [timeLeft, setTimeLeft] = useState<number>(0);
@@ -158,33 +155,6 @@ const RocketTeamChoose = () => {
             />
           ) : (
             <div className="h-10"></div>
-          )}
-          {alert && (
-            <div className="absolute h-full w-full bg-[#000000d3] z-20">
-              <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
-                <span
-                  className="absolute top-2 right-2 cursor-pointer
-              "
-                  onClick={() => setAlert(false)}
-                >
-                  <img src={xIcon} alt="x" className="w-4" />
-                </span>
-                <h1 className="font-bold text-xl text-center">
-                  Poxa, você não pode batalhar!
-                </h1>
-                <div className="flex items-end gap-2 top-4 right-4">
-                  <span className="text-sm font-bold opacity-70">
-                    x {state.userStatus.pokeball}{" "}
-                  </span>
-                  <img src={pokebola} alt="pokebola" width={28} />
-                </div>
-                <p className="text-sm text-center">
-                  Você deve esperar o tempo restante acabar para poder batalhar
-                  novamente contra a equipe Rocket!
-                </p>
-                <Button text="voltar para home" path="/home" />
-              </div>
-            </div>
           )}
         </main>
       )}
