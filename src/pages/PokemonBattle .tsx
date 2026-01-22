@@ -13,7 +13,6 @@ const PokemonBattle = () => {
   const { state, capturePokemon } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
-  const [oponentType, setOponentType] = useState("");
 
   const param = useParams();
 
@@ -79,11 +78,7 @@ const PokemonBattle = () => {
         `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
       );
       const data1 = await responseId.json();
-      console.log("data 1", data1);
-      console.log("TYPE api", data1.types[0].type.name);
-
       const type = data1.types[0].type.name;
-      setOponentType(type);
 
       const responseCaptureRate: any = await fetch(
         `https://pokeapi.co/api/v2/pokemon-species/${data1.id}`,
@@ -125,11 +120,14 @@ const PokemonBattle = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const [hasCalculated, setHasCalculated] = useState(false);
+
   useEffect(() => {
-    if (showResult) {
+    if (showResult && !hasCalculated) {
+      setHasCalculated(true);
       calculateWinner();
     }
-  }, [showResult, oponentType]);
+  }, [showResult, hasCalculated]);
 
   return (
     <>

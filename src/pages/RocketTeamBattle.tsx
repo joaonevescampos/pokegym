@@ -13,7 +13,7 @@ const RocketTeamBattle = () => {
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
   const [reward, setReward] = useState("");
-  const { gainPokeball } = usePokemon();
+  const { gainPokeball, gainEnergy } = usePokemon();
   const [isFighting, setIsFighting] = useState(true);
   const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ const RocketTeamBattle = () => {
     } else {
       console.log("ganhar energy");
       setReward("energy");
-      //ganhar energy
+      gainEnergy(1)
     }
   };
 

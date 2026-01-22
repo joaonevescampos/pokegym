@@ -7,7 +7,6 @@ import Button from "../components/Button";
 import pokebola from "../assets/pokeball.png";
 import xIcon from "../assets/x.png";
 
-
 const ChoosePokemonBattle = () => {
   const { state, usePokeball } = usePokemon();
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState<
@@ -18,7 +17,7 @@ const ChoosePokemonBattle = () => {
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
 
-  console.log(state)
+  console.log(state);
 
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"
@@ -70,10 +69,10 @@ const ChoosePokemonBattle = () => {
             className="absolute w-full h-full z-0 object-cover pointer-events-none"
           />
           <div className="absolute flex items-end gap-2 top-4 left-4">
-          <Link to="/capture-pokemon" className="text-sm font-bold ">
-            voltar
-          </Link>
-        </div>
+            <Link to="/capture-pokemon" className="text-sm font-bold ">
+              voltar
+            </Link>
+          </div>
           {imageURL && (
             <img
               src={imageURL}
@@ -120,9 +119,9 @@ const ChoosePokemonBattle = () => {
               <span
                 className="absolute top-2 right-2 cursor-pointer
               "
-              onClick={() => setAlert(false)}
+                onClick={() => setAlert(false)}
               >
-                <img src={xIcon} alt="x" className="w-4"/>
+                <img src={xIcon} alt="x" className="w-4" />
               </span>
               <h1 className="font-bold text-xl text-center">
                 Poxa, você não pode batalhar!
@@ -136,8 +135,8 @@ const ChoosePokemonBattle = () => {
               <p className="text-sm text-center">
                 Você não tem pokebolas para batalhar e capturar um novo pokemon!
                 Lamento muito! Para conseguir pokebolas você deve treinar seu
-                pokemon concluindo tarefas diárias. Com tempo, você irá ganhar
-                pokébolas e poderá batalhar!
+                pokemon concluindo todas tarefas no seu checklist. Com tempo, você irá
+                ganhar pokébolas e poderá batalhar!
               </p>
               <Button text="treinar pokemons" path="/my-pokemons" />
             </div>
