@@ -37,8 +37,6 @@ const PokemonDetail = () => {
     formatDate();
   }, []);
 
-  console.log(xp);
-
   useEffect(() => {
     if (currentPokemon) {
       getPokemonInfos(currentPokemon.name);
@@ -111,13 +109,13 @@ const PokemonDetail = () => {
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
       if (
-        xp === 10 ||
-        xp === 20 ||
-        xp === 40 ||
-        xp === 50 ||
-        xp === 70 ||
-        xp === 80 ||
-        xp === 90
+        xp === 9 ||
+        xp === 19 ||
+        xp === 39 ||
+        xp === 49 ||
+        xp === 69 ||
+        xp === 79 ||
+        xp === 89
       ) {
         gainPokeball(1);
       } else if (xp === 100) {
@@ -221,11 +219,7 @@ const PokemonDetail = () => {
         <main className="flex items-center justify-center h-screen w-full p-4 text-white">
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="animate-float">
-              <img
-                src={pokemonImage}
-                alt="pokemon"
-                className="w-52"
-              />
+              <img src={pokemonImage} alt="pokemon" className="w-52" />
               <p className="text-sm font-bold text-center">ZZZ...</p>
             </div>
             <strong className="text-xl text-center text-red-400">
@@ -239,7 +233,11 @@ const PokemonDetail = () => {
               Tempo restante
             </p>
             <span>{formatTime(timeLeft)}</span>
-            <Button text="voltar" path="/my-pokemons" style="text-white!"></Button>
+            <Button
+              text="voltar"
+              path="/my-pokemons"
+              style="text-white!"
+            ></Button>
           </div>
         </main>
       ) : (
@@ -327,7 +325,9 @@ const PokemonDetail = () => {
                   style={{ width: `${xp === 101 ? "100%" : widthXP}%` }}
                 />
               </div>
-              <span className="text-sm opacity-80 font-bold">XP: {xp===101 ? "MAX" : xp}</span>
+              <span className="text-sm opacity-80 font-bold">
+                XP: {xp === 101 ? "MAX" : xp}
+              </span>
             </div>
           </section>
           <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
@@ -391,17 +391,18 @@ const PokemonDetail = () => {
           {alert && (
             <div className="absolute h-full w-full top-0 left-0 bg-[#000000d3] z-20">
               <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
-                {xp > 100 && (
-                  <span
+                <span
                   className="absolute top-2 right-2 cursor-pointer
               "
                   onClick={() => {
                     setAlert(false);
+                    if (xp < 100) {
+                      startTimer(28800);
+                    }
                   }}
                 >
                   <img src={xIcon} alt="x" className="w-4" />
                 </span>
-                )}
                 {xp === 10 ||
                 xp === 20 ||
                 xp === 40 ||
@@ -440,8 +441,9 @@ const PokemonDetail = () => {
                     <p className="text-sm text-center">
                       Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,
                       portanto não é mais possível ganhar recompensas treinando
-                      este pokémon! No entanto, seu pokémon ganhou a habilidade de nunca ficar cansado! Capture e treine outros pokémons para
-                      continuar ganhando recompensas.
+                      este pokémon! No entanto, seu pokémon ganhou a habilidade
+                      de nunca ficar cansado! Capture e treine outros pokémons
+                      para continuar ganhando recompensas.
                     </p>
                     <p className="text-xs text-center text-green-400">
                       DICA: use este pokémon que está bem forte para fazer suas
@@ -457,9 +459,10 @@ const PokemonDetail = () => {
                     {xp > 100 ? (
                       <p className="text-sm text-center">
                         Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,
-                      portanto não é mais possível ganhar recompensas treinando
-                      este pokémon! No entanto, seu pokémon ganhou a habilidade de nunca ficar cansado! Capture e treine outros pokémons para
-                      continuar ganhando recompensas.
+                        portanto não é mais possível ganhar recompensas
+                        treinando este pokémon! No entanto, seu pokémon ganhou a
+                        habilidade de nunca ficar cansado! Capture e treine
+                        outros pokémons para continuar ganhando recompensas.
                       </p>
                     ) : (
                       <p className="text-sm text-center">
@@ -473,11 +476,12 @@ const PokemonDetail = () => {
                 <Button
                   text="Meus pokémons"
                   onClick={() => {
-                    if(xp < 100) {
-                      startTimer(60 * 60 * 8);
+                    if (xp < 100) {
+                      console.log("executei");
+                      startTimer(28800);
                     }
+                    navigate("/my-pokemons");
                   }}
-                  path="/my-pokemons"
                 />
               </div>
             </div>
