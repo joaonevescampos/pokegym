@@ -20,8 +20,7 @@ const PokemonDetail = () => {
     deleteChecklist,
     setTimeToRest,
     deleteTimeToRest,
-    // setTag,
-    // deleteTag,
+    setTag
   } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
@@ -44,7 +43,9 @@ const PokemonDetail = () => {
   const currDate = dateFunction.getDate();
   const currDay = dateFunction.getDay();
   const [timeLeft, setTimeLeft] = useState<number>(0);
-  const timeToWait = 28800
+  const timeToWait = 28800;
+  const limitCaractere = 10;
+  const [caractere, setCaractere] = useState(currentPokemon?.tag.length);
 
   useEffect(() => {
     formatDate();
@@ -63,7 +64,6 @@ const PokemonDetail = () => {
       getPokemonInfos(currentPokemon.name);
     }
   }, [currentPokemon]);
-
 
   const getPokemonInfos = async (name: string) => {
     try {
@@ -125,6 +125,13 @@ const PokemonDetail = () => {
         gainPokeball(5);
       }
       setAlert(true);
+    }
+  };
+
+  const handleChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (caractere! <= limitCaractere) {
+      setTag(pokemonName!, e.target.value);
+      setCaractere(e.target.value.length);
     }
   };
 
@@ -332,14 +339,68 @@ const PokemonDetail = () => {
               <span className="text-white text-sm opacity-50 font-medium">
                 {date}
               </span>
-              <p className="text-white text-center text-sm">
-                Crie seu reactChecklist do dia, conclua todas suas tarefas e
+              <p className="text-white text-center">
+                Crie seu checklist do dia, conclua todas suas tarefas e
                 veja seu pokemon ganhar experiência a cada dia
               </p>
+
+              <strong className="text-white text-center text-sm">Lembrando que seu pokémon só pode treinar 1x a cada 8h.</strong>
+
+              <div className="flex flex-col gap-2 ">
+                {caractere === 0 ? (
+                  <p className="text-xs opacity-70 text-white text-center">
+                    Adicione uma tag. Ex: trabalho, academia, faculdade...
+                  </p>
+                ) : (
+                  <p className="h-5"></p>
+                )}
+                <input
+                  type="text"
+                  maxLength={10}
+                  className={`h-8 w-32 text-white font-bold text-center ${
+              type === "electric"
+                ? "bg-amber-700"
+                : type === "grass"
+                  ? "bg-emerald-700"
+                  : type === "water"
+                    ? "bg-blue-800"
+                    : type === "fire"
+                      ? "bg-red-700"
+                      : type === "bug"
+                        ? "bg-pink-800"
+                        : type === "poison"
+                          ? "bg-pink-600"
+                          : type === "ground"
+                            ? "bg-orange-950"
+                            : type === "psychic"
+                              ? "bg-black"
+                              : type === "ghost"
+                                ? "bg-purple-700"
+                                : type === "rock"
+                                  ? "bg-gray-800"
+                                  : type === "ice"
+                                    ? "bg-blue-600"
+                                    : type === "dragon"
+                                      ? "bg-orange-600"
+                                      : "bg-gray-600"
+            } rounded-3xl p-4 m-auto`}
+                  value={currentPokemon?.tag}
+                  onChange={(e) => handleChangeTag(e)}
+                />
+                {caractere! >= 10 ? (
+                <span className="text-green-400 text-center text-xs">
+                  máximo de caracteres atingido
+                </span>
+                ) : (
+                  <span className="h-5"></span>
+                )}
+
+              </div>
+
               <Button
                 path="/"
                 text="Ver progresso mensal"
-                style="w-full text-white my-8"
+                style="w-full text-white mb-4"
               />
               <ul className="flex flex-col gap-4 w-full">
                 {reactChecklist?.map((item, index) => (
