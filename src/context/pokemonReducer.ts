@@ -18,7 +18,7 @@ export const initialPokemonState: PokemonState = {
       {
         year: currYear,
         months: [
-          { 0: [1,6,4,5,7,9,15,20,23] },
+          { 0: [] },
           { 1: [] },
           { 2: [] },
           { 3: [] },

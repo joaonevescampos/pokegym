@@ -66,7 +66,7 @@ function generateBlockedDates(
   return blocked;
 }
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const { state } = usePokemon();
 
   const [selected, setSelected] = useState<Date | undefined>(new Date());
@@ -116,4 +116,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
