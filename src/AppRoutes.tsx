@@ -12,6 +12,7 @@ import PokemonEvolution from "./pages/PokemonEvolution";
 import RocketTeamChoose from "./pages/RocketTeamChoose";
 import RocketTeamBattle from "./pages/RocketTeamBattle";
 import DashboardPage from "./pages/DashboardPage";
+import SpecialPokemons from "./pages/SpecialPokemons";
 
 
 
@@ -38,6 +39,8 @@ function AppRoutes() {
         <Route path="/rocket-team-battle" element={<RocketTeamChoose />} />
         <Route path="/rocket-team-battle/:pokemonName" element={<RocketTeamBattle />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/special-pokemons" element={<SpecialPokemons />} />
+
 
       </Routes>
     </Router>
