@@ -14,6 +14,7 @@ export const initialPokemonState: PokemonState = {
   userStatus: {
     pokeball: 3,
     energy: 1,
+    diamond: 0,
     dashboard: [
       {
         year: currYear,
@@ -123,6 +124,24 @@ export function pokemonReducer(
         },
       };
 
+    case "GAIN_DIAMOND":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          diamond: state.userStatus.diamond + action.payload.gain,
+        },
+      };
+
+    case "USE_DIAMOND":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          diamond: state.userStatus.diamond - action.payload.lose,
+        },
+      };
+
     case "SET_TAG":
       return {
         ...state,
@@ -157,7 +176,7 @@ export function pokemonReducer(
         myPokemons: state.myPokemons.map((pokemonObj: Pokemon) => {
           if (pokemonObj.name !== action.payload.name) return pokemonObj;
 
-          const newChecklistItem = {task: "", checked: false}
+          const newChecklistItem = { task: "", checked: false };
 
           return {
             ...pokemonObj,

@@ -91,6 +91,14 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "USE_ENERGY", payload: { lose } });
   }
 
+  function gainDiamond(gain: number) {
+    dispatch({ type: "GAIN_DIAMOND", payload: { gain } });
+  }
+
+  function useDiamond(lose: number) {
+    dispatch({ type: "USE_DIAMOND", payload: { lose } });
+  }
+
   function setTag(name: string, tag: string) {
     dispatch({ type: "SET_TAG", payload: { name, tag } });
   }
@@ -99,12 +107,20 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "DELETE_TAG", payload: { name } });
   }
 
-    function addChecklist(name: string) {
+  function addChecklist(name: string) {
     dispatch({ type: "ADD_CHECKLIST", payload: { name } });
   }
 
-  function setChecklist(name: string, task: string, checked: boolean, index : number) {
-    dispatch({ type: "SET_CHECKLIST", payload: { name, task, checked, index } });
+  function setChecklist(
+    name: string,
+    task: string,
+    checked: boolean,
+    index: number,
+  ) {
+    dispatch({
+      type: "SET_CHECKLIST",
+      payload: { name, task, checked, index },
+    });
   }
 
   function deleteChecklist(name: string, index: number) {
@@ -155,6 +171,8 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         setChecklist,
         gainEnergy,
         useEnergy,
+        gainDiamond,
+        useDiamond,
         setTag,
         deleteTag,
         setTimeToRest,

@@ -6,10 +6,12 @@ import pokeballImage from "../assets/pokeball-background.png";
 const menu = [
   { name: "Meus pokémons", path: "/my-pokemons" },
   { name: "Capturar pokémons", path: "/capture-pokemon" },
-  { name: "Configurações", path: "/seetings" },
   { name: "Batalha", path: "/rocket-team-battle" },
   { name: "Dashboard", path: "/dashboard" },
+  { name: "Pokémons especiais", path: "/special-pokemons" },
+  { name: "Loja", path: "/store" },
   { name: "Tutorial", path: "/" },
+  { name: "Configurações", path: "/seetings" },
 
 
 ];
@@ -35,7 +37,7 @@ const Home = () => {
             Seja o maior dos mestres pokemon e embarque na maior aventura!
             Batalhar, capturar e treinar todos os 68 pokémons sendo produtivo!
           </p>
-          <ul className="grid grid-cols-3 max-lg:grid-cols-2 gap-4 w-full z-10">
+          <ul className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 w-full z-10">
             {menu.map((item, index) => (
               <li
                 className="w-full min-w-36 min-h-24 bg-bt-purple rounded-2xl"

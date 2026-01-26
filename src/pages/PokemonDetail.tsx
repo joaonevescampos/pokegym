@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { usePokemon } from "../context/usePokemon";
 import pokebola from "../assets/pokeball.png";
+import diamond from "../assets/diamond.png";
 import energy from "../assets/energy.png";
 import xIcon from "../assets/x.png";
 interface ChecklistType {
@@ -15,6 +16,7 @@ const PokemonDetail = () => {
     state,
     gainXp,
     gainPokeball,
+    gainDiamond,
     registerMission,
     addChecklist,
     setChecklist,
@@ -122,8 +124,9 @@ const PokemonDetail = () => {
         xp === 89
       ) {
         gainPokeball(1);
-      } else if (xp === 100) {
+      } else if (xp === 99) {
         gainPokeball(5);
+        gainDiamond(1);
       }
       setAlert(true);
     }
@@ -241,7 +244,9 @@ const PokemonDetail = () => {
             {state.userStatus.energy > 0 && (
               <div className="flex flex-col gap-2 items-center justify-center pb-12">
                 <div className="flex items-center justify-center gap-2 pb-4">
-                  <span className="text-center opacity-70 font-semibold">Você tem um total de x {state.userStatus.energy}</span>
+                  <span className="text-center opacity-70 font-semibold">
+                    Você tem um total de x {state.userStatus.energy}
+                  </span>
                   <img src={energy} alt="energy" className="w-6" />
                 </div>
                 <span className="text-sm font-bold text-center">
@@ -251,7 +256,7 @@ const PokemonDetail = () => {
                   text="Usar energia"
                   onClick={() => {
                     useEnergy(1);
-                    deleteTimeToRest(pokemonName!)
+                    deleteTimeToRest(pokemonName!);
                     window.location.reload();
                   }}
                 ></Button>
@@ -516,11 +521,21 @@ const PokemonDetail = () => {
                       UAUUU! Você atingiu o nível máximo: {level}
                     </h1>
                     <h2 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +5 pokebolas!
+                      Oba! Você ganhou +5 pokebolas e +1 diamante!
                     </h2>
-                    <div className="flex items-end gap-2 top-4 right-4">
-                      <span className="text-sm font-bold opacity-70">+ 5</span>
-                      <img src={pokebola} alt="pokebola" width={28} />
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="flex items-end gap-2">
+                        <span className="text-sm font-bold opacity-70">
+                          + 5
+                        </span>
+                        <img src={pokebola} alt="pokebola" width={28} />
+                      </div>
+                      <div className="flex items-end gap-2">
+                        <span className="text-sm font-bold opacity-70">
+                          + 1
+                        </span>
+                        <img src={diamond} alt="diamond" width={28} />
+                      </div>
                     </div>
                     <p className="text-sm text-center">
                       Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,

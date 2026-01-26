@@ -103,7 +103,7 @@ const RocketTeamChoose = () => {
               className="absolute w-full h-full z-0 object-cover pointer-events-none"
             />
             <div className="absolute flex items-end gap-2 top-4 left-4">
-              <Link to="/capture-pokemon" className="text-sm font-bold ">
+              <Link to="/home" className="text-sm font-bold ">
                 voltar
               </Link>
             </div>

@@ -1,6 +1,7 @@
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
+import diamond from "../assets/diamond.png";
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
@@ -114,14 +115,14 @@ const PokemonCataloge = () => {
 
   return (
     <>
-      <header className="relative w-full h-fit text-white">
+      <header className="relative w-full h-fit text-white pt-4">
         <section>
           <div className="absolute flex items-end gap-2 top-4 left-4">
             <Link to="/home" className="text-sm  font-bold opacity-70">
               Pokegym
             </Link>
           </div>
-          <div className="absolute flex items-end gap-2 top-4 right-4">
+           <div className="absolute flex items-end gap-2 top-4 right-4">
             <div className="flex items-end gap-1">
               <span className="text-sm font-bold opacity-70">
                 x {state.userStatus.pokeball}{" "}
@@ -133,6 +134,12 @@ const PokemonCataloge = () => {
                 x {state.userStatus.energy}{" "}
               </span>
               <img src={energy} alt="energy" width={28} />
+            </div>
+            <div className="flex items-end gap-1">
+              <span className="text-sm font-bold opacity-70">
+                x {state.userStatus.diamond}{" "}
+              </span>
+              <img src={diamond} alt="diamond" width={28} />
             </div>
           </div>
         </section>

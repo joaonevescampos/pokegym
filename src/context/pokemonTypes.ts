@@ -62,6 +62,7 @@ export type Dashboard = DashboardYear[];
 export type UserStatus = {
   pokeball: number;
   energy: number;
+  diamond: number;
   dashboard: Dashboard;
 };
 
@@ -78,11 +79,13 @@ export type PokemonAction =
   | { type: "USE_POKEBALL"; payload: { lose: number } }
   | { type: "GAIN_ENERGY"; payload: { gain: number } }
   | { type: "USE_ENERGY"; payload: { lose: number } }
+  | { type: "GAIN_DIAMOND"; payload: { gain: number } }
+  | { type: "USE_DIAMOND"; payload: { lose: number } }
   | { type: "SET_TAG"; payload: { name: string; tag: string } }
   | { type: "DELETE_TAG"; payload: { name: string } }
   | {
       type: "ADD_CHECKLIST";
-      payload: { name: string};
+      payload: { name: string };
     }
   | {
       type: "SET_CHECKLIST";

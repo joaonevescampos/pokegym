@@ -13,8 +13,9 @@ import RocketTeamChoose from "./pages/RocketTeamChoose";
 import RocketTeamBattle from "./pages/RocketTeamBattle";
 import DashboardPage from "./pages/DashboardPage";
 import SpecialPokemons from "./pages/SpecialPokemons";
-
-
+import SpecialPokemonSnorlax from "./pages/SpecialPokemonSnorlax";
+import SpecialPokemonVictini from "./pages/SpecialPokemonVictini";
+import SpecialPokemonCelebi from "./pages/SpecialPokemonCelebi";
 
 function AppRoutes() {
   return (
@@ -40,7 +41,9 @@ function AppRoutes() {
         <Route path="/rocket-team-battle/:pokemonName" element={<RocketTeamBattle />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/special-pokemons" element={<SpecialPokemons />} />
-
+        <Route path="/special-pokemon/snorlax" element={<SpecialPokemonSnorlax />} />
+        <Route path="/special-pokemon/victini" element={<SpecialPokemonVictini />} />
+        <Route path="/special-pokemon/celebi" element={<SpecialPokemonCelebi />} />
 
       </Routes>
     </Router>

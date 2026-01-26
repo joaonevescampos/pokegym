@@ -8,6 +8,7 @@ import type {
 } from "@/context/pokemonTypes";
 import { usePokemon } from "@/context/usePokemon";
 import { useState, useMemo, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function isSameDay(a: Date, b: Date) {
   return (
@@ -126,54 +127,64 @@ const DashboardPage = () => {
   const progressWidth = Math.ceil(daysTrained / 365);
 
   return (
-    <main className="flex flex-col gap-4 items-center justify-center max-w-100 w-full h-screen m-auto px-4">
-      <h1 className="font-bold text-xl text-white">Progresso</h1>
-      <p className="opacity-70 text-sm text-white">
-        Veja seu progresso ao longo dos meses
-      </p>
-      <Calendar
-        mode="single"
-        selected={selected}
-        onSelect={setSelected}
-        month={month}
-        onMonthChange={setMonth}
-        modifiers={{
-          allowed: safeHighlightedDates,
-          blocked: blockedDates,
-        }}
-        modifiersClassNames={{
-          allowed: "bg-green-400 text-white rounded-lg",
-          blocked: "bg-red-400 text-white rounded-lg",
-        }}
-        className="rounded-lg border w-full"
-      />
-      <div className="w-full">
-        <h2 className="text-white font-bold pb-4">Progresso de {currYear}</h2>
-        <div className="flex justify-between pb-2 text-white text-xs font-bold ">
-          <span className="text-green-400">{daysTrained}</span>
-          <span className="opacity-70">365</span>
-        </div>
-        <div className="relative h-8 w-full bg-red-400 rounded">
-          <div
-            className={`absolute top-0 left-0 bg-green-400 h-8 rounded`}
-            style={{ width: `${progressWidth}%` }}
-          ></div>
-        </div>
+    <>
+      <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
+        <Link to="/home" className="text-sm  font-bold opacity-70">
+          Pokegym
+        </Link>
       </div>
-      <div className="flex flex-col gap-2 items-start w-full text-white">
-        <div className="flex gap-2 items-center">
-          <div className="w-4 h-4 bg-green-400 rounded"></div>
-          <span className="text-sm opacity-70 font-medium">Treino concluído: {daysTrained}</span>
+      
+      <main className="flex flex-col gap-4 items-center justify-center max-w-100 w-full h-screen m-auto px-4">
+        <h1 className="font-bold text-xl text-white">Progresso</h1>
+        <p className="opacity-70 text-sm text-white">
+          Veja seu progresso ao longo dos meses
+        </p>
+        <Calendar
+          mode="single"
+          selected={selected}
+          onSelect={setSelected}
+          month={month}
+          onMonthChange={setMonth}
+          modifiers={{
+            allowed: safeHighlightedDates,
+            blocked: blockedDates,
+          }}
+          modifiersClassNames={{
+            allowed: "bg-green-400 text-white rounded-lg",
+            blocked: "bg-red-400 text-white rounded-lg",
+          }}
+          className="rounded-lg border w-full"
+        />
+        <div className="w-full">
+          <h2 className="text-white font-bold pb-4">Progresso de {currYear}</h2>
+          <div className="flex justify-between pb-2 text-white text-xs font-bold ">
+            <span className="text-green-400">{daysTrained}</span>
+            <span className="opacity-70">365</span>
+          </div>
+          <div className="relative h-8 w-full bg-red-400 rounded">
+            <div
+              className={`absolute top-0 left-0 bg-green-400 h-8 rounded`}
+              style={{ width: `${progressWidth}%` }}
+            ></div>
+          </div>
         </div>
-        <div className="flex gap-2 items-center">
-          <div className="w-4 h-4 bg-red-400 rounded"></div>
-          <span className="text-sm opacity-70 font-medium">
-            Treino não concluido: {365 - daysTrained}
-          </span>
+        <div className="flex flex-col gap-2 items-start w-full text-white">
+          <div className="flex gap-2 items-center">
+            <div className="w-4 h-4 bg-green-400 rounded"></div>
+            <span className="text-sm opacity-70 font-medium">
+              Treino concluído: {daysTrained}
+            </span>
+          </div>
+          <div className="flex gap-2 items-center">
+            <div className="w-4 h-4 bg-red-400 rounded"></div>
+            <span className="text-sm opacity-70 font-medium">
+              Treino não concluido: {365 - daysTrained}
+            </span>
+          </div>
         </div>
-      </div>
-      <Button text="voltar" path="/home" style="text-white!" />
-    </main>
+        <Button text="voltar" path="/home" style="text-white!" />
+      </main>
+    </>
   );
 };
 
