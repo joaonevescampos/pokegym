@@ -69,31 +69,33 @@ const SpecialPokemons = () => {
   };
   return (
     <>
-      <div className="absolute flex items-end gap-2 top-4 right-4 text-white">
-        <div className="flex items-end gap-1">
-          <span className="text-sm font-bold opacity-70">
-            x {state.userStatus.pokeball}{" "}
-          </span>
-          <img src={pokebola} alt="pokebola" width={28} />
+      <header className="relative">
+        <div className="absolute flex items-end gap-2 top-4 right-4 text-white">
+          <div className="flex items-end gap-1">
+            <span className="text-sm font-bold opacity-70">
+              x {state.userStatus.pokeball}{" "}
+            </span>
+            <img src={pokebola} alt="pokebola" width={28} />
+          </div>
+          <div className="flex items-end gap-1">
+            <span className="text-sm font-bold opacity-70">
+              x {state.userStatus.energy}{" "}
+            </span>
+            <img src={energy} alt="energy" width={28} />
+          </div>
+          <div className="flex items-end gap-1">
+            <span className="text-sm font-bold opacity-70">
+              x {state.userStatus.diamond}{" "}
+            </span>
+            <img src={diamond} alt="diamond" width={28} />
+          </div>
         </div>
-        <div className="flex items-end gap-1">
-          <span className="text-sm font-bold opacity-70">
-            x {state.userStatus.energy}{" "}
-          </span>
-          <img src={energy} alt="energy" width={28} />
+        <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
+          <Link to="/home" className="text-sm  font-bold opacity-70">
+            Pokegym
+          </Link>
         </div>
-        <div className="flex items-end gap-1">
-          <span className="text-sm font-bold opacity-70">
-            x {state.userStatus.diamond}{" "}
-          </span>
-          <img src={diamond} alt="diamond" width={28} />
-        </div>
-      </div>
-      <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
-        <Link to="/home" className="text-sm  font-bold opacity-70">
-          Pokegym
-        </Link>
-      </div>
+      </header>
       <main className="flex flex-col items-center justify-center w-full h-full pb-4 pt-16">
         <h1 className="text-white text-xl font-bold pb-4">
           Pokemons Especiais
@@ -129,7 +131,11 @@ const SpecialPokemons = () => {
                   (item) =>
                     pokemon.name === item.name &&
                     (item.active ? (
-                      <Button text="Selecionar" path={`/special-pokemon/${pokemon.name}`} style="text-white!"/>
+                      <Button
+                        text="Selecionar"
+                        path={`/special-pokemon/${pokemon.name}`}
+                        style="text-white!"
+                      />
                     ) : (
                       <button
                         className="flex gap-1 items-center justify-center bg-white rounded-3xl w-24 py-2 cursor-pointer"
