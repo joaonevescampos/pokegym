@@ -14,6 +14,14 @@ type BasePokemon = {
   captured: boolean;
 };
 
+type Generation = {
+  generationString: string;
+  generationNumber: number;
+  color: string;
+  selected: boolean;
+  released: boolean;
+};
+
 const PokemonCataloge = () => {
   const { state } = usePokemon();
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
@@ -26,6 +34,71 @@ const PokemonCataloge = () => {
     { level: "dificil", color: "bg-red-400", selected: false },
     { level: "insano", color: "bg-purple-400", selected: false },
     { level: "todos", color: "bg-white", selected: false },
+  ]);
+  const [generationList, setGenerationList] = useState<Generation[]>([
+    {
+      generationString: "I",
+      generationNumber: 1,
+      color: "bg-green-200",
+      selected: true,
+      released: true,
+    },
+    {
+      generationString: "II",
+      generationNumber: 2,
+      color: "bg-blue-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "III",
+      generationNumber: 3,
+      color: "bg-purple-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "IV",
+      generationNumber: 4,
+      color: "bg-pink-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "V",
+      generationNumber: 5,
+      color: "bg-red-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "VI",
+      generationNumber: 6,
+      color: "bg-orange-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "VII",
+      generationNumber: 7,
+      color: "bg-yellow-200",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "VIII",
+      generationNumber: 8,
+      color: "bg-white",
+      selected: false,
+      released: false,
+    },
+    {
+      generationString: "IX",
+      generationNumber: 9,
+      color: "bg-gray-200",
+      selected: false,
+      released: false,
+    },
   ]);
 
   const isEvolutionChainCaptured = async (speciesUrl: string) => {
@@ -46,9 +119,13 @@ const PokemonCataloge = () => {
     return state.myPokemons.some((p) => evolutionNames.includes(p.name));
   };
 
-  const getPokemonList = async () => {
+  const getPokemonList = async (generation: number) => {
     try {
-      const genRes = await fetch("https://pokeapi.co/api/v2/generation/1");
+      console.log("GEN", generation);
+      const genRes = await fetch(
+        `https://pokeapi.co/api/v2/generation/${generation}`,
+      );
+      console.log(`https://pokeapi.co/api/v2/generation/${generation}`);
       const genData = await genRes.json();
 
       const basePokemons = await Promise.all(
@@ -79,7 +156,80 @@ const PokemonCataloge = () => {
     }
   };
   useEffect(() => {
-    getPokemonList();
+    getPokemonList(1);
+    const userXP = 2000;
+    if (userXP >= 0 && userXP < 1000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 1
+          ? { ...item, released: true }
+          : { ...item, released: false },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 1000 && userXP < 2000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 1 || item.generationNumber === 2
+          ? { ...item, released: true }
+          : { ...item, released: false },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 2000 && userXP < 3000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 1 ||
+        item.generationNumber === 2 ||
+        item.generationNumber === 3
+          ? { ...item, released: true }
+          : { ...item, released: false },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 3000 && userXP < 4000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 1 ||
+        item.generationNumber === 2 ||
+        item.generationNumber === 3 ||
+        item.generationNumber === 4
+          ? { ...item, released: true }
+          : { ...item, released: false },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 4000 && userXP < 5000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 6 ||
+        item.generationNumber === 7 ||
+        item.generationNumber === 8 ||
+        item.generationNumber === 9
+          ? { ...item, released: false }
+          : { ...item, released: true },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 5000 && userXP < 6000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 7 ||
+        item.generationNumber === 8 ||
+        item.generationNumber === 9
+          ? { ...item, released: false }
+          : { ...item, released: true },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 6000 && userXP < 7000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 8 || item.generationNumber === 9
+          ? { ...item, released: false }
+          : { ...item, released: true },
+      );
+      setGenerationList(newGenerationList);
+    } else if (userXP >= 7000 && userXP < 8000) {
+      const newGenerationList: Generation[] = generationList.map((item) =>
+        item.generationNumber === 9
+          ? { ...item, released: false }
+          : { ...item, released: true },
+      );
+      setGenerationList(newGenerationList);
+    } else {
+      const newGenerationList: Generation[] = generationList.map((item) => {
+        return { ...item, released: true };
+      });
+      setGenerationList(newGenerationList);
+    }
   }, []);
 
   const filterCaptureLevel = (captureStatus: string) => {
@@ -104,13 +254,23 @@ const PokemonCataloge = () => {
     const newPokemonList = filterCaptureLevel(captureStatus);
     setPokemonFilteredList(newPokemonList);
 
-    const newCaptureLevel = captureLevels.map((item) => 
+    const newCaptureLevel = captureLevels.map((item) =>
       item.level === captureStatus
-        ? {...item, selected : true}
-        : {...item, selected : false}
+        ? { ...item, selected: true }
+        : { ...item, selected: false },
     );
 
-    setCaptureLevels(newCaptureLevel)
+    setCaptureLevels(newCaptureLevel);
+  };
+
+  const handleSelectGeneration = (generation: number) => {
+    const newGenerationList: Generation[] = generationList.map((item) =>
+      item.generationNumber === generation
+        ? { ...item, selected: true }
+        : { ...item, selected: false },
+    );
+    setGenerationList(newGenerationList);
+    getPokemonList(generation);
   };
 
   return (
@@ -122,7 +282,7 @@ const PokemonCataloge = () => {
               Pokegym
             </Link>
           </div>
-           <div className="absolute flex items-end gap-2 top-4 right-4">
+          <div className="absolute flex items-end gap-2 top-4 right-4">
             <div className="flex items-end gap-1">
               <span className="text-sm font-bold opacity-70">
                 x {state.userStatus.pokeball}{" "}
@@ -157,12 +317,28 @@ const PokemonCataloge = () => {
               captura.
             </p>
             <p className="text-sm font-medium text-center mb-4 opacity-70">
-              4. Ao capturar um pokémon você ganha energia proporcional ao nível.
+              4. Ao capturar um pokémon você ganha energia proporcional ao
+              nível.
             </p>
-            <h1 className="text-xl text-center font-extrabold">
-              Níveis de captura
-            </h1>
           </div>
+          <h2 className="text-xl text-center font-extrabold">Geração</h2>
+          <p className="text-sm font-medium text-center pt-2 opacity-70">
+            Cada geração é liberada a cada 1000 XP do jogador.
+          </p>
+          <ul className="flex flex-wrap gap-2 py-4 max-lg:max-w-80">
+            {generationList.map((item, index) => (
+              <li
+                className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer ${item.selected ? "border-2 border-white bg-transparent! text-white" : "border-none"} ${!item.released ? "pointer-events-none opacity-50" : ""}`}
+                onClick={() => handleSelectGeneration(item.generationNumber)}
+                key={index}
+              >
+                {item.generationString}
+              </li>
+            ))}
+          </ul>
+          <h2 className="text-xl text-center font-extrabold">
+            Níveis de captura
+          </h2>
           <ul className="flex gap-2 py-4">
             {captureLevels.map((item, index) => (
               <li
