@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { usePokemon } from "../context/usePokemon";
+import pokebola from "../assets/pokeball.png"
 
 interface PokemonCard {
   name: string;
@@ -118,7 +119,7 @@ const PokemonCard = ({
       {imageURL ? (
         <img src={imageURL} alt={name} className="w-40 z-10" />
       ) : (
-        <span>sem imagem</span>
+        <img src={pokebola} alt="pokebola" className="w-40 z-10 opacity-30" />
       )}
       <h2 className="font-bold z-10 text-sm">{name.toUpperCase()}</h2>
       <span
