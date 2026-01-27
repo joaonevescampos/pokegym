@@ -115,8 +115,20 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_USERNAME", payload: { userName } });
   }
 
-   function setGender(gender: string) {
+  function setGender(gender: string) {
     dispatch({ type: "SET_GENDER", payload: { gender } });
+  }
+
+  function activeNote(status: boolean) {
+    dispatch({ type: "ACTIVE_NOTE", payload: { status } });
+  }
+
+  function activeRandom(status: boolean) {
+    dispatch({ type: "ACTIVE_RANDOM", payload: { status } });
+  }
+
+  function activePomodoro(status: boolean) {
+    dispatch({ type: "ACTIVE_POMODORO", payload: { status } });
   }
 
   function addChecklist(name: string) {
@@ -145,6 +157,13 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
 
   function deleteTimeToRest(name: string) {
     dispatch({ type: "DELETE_TIME_TO_REST", payload: { name } });
+  }
+
+  function setTimeToRestRocket(time_to_rest_rocket: number | null) {
+    dispatch({
+      type: "SET_TIME_TO_REST_ROCKET",
+      payload: {time_to_rest_rocket },
+    });
   }
 
   function registerMission() {
@@ -190,8 +209,12 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         setTag,
         deleteTag,
         setGender,
+        activeNote,
+        activePomodoro,
+        activeRandom,
         setTimeToRest,
         deleteTimeToRest,
+        setTimeToRestRocket,
       }}
     >
       {children}

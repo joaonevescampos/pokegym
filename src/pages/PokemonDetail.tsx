@@ -52,6 +52,10 @@ const PokemonDetail = () => {
   const limitCaractere = 10;
   const [caractere, setCaractere] = useState(currentPokemon?.tag.length);
 
+  // const [createPomodoro, setCreatePomodoro] = useState(false)
+  // const [createRandom, setCreateRandom] = useState(false)
+
+
   useEffect(() => {
     formatDate();
   }, []);
@@ -113,7 +117,7 @@ const PokemonDetail = () => {
     const evolved = await gainHp(currentPokemon.name, 1);
     if (evolved) {
       gainPokeball(3);
-      gainXp(5)
+      gainXp(5);
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
       if (
@@ -126,13 +130,13 @@ const PokemonDetail = () => {
         hp === 89
       ) {
         gainPokeball(1);
-        gainXp(5)
+        gainXp(5);
       } else if (hp === 99) {
         gainPokeball(5);
         gainDiamond(1);
-        gainXp(10)
+        gainXp(10);
       } else {
-        gainXp(1)
+        gainXp(1);
       }
       setAlert(true);
     }
@@ -370,14 +374,36 @@ const PokemonDetail = () => {
               <span className="text-white text-sm opacity-50 font-medium">
                 {date}
               </span>
-              <p className="text-white text-center opacity-80">
+              <p className="text-white text-center">
                 Crie seu checklist do dia, conclua todas suas tarefas e veja seu
-                pokemon ganhar ehperiência a cada dia.
+                pokemon ganhar experiência a cada dia.
               </p>
 
-              <strong className="text-white text-center text-sm">
-                Seu pokémon só pode treinar 1x a cada 8h.
-              </strong>
+              <div className="flex flex-col gap-2 text-white">
+                <p className="text-sm opacity-75 text-center">
+                  Habilidades de pokémons especiais -{" "}
+                  <Link to="/special-pokemons" className="underline">
+                    Saiba mais
+                  </Link>
+                </p>
+                <ul className="flex justify-center gap-2">
+                  <li
+                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer`} onClick={() => navigate("/snorlax-note")}
+                  >
+                    NOTAS 🔒
+                  </li>
+                  <li
+                    className={`flex items-center justify-center font-bold bg-orange-400 w-30 h-8 rounded-2xl text-xs cursor-pointer ${"opacity-50 pointer-events-none bg-gray-500!"}`}
+                  >
+                    SORTEIO 🔒
+                  </li>
+                  <li
+                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${"opacity-50 pointer-events-none bg-gray-500!"}`}
+                  >
+                    POMODORO 🔒
+                  </li>
+                </ul>
+              </div>
 
               <div className="flex flex-col gap-2 ">
                 {caractere === 0 ? (

@@ -6,10 +6,8 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import rocketTeam from "../assets/team-rocket-3d.png";
 
-const STORAGE_KEY = "timer_end_time";
-
 const RocketTeamChoose = () => {
-  const { state } = usePokemon();
+  const { state, setTimeToRestRocket } = usePokemon();
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState<
     number | undefined
   >(undefined);
@@ -19,7 +17,7 @@ const RocketTeamChoose = () => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
   useEffect(() => {
-    const savedEndTime = localStorage.getItem(STORAGE_KEY);
+    const savedEndTime = state.userStatus.time_to_rest_rocket;
 
     if (savedEndTime) {
       const endTime = Number(savedEndTime);
@@ -45,7 +43,7 @@ const RocketTeamChoose = () => {
 
   function startTimer(seconds: number) {
     const endTime = Date.now() + seconds * 1000;
-    localStorage.setItem(STORAGE_KEY, String(endTime));
+    setTimeToRestRocket(endTime);
     updateTime(endTime);
   }
 
@@ -54,7 +52,7 @@ const RocketTeamChoose = () => {
     setTimeLeft(remaining);
 
     if (remaining === 0) {
-      localStorage.removeItem(STORAGE_KEY);
+      setTimeToRestRocket(null);
     }
   }
 
@@ -87,11 +85,7 @@ const RocketTeamChoose = () => {
               Tempo restante
             </p>
             <span>{formatTime(timeLeft)}</span>
-            <Button
-              text="voltar"
-              path="/home"
-              style="text-white!"
-            ></Button>
+            <Button text="voltar" path="/home" style="text-white!"></Button>
           </div>
         </main>
       ) : (

@@ -19,6 +19,7 @@ import SpecialPokemonCelebi from "./pages/SpecialPokemonCelebi";
 import SetGameInfos from "./pages/SetGameInfos";
 import Store from "./pages/Store";
 import Seetings from "./pages/Seetings";
+import SnorlaxNote from "./pages/SnorlaxNote";
 
 
 function AppRoutes() {
@@ -66,6 +67,8 @@ function AppRoutes() {
         <Route path="/set-informations" element={<SetGameInfos />} />
         <Route path="/store" element={<Store />} />
         <Route path="/seetings" element={<Seetings />} />
+        <Route path="/snorlax-note" element={<SnorlaxNote />} />
+
 
       </Routes>
     </Router>

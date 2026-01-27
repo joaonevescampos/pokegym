@@ -18,6 +18,9 @@ export type PokemonContextType = {
   setGender: (gender: string) => void;
   setTag: (name: string, tag: string) => void;
   deleteTag: (name: string) => void;
+  activeNote: (status: boolean) => void;
+  activeRandom: (status: boolean) => void;
+  activePomodoro: (status: boolean) => void;
   addChecklist: (name: string) => void;
   setChecklist: (
     name: string,
@@ -28,6 +31,7 @@ export type PokemonContextType = {
   deleteChecklist: (name: string, index: number) => void;
   setTimeToRest: (name: string, time_to_rest: number) => void;
   deleteTimeToRest: (name: string) => void;
+  setTimeToRestRocket: (time_to_rest_rocket: number | null) => void;
   resetGame: () => void;
 };
 

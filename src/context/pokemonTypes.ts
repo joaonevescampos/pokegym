@@ -61,12 +61,17 @@ export type Dashboard = DashboardYear[];
 
 export type UserStatus = {
   userName: string;
-  gender : string
+  gender: string;
   pokeball: number;
   energy: number;
   diamond: number;
   dashboard: Dashboard;
   xp: number;
+  note: string;
+  snorlaxStatus: boolean;
+  victiniStatus: boolean;
+  celebiStatus: boolean;
+  time_to_rest_rocket: number | null;
 };
 
 export type PokemonState = {
@@ -89,6 +94,9 @@ export type PokemonAction =
   | { type: "DELETE_TAG"; payload: { name: string } }
   | { type: "SET_GENDER"; payload: { gender: string } }
   | { type: "SET_USERNAME"; payload: { userName: string } }
+  | { type: "ACTIVE_NOTE"; payload: { status: boolean } }
+  | { type: "ACTIVE_RANDOM"; payload: { status: boolean } }
+  | { type: "ACTIVE_POMODORO"; payload: { status: boolean } }
   | {
       type: "ADD_CHECKLIST";
       payload: { name: string };
@@ -108,6 +116,10 @@ export type PokemonAction =
   | {
       type: "DELETE_TIME_TO_REST";
       payload: { name: string };
+    }
+  | {
+      type: "SET_TIME_TO_REST_ROCKET";
+      payload: { time_to_rest_rocket: number | null };
     }
   | {
       type: "REGISTER_MISSION";

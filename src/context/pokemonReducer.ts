@@ -37,6 +37,11 @@ export const initialPokemonState: PokemonState = {
         ],
       },
     ],
+    note: "",
+    snorlaxStatus: false,
+    victiniStatus: false,
+    celebiStatus: false,
+    time_to_rest_rocket: null
   },
   myPokemons: [],
 };
@@ -191,12 +196,39 @@ export function pokemonReducer(
         },
       };
 
-      case "SET_GENDER":
+    case "SET_GENDER":
       return {
         ...state,
         userStatus: {
           ...state.userStatus,
           gender: action.payload.gender,
+        },
+      };
+
+    case "ACTIVE_NOTE":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          snorlaxStatus: action.payload.status,
+        },
+      };
+
+    case "ACTIVE_RANDOM":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          victiniStatus: action.payload.status,
+        },
+      };
+
+    case "ACTIVE_POMODORO":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          celebiStatus: action.payload.status,
         },
       };
 
@@ -280,6 +312,15 @@ export function pokemonReducer(
             time_to_rest: null,
           };
         }),
+      };
+
+    case "SET_TIME_TO_REST_ROCKET":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          time_to_rest_rocket: action.payload.time_to_rest_rocket,
+        },
       };
 
     case "REGISTER_MISSION": {

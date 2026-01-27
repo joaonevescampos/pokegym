@@ -13,22 +13,18 @@ const RocketTeamBattle = () => {
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
   const [reward, setReward] = useState("");
-  const { gainPokeball, gainEnergy } = usePokemon();
+  const { state, gainPokeball, gainEnergy } = usePokemon();
   const [isFighting, setIsFighting] = useState(true);
   const navigate = useNavigate();
 
   const param = useParams();
+  const timeToRest = state.userStatus.time_to_rest_rocket;
 
   useEffect(() => {
-    console.log(
-      "teste",
-      Number(localStorage.getItem("timer_end_time")) - Date.now(),
-    );
-    if (
-      Number(localStorage.getItem("timer_end_time")) - Date.now() <
-      28788000
-    ) {
-      navigate(`/home`);
+    if (timeToRest) {
+      if (Number(timeToRest - Date.now() < 28788000)) {
+        navigate(`/home`);
+      }
     }
   }, []);
 
@@ -93,7 +89,7 @@ const RocketTeamBattle = () => {
     } else {
       console.log("ganhar energy");
       setReward("energy");
-      gainEnergy(1)
+      gainEnergy(1);
     }
   };
 
@@ -112,8 +108,7 @@ const RocketTeamBattle = () => {
 
   return (
     <>
-      {Number(localStorage.getItem("timer_end_time")) - Date.now() <
-      28708000 ? (
+      {timeToRest! - Date.now() < 28708000 ? (
         <></>
       ) : (
         <main className="flex flex-col items-center justify-center h-screen max-lg:h-full max-lg:min-h-100 text-white">
