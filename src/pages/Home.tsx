@@ -22,7 +22,7 @@ const Home = () => {
       <img
         src={backgroundImage}
         alt="home"
-        className="absolute left-0 w-full object-cover h-full opacity-15 z-0"
+        className="absolute left-0 w-full object-cover h-full opacity-25 z-0"
       />
       <section className="flex flex-col items-center justify-center w-full h-full">
         <div className="flex flex-col gap-4 items-center justify-center text-white px-4 z-10">

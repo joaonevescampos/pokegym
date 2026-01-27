@@ -370,13 +370,13 @@ const PokemonDetail = () => {
               <span className="text-white text-sm opacity-50 font-medium">
                 {date}
               </span>
-              <p className="text-white text-center">
+              <p className="text-white text-center opacity-80">
                 Crie seu checklist do dia, conclua todas suas tarefas e veja seu
                 pokemon ganhar ehperiência a cada dia.
               </p>
 
               <strong className="text-white text-center text-sm">
-                Lembrando que seu pokémon só pode treinar 1x a cada 8h.
+                Seu pokémon só pode treinar 1x a cada 8h.
               </strong>
 
               <div className="flex flex-col gap-2 ">

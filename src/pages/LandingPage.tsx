@@ -10,7 +10,7 @@ import Button from "../components/Button";
 const LandingPage = () => {
   return (
     <main className="relative flex flex-col justify-center items-center h-full text-white overflow-x-hidden">
-      <section className="  max-lg:flex-none flex items-center justify-center h-70 max-lg:h-130 w-full max-lg:overflow-x-hidden bg-linear-to-tl from-pink-800 to-blue-900">
+      <section className="  max-lg:flex-none flex items-center justify-center h-70 max-lg:h-130 w-full max-lg:overflow-x-hidden bg-linear-to-br from-blue-800 to-purple-500">
         <img
           src={bgPokeball}
           alt="pokeball"
@@ -76,7 +76,7 @@ const LandingPage = () => {
         <h2 className="text-xl font-bold">
           Onde encontrar, para que serve e onde usar items?
         </h2>
-        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-tl from-pink-800 to-blue-900 p-4 rounded-2xl">
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-800 to-purple-500 p-4 rounded-2xl">
           <strong>
             Existem 3 items no jogo: pokebolas, energias e diamantes.
           </strong>
@@ -162,7 +162,7 @@ const LandingPage = () => {
           </p>
         </div>
         <h2 className="text-xl font-bold">Como funcionam as batalhas?</h2>
-        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-tl from-pink-800 to-blue-900 p-4 rounded-2xl">
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-800 to-purple-500 p-4 rounded-2xl">
           <strong>Existem 2 modos de batalha no jogo:</strong>
 
           <div className="flex flex-col gap-2">
@@ -182,10 +182,11 @@ const LandingPage = () => {
             <ul className="flex flex-col gap-2 font-bold items-center py-4">
               <li className="text-green-400">fácil: 1 energia;</li>
               <li className="text-yellow-400">médio: 3 energias;</li>
-              <li className="text-red-400">difícil: 5 energias;</li>
-              <li className="text-purple-400"> insano: 10 energias </li>
+              <li className="text-red-300">difícil: 5 energias;</li>
+              <li className="text-purple-300"> insano: 10 energias </li>
             </ul>
           </div>
+        </div>
           <h3 className="text-center font-bold text-xl">
             Para que servem os pokémons especiais?
           </h3>
@@ -197,7 +198,6 @@ const LandingPage = () => {
             Existem 3 pokémons: Snorlax, Victini e Celebi com suas respectivas
             habilidades: bloco de notas, sorteio e pomodoro
           </p>
-        </div>
         <p className="font-bold text-center">
           Mais dúvidas? Que tal ir jogando e aprendendo na prática? Vamos lá!
           Clique em "Começar"

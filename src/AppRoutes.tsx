@@ -18,6 +18,7 @@ import SpecialPokemonVictini from "./pages/SpecialPokemonVictini";
 import SpecialPokemonCelebi from "./pages/SpecialPokemonCelebi";
 import SetGameInfos from "./pages/SetGameInfos";
 import Store from "./pages/Store";
+import Seetings from "./pages/Seetings";
 
 
 function AppRoutes() {
@@ -64,6 +65,7 @@ function AppRoutes() {
         />
         <Route path="/set-informations" element={<SetGameInfos />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/seetings" element={<Seetings />} />
 
       </Routes>
     </Router>
