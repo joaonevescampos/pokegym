@@ -16,6 +16,7 @@ import SpecialPokemons from "./pages/SpecialPokemons";
 import SpecialPokemonSnorlax from "./pages/SpecialPokemonSnorlax";
 import SpecialPokemonVictini from "./pages/SpecialPokemonVictini";
 import SpecialPokemonCelebi from "./pages/SpecialPokemonCelebi";
+import SetGameInfos from "./pages/SetGameInfos";
 
 function AppRoutes() {
   return (
@@ -35,16 +36,31 @@ function AppRoutes() {
           path="/pokemon-battle/:pokemonOponent/:pokemonChose"
           element={<PokemonBattle />}
         />
-        <Route path="/pokemon-evolution/:pokemonName" element={<PokemonEvolution />} />
+        <Route
+          path="/pokemon-evolution/:pokemonName"
+          element={<PokemonEvolution />}
+        />
 
         <Route path="/rocket-team-battle" element={<RocketTeamChoose />} />
-        <Route path="/rocket-team-battle/:pokemonName" element={<RocketTeamBattle />} />
+        <Route
+          path="/rocket-team-battle/:pokemonName"
+          element={<RocketTeamBattle />}
+        />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/special-pokemons" element={<SpecialPokemons />} />
-        <Route path="/special-pokemon/snorlax" element={<SpecialPokemonSnorlax />} />
-        <Route path="/special-pokemon/victini" element={<SpecialPokemonVictini />} />
-        <Route path="/special-pokemon/celebi" element={<SpecialPokemonCelebi />} />
-
+        <Route
+          path="/special-pokemon/snorlax"
+          element={<SpecialPokemonSnorlax />}
+        />
+        <Route
+          path="/special-pokemon/victini"
+          element={<SpecialPokemonVictini />}
+        />
+        <Route
+          path="/special-pokemon/celebi"
+          element={<SpecialPokemonCelebi />}
+        />
+        <Route path="/set-informations" element={<SetGameInfos />} />
       </Routes>
     </Router>
   );

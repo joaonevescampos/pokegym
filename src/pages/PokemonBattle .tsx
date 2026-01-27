@@ -96,7 +96,7 @@ const PokemonBattle = () => {
       const pokemonChose = state.myPokemons.filter(
         (pokemon) => pokemon.name === param.pokemonChose,
       )[0];
-      const pokemonChoseLevel = pokemonChose.xp;
+      const pokemonChoseLevel = pokemonChose.hp;
 
       const winRate = captureRate + userTotalPokemon + pokemonChoseLevel;
       const total = maxCaptureRate + maxLevel + maxCapturedPokemons;

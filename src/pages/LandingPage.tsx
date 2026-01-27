@@ -1,13 +1,16 @@
 import charizardImage from "../assets/charizard.png";
 import ivysaurImage from "../assets/bulbasaur.png";
 import bgPokeball from "../assets/pokeball-background.png";
-
+import pokeball from "../assets/pokeball-animation.png";
+import energy from "../assets/energy.png";
+import diamond from "../assets/diamond.png";
 import Button from "../components/Button";
+
 
 const LandingPage = () => {
   return (
-    <main className="relative flex max-lg:flex-col justify-between items-center h-full max-lg:h-full text-white overflow-x-hidden">
-      <section className=" flex-2 max-lg:flex-none flex items-center justify-center h-screen max-lg:h-130 w-full max-lg:overflow-x-hidden">
+    <main className="relative flex flex-col justify-center items-center h-full text-white overflow-x-hidden">
+      <section className="  max-lg:flex-none flex items-center justify-center h-70 max-lg:h-130 w-full max-lg:overflow-x-hidden bg-linear-to-tl from-pink-800 to-blue-900">
         <img
           src={bgPokeball}
           alt="pokeball"
@@ -23,7 +26,7 @@ const LandingPage = () => {
           alt="ivysaur"
           className="absolute bottom-0 max-lg:top-85 -right-10 max-lg:-right-10 w-50 max-lg:w-50 z-50"
         />
-        <div className="flex flex-col gap-8 items-center justify-center p-8 max-w-150 max-lg:max-w-100">
+        <div className="flex flex-col gap-8 items-center justify-center p-8 max-w-200 max-lg:max-w-100">
           <h1 className="text-5xl pt-8 font-extrabold">POKEGYM</h1>
           <p className="text-xl font-medium text-center">
             Se aventure nessa jornada! Seja produtivo e veja seus pokemons
@@ -31,9 +34,9 @@ const LandingPage = () => {
           </p>
         </div>
       </section>
-      <section className="flex-3 max-lg:flex-none flex flex-col gap-8 items-start max-lg:items-center p-12 max-lg:p-4 h-full w-full z-0">
-        <h2 className="text-2xl font-extrabold">TUTORIAL</h2>
-        <div className="flex flex-col gap-4 max-w-150 text-sm">
+      <section className=" flex flex-col gap-8 items-center py-12 max-lg:px-4 h-full w-full z-0">
+        <h2 className="text-xl font-bold">Como jogar?</h2>
+        <div className="flex flex-col gap-4 max-w-200 text-sm">
           <p>
             1 - Inicialmente você escolhe um pokemon para compor seu time
             inicial.
@@ -41,33 +44,165 @@ const LandingPage = () => {
 
           <p>
             2 - Crie sua lista de tarefas do dia e conclua cada uma delas para
-            treinar seu pokémon.
+            treinar seu pokémon e ganhar recomepensas.
           </p>
 
           <p>
             3 - Após concluir todas tarefas do dia, seu pokémon escolhido vai
-            ficar mais forte ganhar 1x pokebola. Assim, ele vai ganhando XP e subindo de level e com o
-            tempo podem evoluir para sua segunda e terceira forma.
+            ficar mais forte ganhar HP e você ganha XP. Assim, ele vai subindo
+            de level e com o tempo podem evoluir para sua segunda e terceira
+            forma.
           </p>
 
           <p>
             4 - Depois de evoluir seu pokemon, você receberá 3 pokebolas para
-            capturar até 3 novos pokémons. Para capturar um novo pokémon você deve ganhar uma batalha contra ele. São 4 níveis de batalha a
+            capturar até 3 novos pokémons. Para capturar um novo pokémon você
+            deve ganhar uma batalha contra ele. São 4 níveis de batalha a
             depender a força do pokémon. Caso não consiga ganhar, você pode
-            continuar treinando seu pokémon até receber mais pokebolas para tentar novamente.
+            continuar treinando seu pokémon até receber mais pokebolas para
+            tentar novamente.
           </p>
 
           <p>
             Dica: pokémon num nível mais alto batalhando e ter mais pokemons
             capturados, tem mais chances de ganhar as batalhas! Além disso, você
-            pode escolher pokémons mais fracos selecionando o filtro - fácil.
+            pode capturar pokemons mais fracos selecionando o filtro - fácil.
           </p>
 
           <p>
             Preparado para ser produtivo e se divertir ao mesmo tempo? Boraaaa!!
           </p>
         </div>
-        <Button text="Começar" path="/choose-pokemon" />
+        <h2 className="text-xl font-bold">
+          Onde encontrar, para que serve e onde usar items?
+        </h2>
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-tl from-pink-800 to-blue-900 p-4 rounded-2xl">
+          <strong>
+            Existem 3 items no jogo: pokebolas, energias e diamantes.
+          </strong>
+
+          <div className="flex gap-4 ">
+            <img
+              src={pokeball}
+              alt="pokeball"
+              className="w-16 h-16 object-cover"
+            />
+            <div className="flex flex-col gap-2">
+              <p>
+                <strong>Para que servem?</strong> Capturar pokémons.
+              </p>
+              <p>
+                <strong>Como consigo?</strong> Treinando pokémons.
+              </p>
+              <p>
+                <strong>Como usar?</strong> Quando tiver pelo menos uma
+                pokebola, você poderá batalhar contra um pokémon a sua escolha e
+                poderá capturá-lo.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <img
+              src={energy}
+              alt="energia"
+              className="w-16 h-16 object-cover"
+            />
+            <div className="flex flex-col gap-2">
+              <p>
+                <strong>Para que servem?</strong> Curar pokémons ou trocar por
+                pokebola ou diamante.
+              </p>
+              <p>
+                <strong>Como consigo?</strong> Capturando pokémons.
+              </p>
+              <p>
+                <strong>Como usar?</strong> Ao treinar um pokémon, ele
+                automaticamente entra em estado e exaustão. Você pode usar uma
+                energia para revigorá-lo. Você ir na "loja" para trocá-los.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <img
+              src={diamond}
+              alt="diamond"
+              className="w-16 h-16 object-cover"
+            />
+            <div className="flex flex-col gap-2">
+              <p>
+                <strong>Para que servem?</strong> Invocar pokemons especiais.
+              </p>
+              <p>
+                <strong>Como consigo?</strong> Treinando um pokémon até o nível
+                máximo: 10.
+              </p>
+              <p>
+                <strong>Como usar?</strong> Em "pokemons especiais" você pode
+                usar diamantes para invocá-los e usar suas habilidades.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 max-w-200 text-sm">
+          <h2 className="text-xl font-bold text-center">Como eu treino meus pokémons?</h2>
+          <p>
+            Acesse "Meus pokemons", escolha um pokémon, crie seu checklist em
+            marque todos como concluido. Irá aparecer um botão verde para
+            finalizar o treinamento. Logo após, você ganha XP e HP e seu pokémon
+            dormirá.
+          </p>
+          <p>
+            <strong>XP</strong> - É a experiência que você jogador ganha ao
+            treinar um pokémon.
+          </p>
+          <p>
+            <strong>HP</strong> - É a força que seu pokémon ganhar ao ser
+            treinado. Quanto mais HP tiver, mais facilmente ganhará as batalhas
+            de captura.
+          </p>
+        </div>
+        <h2 className="text-xl font-bold">Como funcionam as batalhas?</h2>
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-tl from-pink-800 to-blue-900 p-4 rounded-2xl">
+          <strong>Existem 2 modos de batalha no jogo:</strong>
+
+          <div className="flex flex-col gap-2">
+            <h3 className="text-xl font-bold">Contra equipe Rocket</h3>
+            <p>
+              Você pode batalhar contra a equipe Rocket com o objetivo de
+              conseguir energia ou pokébola.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-xl font-bold">Contra um pokémon</h3>
+            <p>
+              Em "Capturar pokémon", você pode batalhar contra um pokémon para
+              capturá-lo. Você ganha energia toda vez que captura um pokémon
+              proporcionalmente ao seu nível de dificuldade:
+            </p>
+            <ul className="flex flex-col gap-2 font-bold items-center py-4">
+              <li className="text-green-400">fácil: 1 energia;</li>
+              <li className="text-yellow-400">médio: 3 energias;</li>
+              <li className="text-red-400">difícil: 5 energias;</li>
+              <li className="text-purple-400"> insano: 10 energias </li>
+            </ul>
+          </div>
+          <h3 className="text-center font-bold text-xl">
+            Para que servem os pokémons especiais?
+          </h3>
+          <p>
+            Os pokémons especiais não são treináveis nem capturáveis, eles são
+            invocados para que possa usar suas habilidades.
+          </p>
+          <p>
+            Existem 3 pokémons: Snorlax, Victini e Celebi com suas respectivas
+            habilidades: bloco de notas, sorteio e pomodoro
+          </p>
+        </div>
+        <p className="font-bold text-center">
+          Mais dúvidas? Que tal ir jogando e aprendendo na prática? Vamos lá!
+          Clique em "Começar"
+        </p>
+        <Button text="Começar" path="/set-informations" />
       </section>
     </main>
   );

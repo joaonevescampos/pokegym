@@ -14,7 +14,10 @@ export const initialPokemonState: PokemonState = {
   userStatus: {
     pokeball: 3,
     energy: 1,
+    xp: 0,
     diamond: 0,
+    userName: "",
+    gender: "",
     dashboard: [
       {
         year: currYear,
@@ -38,8 +41,8 @@ export const initialPokemonState: PokemonState = {
   myPokemons: [],
 };
 
-function calculateLevel(xp: number) {
-  return Math.min(Math.floor(xp / 10), 10);
+function calculateLevel(hp: number) {
+  return Math.min(Math.floor(hp / 10), 10);
 }
 
 export function pokemonReducer(
@@ -62,7 +65,7 @@ export function pokemonReducer(
           {
             name: action.payload.name,
             type: action.payload.type,
-            xp: 0,
+            hp: 0,
             level: 0,
             checklist: [{ task: "crie sua tarefa aqui", checked: false }],
             tag: "",
@@ -71,18 +74,18 @@ export function pokemonReducer(
         ],
       };
 
-    case "GAIN_XP":
+    case "GAIN_HP":
       return {
         ...state,
         myPokemons: state.myPokemons.map((p) => {
           if (p.name !== action.payload.name) return p;
 
-          const newXp = Math.min(p.xp + action.payload.xp, 101);
+          const newXp = Math.min(p.hp + action.payload.hp, 101);
           const newLevel = calculateLevel(newXp);
 
           return {
             ...p,
-            xp: newXp,
+            hp: newXp,
             level: newLevel,
           };
         }),
@@ -142,6 +145,15 @@ export function pokemonReducer(
         },
       };
 
+    case "GAIN_XP":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          xp: state.userStatus.xp + action.payload.gain,
+        },
+      };
+
     case "SET_TAG":
       return {
         ...state,
@@ -168,6 +180,24 @@ export function pokemonReducer(
             tag: "",
           };
         }),
+      };
+
+    case "SET_USERNAME":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          userName: action.payload.userName,
+        },
+      };
+
+      case "SET_GENDER":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          gender: action.payload.gender,
+        },
       };
 
     case "ADD_CHECKLIST":

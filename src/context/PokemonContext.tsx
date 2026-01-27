@@ -5,7 +5,7 @@ import type { PokemonState } from "./pokemonTypes";
 export type PokemonContextType = {
   state: PokemonState;
   capturePokemon: (name: string, type: string) => void;
-  gainXp: (name: string, xp: number) => Promise<boolean>;
+  gainHp: (name: string, hp: number) => Promise<boolean>;
   gainPokeball: (gain: number) => void;
   usePokeball: (lose: number) => void;
   registerMission: (year: number, month: number, day: number) => void;
@@ -13,10 +13,18 @@ export type PokemonContextType = {
   useEnergy: (lose: number) => void;
   gainDiamond: (gain: number) => void;
   useDiamond: (lose: number) => void;
+  gainXp: (gain: number) => void;
+  setUserName: (userName: string) => void;
+  setGender: (gender: string) => void;
   setTag: (name: string, tag: string) => void;
   deleteTag: (name: string) => void;
   addChecklist: (name: string) => void;
-  setChecklist: (name: string, task: string, checked: boolean, index: number) => void;
+  setChecklist: (
+    name: string,
+    task: string,
+    checked: boolean,
+    index: number,
+  ) => void;
   deleteChecklist: (name: string, index: number) => void;
   setTimeToRest: (name: string, time_to_rest: number) => void;
   deleteTimeToRest: (name: string) => void;

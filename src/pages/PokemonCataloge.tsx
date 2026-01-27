@@ -2,6 +2,9 @@ import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
+import maleProfile from "../assets/male-profile.png";
+import femaleProfile from "../assets/female-profile.png";
+
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
@@ -9,7 +12,7 @@ import { useEffect, useState } from "react";
 type BasePokemon = {
   name: string;
   level: number;
-  xp: number;
+  hp: number;
   captureLevel: number;
   captured: boolean;
 };
@@ -142,7 +145,7 @@ const PokemonCataloge = () => {
           return {
             name: pokemon.name,
             level: 0,
-            xp: 0,
+            hp: 0,
             captureLevel: species.capture_rate,
             captured,
           };
@@ -157,7 +160,7 @@ const PokemonCataloge = () => {
   };
   useEffect(() => {
     getPokemonList(1);
-    const userXP = 2000;
+    const userXP = state.userStatus.xp;
     if (userXP >= 0 && userXP < 1000) {
       const newGenerationList: Generation[] = generationList.map((item) =>
         item.generationNumber === 1
@@ -282,26 +285,51 @@ const PokemonCataloge = () => {
               Pokegym
             </Link>
           </div>
-          <div className="absolute flex items-end gap-2 top-4 right-4">
-            <div className="flex items-end gap-1">
-              <span className="text-sm font-bold opacity-70">
-                x {state.userStatus.pokeball}{" "}
-              </span>
-              <img src={pokebola} alt="pokebola" width={28} />
+          <section className="absolute flex flex-col items-end gap-2 top-4 right-4">
+            <div className="flex gap-4 items-center pb-2">
+              <div className="flex items-end gap-2">
+                <div className="flex items-end gap-1">
+                  <span className="text-sm font-bold opacity-70">
+                    x {state.userStatus.pokeball}{" "}
+                  </span>
+                  <img src={pokebola} alt="pokebola" width={20} />
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className="text-sm font-bold opacity-70">
+                    x {state.userStatus.energy}{" "}
+                  </span>
+                  <img src={energy} alt="energy" width={20} />
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className="text-sm font-bold opacity-70">
+                    x {state.userStatus.diamond}{" "}
+                  </span>
+                  <img src={diamond} alt="diamond" width={20} />
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <div className="flex flex-col items-end">
+                  <span className="font-bold text-xs">
+                    {state.userStatus.userName}
+                  </span>
+                  <span className="opacity-60 font-bold text-xs">
+                    {" "}
+                    {state.userStatus.xp} XP
+                  </span>
+                </div>
+                <img
+                  src={
+                    state.userStatus.gender === "feminino"
+                      ? femaleProfile
+                      : maleProfile
+                  }
+                  alt="profile"
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              </div>
             </div>
-            <div className="flex items-end gap-1">
-              <span className="text-sm font-bold opacity-70">
-                x {state.userStatus.energy}{" "}
-              </span>
-              <img src={energy} alt="energy" width={28} />
-            </div>
-            <div className="flex items-end gap-1">
-              <span className="text-sm font-bold opacity-70">
-                x {state.userStatus.diamond}{" "}
-              </span>
-              <img src={diamond} alt="diamond" width={28} />
-            </div>
-          </div>
+          </section>
+          <div className="absolute flex flex-col items-end gap-2 top-4 right-4"></div>
         </section>
         <section className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120 px-4">
@@ -313,13 +341,13 @@ const PokemonCataloge = () => {
               2. Cada nível determina o grau de dificudade da batalha.
             </p>
             <p className="text-sm font-medium text-center opacity-70">
-              3. Escolha um dos níveis e filtre os pokémons por nível de
-              captura.
+              3. Filtre os pokémons por nível de captura.
             </p>
-            <p className="text-sm font-medium text-center mb-4 opacity-70">
-              4. Ao capturar um pokémon você ganha energia proporcional ao
-              nível.
-            </p>
+            <Link to="/">
+              <p className="text-sm underline font-medium text-center mb-4">
+                Saber mais detalhes
+              </p>
+            </Link>
           </div>
           <h2 className="text-xl text-center font-extrabold">Geração</h2>
           <p className="text-sm font-medium text-center pt-2 opacity-70">

@@ -34,16 +34,16 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  async function gainXp(name: string, xp: number): Promise<boolean> {
+  async function gainHp(name: string, hp: number): Promise<boolean> {
     const pokemon = state.myPokemons.find((p) => p.name === name);
 
     if (!pokemon) return false;
 
     const previousLevel = pokemon.level;
 
-    dispatch({ type: "GAIN_XP", payload: { name, xp } });
+    dispatch({ type: "GAIN_HP", payload: { name, hp } });
 
-    const newXp = Math.min(pokemon!.xp + xp, 101);
+    const newXp = Math.min(pokemon!.hp + hp, 101);
     const newLevel = Math.floor(newXp / 10);
 
     // Evolui a cada 3 levels
@@ -99,12 +99,24 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "USE_DIAMOND", payload: { lose } });
   }
 
+  function gainXp(gain: number) {
+    dispatch({ type: "GAIN_XP", payload: { gain } });
+  }
+
   function setTag(name: string, tag: string) {
     dispatch({ type: "SET_TAG", payload: { name, tag } });
   }
 
   function deleteTag(name: string) {
     dispatch({ type: "DELETE_TAG", payload: { name } });
+  }
+
+  function setUserName(userName: string) {
+    dispatch({ type: "SET_USERNAME", payload: { userName } });
+  }
+
+   function setGender(gender: string) {
+    dispatch({ type: "SET_GENDER", payload: { gender } });
   }
 
   function addChecklist(name: string) {
@@ -161,7 +173,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
       value={{
         state,
         capturePokemon,
-        gainXp,
+        gainHp,
         gainPokeball,
         usePokeball,
         registerMission,
@@ -173,8 +185,11 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         useEnergy,
         gainDiamond,
         useDiamond,
+        gainXp,
+        setUserName,
         setTag,
         deleteTag,
+        setGender,
         setTimeToRest,
         deleteTimeToRest,
       }}

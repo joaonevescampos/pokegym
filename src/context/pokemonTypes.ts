@@ -1,7 +1,7 @@
 export type Pokemon = {
   name: string;
   type: string;
-  xp: number;
+  hp: number;
   level: number;
   checklist: Checklist[];
   tag: string;
@@ -60,10 +60,13 @@ export type DashboardYear = {
 export type Dashboard = DashboardYear[];
 
 export type UserStatus = {
+  userName: string;
+  gender : string
   pokeball: number;
   energy: number;
   diamond: number;
   dashboard: Dashboard;
+  xp: number;
 };
 
 export type PokemonState = {
@@ -73,7 +76,7 @@ export type PokemonState = {
 
 export type PokemonAction =
   | { type: "CAPTURE_POKEMON"; payload: { name: string; type: string } }
-  | { type: "GAIN_XP"; payload: { name: string; xp: number } }
+  | { type: "GAIN_HP"; payload: { name: string; hp: number } }
   | { type: "EVOLVE_POKEMON"; payload: { name: string; newName: string } }
   | { type: "GAIN_POKEBALL"; payload: { gain: number } }
   | { type: "USE_POKEBALL"; payload: { lose: number } }
@@ -81,8 +84,11 @@ export type PokemonAction =
   | { type: "USE_ENERGY"; payload: { lose: number } }
   | { type: "GAIN_DIAMOND"; payload: { gain: number } }
   | { type: "USE_DIAMOND"; payload: { lose: number } }
+  | { type: "GAIN_XP"; payload: { gain: number } }
   | { type: "SET_TAG"; payload: { name: string; tag: string } }
   | { type: "DELETE_TAG"; payload: { name: string } }
+  | { type: "SET_GENDER"; payload: { gender: string } }
+  | { type: "SET_USERNAME"; payload: { userName: string } }
   | {
       type: "ADD_CHECKLIST";
       payload: { name: string };

@@ -14,6 +14,7 @@ interface ChecklistType {
 const PokemonDetail = () => {
   const {
     state,
+    gainHp,
     gainXp,
     gainPokeball,
     gainDiamond,
@@ -39,7 +40,7 @@ const PokemonDetail = () => {
   const currentPokemon = state.myPokemons.find((p) => p.name === pokemonName);
   const name = currentPokemon?.name ?? "";
   const type = currentPokemon?.type ?? "";
-  const xp = currentPokemon?.xp ?? 0;
+  const hp = currentPokemon?.hp ?? 0;
   const level = currentPokemon?.level ?? 0;
   const dateFunction = new Date();
   const currYear = dateFunction.getFullYear();
@@ -80,7 +81,7 @@ const PokemonDetail = () => {
     }
   };
 
-  const widthXP = (xp % 10) * 10;
+  const widthHP = (hp % 10) * 10;
 
   const handleClick = () => {
     addChecklist(pokemonName!);
@@ -109,24 +110,27 @@ const PokemonDetail = () => {
   const handleFinish = async () => {
     if (!currentPokemon) return;
     registerMission(currYear, currMonth, currDate);
-    const evolved = await gainXp(currentPokemon.name, 1);
+    const evolved = await gainHp(currentPokemon.name, 1);
     if (evolved) {
       gainPokeball(3);
+      gainXp(5)
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
       if (
-        xp === 9 ||
-        xp === 19 ||
-        xp === 39 ||
-        xp === 49 ||
-        xp === 69 ||
-        xp === 79 ||
-        xp === 89
+        hp === 9 ||
+        hp === 19 ||
+        hp === 39 ||
+        hp === 49 ||
+        hp === 69 ||
+        hp === 79 ||
+        hp === 89
       ) {
         gainPokeball(1);
-      } else if (xp === 99) {
+        gainXp(1)
+      } else if (hp === 99) {
         gainPokeball(5);
         gainDiamond(1);
+        gainXp(10)
       }
       setAlert(true);
     }
@@ -351,11 +355,11 @@ const PokemonDetail = () => {
               <div className="h-3 rounded-4xl bg-gray-800 w-50">
                 <hr
                   className={`border-6 rounded-4xl text-green-300`}
-                  style={{ width: `${xp === 101 ? "100%" : widthXP}%` }}
+                  style={{ width: `${hp === 101 ? "100%" : widthHP}%` }}
                 />
               </div>
               <span className="text-sm opacity-80 font-bold">
-                XP: {xp === 101 ? "MAX" : xp}
+                HP: {hp === 101 ? "MAX" : hp}
               </span>
             </div>
           </section>
@@ -366,7 +370,7 @@ const PokemonDetail = () => {
               </span>
               <p className="text-white text-center">
                 Crie seu checklist do dia, conclua todas suas tarefas e veja seu
-                pokemon ganhar experiência a cada dia.
+                pokemon ganhar ehperiência a cada dia.
               </p>
 
               <strong className="text-white text-center text-sm">
@@ -485,26 +489,26 @@ const PokemonDetail = () => {
               "
                   onClick={() => {
                     setAlert(false);
-                    if (xp < 100) {
+                    if (hp < 100) {
                       startTimer(timeToWait);
                     }
                   }}
                 >
                   <img src={xIcon} alt="x" className="w-4" />
                 </span>
-                {xp === 10 ||
-                xp === 20 ||
-                xp === 40 ||
-                xp === 50 ||
-                xp === 70 ||
-                xp === 80 ||
-                xp === 90 ? (
+                {hp === 10 ||
+                hp === 20 ||
+                hp === 40 ||
+                hp === 50 ||
+                hp === 70 ||
+                hp === 80 ||
+                hp === 90 ? (
                   <>
                     <h2 className="font-bold text-center">
                       Excelente! Você atingiu o nível {level}
                     </h2>
                     <h1 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +1 pokebola!
+                      Oba! Você ganhou +1 pokebola, +1 HP e +5 XP!
                     </h1>
                     <div className="flex items-end gap-2 top-4 right-4">
                       <span className="text-sm font-bold opacity-70">+ 1</span>
@@ -515,13 +519,13 @@ const PokemonDetail = () => {
                       capturá-lo para fazer parte do seu time!
                     </p>
                   </>
-                ) : xp === 100 ? (
+                ) : hp === 100 ? (
                   <>
                     <h1 className="font-bold text-center">
                       UAUUU! Você atingiu o nível máximo: {level}
                     </h1>
                     <h2 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +5 pokebolas e +1 diamante!
+                      Oba! Você ganhou +5 pokebolas, +10 XP, +1HP e +1 diamante!
                     </h2>
                     <div className="flex items-center justify-center gap-4">
                       <div className="flex items-end gap-2">
@@ -554,8 +558,11 @@ const PokemonDetail = () => {
                     <h1 className="font-bold text-xl text-center text-green-400 pb-4">
                       Parabéns! Continue sendo produtivo assim!
                     </h1>
+                    <h2 className="font-bold text-sm text-center text-green-400">
+                      Oba! Você ganhou +1 XP e +1 HP!
+                    </h2>
 
-                    {xp > 100 ? (
+                    {hp > 100 ? (
                       <p className="text-sm text-center">
                         Seu {pokemonName?.toUpperCase()} atingiu o nível máximo,
                         portanto não é mais possível ganhar recompensas
@@ -575,7 +582,7 @@ const PokemonDetail = () => {
                 <Button
                   text="Meus pokémons"
                   onClick={() => {
-                    if (xp < 100) {
+                    if (hp < 100) {
                       startTimer(timeToWait);
                     }
                     navigate("/my-pokemons");

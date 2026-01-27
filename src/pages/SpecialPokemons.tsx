@@ -1,7 +1,9 @@
 import { usePokemon } from "@/context/usePokemon";
-import diamond from "../assets/diamond.png";
 import pokebola from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
+import diamond from "../assets/diamond.png";
+import maleProfile from "../assets/male-profile.png";
+import femaleProfile from "../assets/female-profile.png";
 import xIcon from "../assets/x.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -70,26 +72,50 @@ const SpecialPokemons = () => {
   return (
     <>
       <header className="relative">
-        <div className="absolute flex items-end gap-2 top-4 right-4 text-white">
-          <div className="flex items-end gap-1">
-            <span className="text-sm font-bold opacity-70">
-              x {state.userStatus.pokeball}{" "}
-            </span>
-            <img src={pokebola} alt="pokebola" width={28} />
+        <section className="absolute flex flex-col items-end gap-2 top-4 right-4 text-white">
+          <div className="flex gap-4 items-center pb-2">
+            <div className="flex items-end gap-2">
+              <div className="flex items-end gap-1">
+                <span className="text-sm font-bold opacity-70">
+                  x {state.userStatus.pokeball}{" "}
+                </span>
+                <img src={pokebola} alt="pokebola" width={20} />
+              </div>
+              <div className="flex items-end gap-1">
+                <span className="text-sm font-bold opacity-70">
+                  x {state.userStatus.energy}{" "}
+                </span>
+                <img src={energy} alt="energy" width={20} />
+              </div>
+              <div className="flex items-end gap-1">
+                <span className="text-sm font-bold opacity-70">
+                  x {state.userStatus.diamond}{" "}
+                </span>
+                <img src={diamond} alt="diamond" width={20} />
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <div className="flex flex-col items-end">
+                <span className="font-bold text-xs">
+                  {state.userStatus.userName}
+                </span>
+                <span className="opacity-60 font-bold text-xs">
+                  {" "}
+                  {state.userStatus.xp} XP
+                </span>
+              </div>
+              <img
+                src={
+                  state.userStatus.gender === "feminino"
+                    ? femaleProfile
+                    : maleProfile
+                }
+                alt="profile"
+                className="w-8 h-8 rounded-full object-cover"
+              />
+            </div>
           </div>
-          <div className="flex items-end gap-1">
-            <span className="text-sm font-bold opacity-70">
-              x {state.userStatus.energy}{" "}
-            </span>
-            <img src={energy} alt="energy" width={28} />
-          </div>
-          <div className="flex items-end gap-1">
-            <span className="text-sm font-bold opacity-70">
-              x {state.userStatus.diamond}{" "}
-            </span>
-            <img src={diamond} alt="diamond" width={28} />
-          </div>
-        </div>
+        </section>
         <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
           <Link to="/home" className="text-sm  font-bold opacity-70">
             Pokegym
