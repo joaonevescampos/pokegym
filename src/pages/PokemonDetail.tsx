@@ -126,11 +126,13 @@ const PokemonDetail = () => {
         hp === 89
       ) {
         gainPokeball(1);
-        gainXp(1)
+        gainXp(5)
       } else if (hp === 99) {
         gainPokeball(5);
         gainDiamond(1);
         gainXp(10)
+      } else {
+        gainXp(1)
       }
       setAlert(true);
     }
@@ -354,7 +356,7 @@ const PokemonDetail = () => {
               </span>
               <div className="h-3 rounded-4xl bg-gray-800 w-50">
                 <hr
-                  className={`border-6 rounded-4xl text-green-300`}
+                  className={`border-6 rounded-4xl border-green-300!`}
                   style={{ width: `${hp === 101 ? "100%" : widthHP}%` }}
                 />
               </div>
@@ -433,7 +435,7 @@ const PokemonDetail = () => {
               </div>
 
               <Button
-                path="/"
+                path="/dashboard"
                 text="Ver progresso mensal"
                 style="w-full text-white mb-4"
               />
