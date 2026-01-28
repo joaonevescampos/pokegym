@@ -15,7 +15,7 @@ export const initialPokemonState: PokemonState = {
     pokeball: 3,
     energy: 1,
     xp: 0,
-    diamond: 0,
+    diamond: 20,
     userName: "",
     gender: "",
     dashboard: [
@@ -356,7 +356,6 @@ export function pokemonReducer(
         (m: any) => m[month] !== undefined,
       );
 
-      // 2️⃣ Mês não existe nesse ano
       if (monthIndex === -1) {
         const updatedYear: DashboardYear = {
           ...yearEntry,
@@ -382,12 +381,10 @@ export function pokemonReducer(
       const monthEntry = yearEntry.months[monthIndex];
       const days = monthEntry[month]!;
 
-      // 3️⃣ Dia já registrado → não faz nada
       if (days.includes(day)) {
         return state;
       }
 
-      // 4️⃣ Adiciona o dia ao mês existente
       const updatedMonth: MonthEntry = {
         ...monthEntry,
         [month]: [...days, day],

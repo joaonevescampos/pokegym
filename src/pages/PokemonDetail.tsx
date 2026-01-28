@@ -52,7 +52,6 @@ const PokemonDetail = () => {
   const limitCaractere = 10;
   const [caractere, setCaractere] = useState(currentPokemon?.tag.length);
 
-  // const [createPomodoro, setCreatePomodoro] = useState(false)
   // const [createRandom, setCreateRandom] = useState(false)
 
 
@@ -388,19 +387,19 @@ const PokemonDetail = () => {
                 </p>
                 <ul className="flex justify-center gap-2">
                   <li
-                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer`} onClick={() => navigate("/snorlax-note")}
+                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.snorlaxStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`} onClick={() => navigate("/snorlax-note")}
                   >
-                    NOTAS 🔒
+                    NOTAS { state.userStatus.snorlaxStatus===false && "🔒"}
                   </li>
                   <li
-                    className={`flex items-center justify-center font-bold bg-orange-400 w-30 h-8 rounded-2xl text-xs cursor-pointer ${"opacity-50 pointer-events-none bg-gray-500!"}`}
+                    className={`flex items-center justify-center font-bold bg-orange-500 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.victiniStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`}
                   >
-                    SORTEIO 🔒
+                    SORTEIO { state.userStatus.victiniStatus===false && "🔒"}
                   </li>
                   <li
-                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${"opacity-50 pointer-events-none bg-gray-500!"}`}
+                    className={`flex items-center justify-center font-bold bg-green-700 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.celebiStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`} onClick={() => navigate("/pomodoro")}
                   >
-                    POMODORO 🔒
+                    POMODORO { state.userStatus.celebiStatus===false && "🔒"}
                   </li>
                 </ul>
               </div>

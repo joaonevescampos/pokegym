@@ -5,7 +5,7 @@ import diamond from "../assets/diamond.png";
 import maleProfile from "../assets/male-profile.png";
 import femaleProfile from "../assets/female-profile.png";
 import xIcon from "../assets/x.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/Button";
 
@@ -45,13 +45,18 @@ type ActivePokemon = {
 };
 
 const SpecialPokemons = () => {
-  const { state, useDiamond } = usePokemon();
+  const { state, useDiamond, activeNote, activeRandom, activePomodoro } =
+    usePokemon();
   const [alert, setAlert] = useState(false);
+  const [successAlert, setSucessAlert] = useState(false);
+  const [pokemonInvocated, setPokemonInvocaated] = useState("");
+
   const [activePokemon, setActivePokemon] = useState<ActivePokemon[]>([
-    { name: "snorlax", active: false },
-    { name: "victini", active: false },
-    { name: "celebi", active: false },
+    { name: "snorlax", active: state.userStatus.snorlaxStatus },
+    { name: "victini", active: state.userStatus.victiniStatus },
+    { name: "celebi", active: state.userStatus.celebiStatus },
   ]);
+  const navigate = useNavigate();
 
   const involquePokemon = (name: string, cost: number) => {
     if (state.userStatus.diamond < cost) {
@@ -61,12 +66,17 @@ const SpecialPokemons = () => {
       const updateActivePokemon: ActivePokemon[] = activePokemon.map(
         (pokemon) => {
           if (pokemon.name === name) {
+            name === "snorlax" && activeNote(true);
+            name === "victini" && activeRandom(true);
+            name === "celebi" && activePomodoro(true);
             return { name, active: true };
           }
           return pokemon;
         },
       );
       setActivePokemon(updateActivePokemon);
+      setSucessAlert(true);
+      setPokemonInvocaated(name);
     }
   };
   return (
@@ -158,9 +168,13 @@ const SpecialPokemons = () => {
                     pokemon.name === item.name &&
                     (item.active ? (
                       <Button
-                        text="Selecionar"
-                        path={`/special-pokemon/${pokemon.name}`}
-                        style="text-white!"
+                        text="Invocado"
+                        onClick={() => {
+                          pokemon.name === "snorlax" &&
+                            navigate("/snorlax-note");
+                          pokemon.name === "celebi" && navigate("/pomodoro");
+                        }}
+                        style="text-white! bg-bt-purple!"
                       />
                     ) : (
                       <button
@@ -205,6 +219,56 @@ const SpecialPokemons = () => {
                 diamantes suficiente.
               </p>
               <Button text="Treinar pokemons" path="/my-pokemons" />
+            </div>
+          </div>
+        )}
+        {successAlert && (
+          <div className="absolute h-full w-full top-0 left-0 bg-[#000000d3] z-20">
+            <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
+              <span
+                className="absolute top-2 right-2 cursor-pointer
+              "
+                onClick={() => setSucessAlert(false)}
+              >
+                <img src={xIcon} alt="x" className="w-4" />
+              </span>
+              <img
+                src={
+                  pokemonInvocated === "snorlax"
+                    ? specialPokemons[0].image
+                    : pokemonInvocated === "victini"
+                      ? specialPokemons[1].image
+                      : specialPokemons[2].image
+                }
+                alt="pokemon"
+                className="w-32 mx-auto"
+              />
+              <h1 className="font-bold text-xl text-center text-green-500">
+                Parabéns, você acaba de invocar as habilidades do{" "}
+                {pokemonInvocated}!
+              </h1>
+              {pokemonInvocated === "snorlax" ? (
+                <p className="text-sm text-center">
+                  Com a habilidade do SNORLAX liberada, você pode agora criar
+                  bloco de notas, tanto quando for treinar um pokémon, quanto
+                  poderá acessar o bloco clicando no botão "Invocado".
+                </p>
+              ) : pokemonInvocated === "victini" ? (
+                <p className="text-sm text-center">
+                  Com a habilidade do VICTINI liberada, você pode sortear
+                  tarefas quando for treinar um pokémon e perder totalmente a
+                  dúvida de por qual tarefa começar! Essa habilidade só funciona
+                  quando for treinar um pokémon específico!
+                </p>
+              ) : (
+                <p className="text-sm text-center">
+                  Com a habilidade do CELEBI liberada, você pode agora criar
+                  pomodoro que é uma ténica de cronometragem de tarefas e vai te
+                  ajudar a concluir tarefas de maneira mais controlada e rápida.
+                  Você consegue acessar sua habilidade clicando em "Invocado" ou
+                  clicando em "Pomodoro" quando for treinar seu pokémon .
+                </p>
+              )}
             </div>
           </div>
         )}

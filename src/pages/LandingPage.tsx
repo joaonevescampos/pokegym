@@ -1,7 +1,7 @@
 import charizardImage from "../assets/charizard.png";
 import ivysaurImage from "../assets/bulbasaur.png";
 import bgPokeball from "../assets/pokeball-background.png";
-import pokeball from "../assets/pokeball-animation.png";
+import pokeball from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
 import Button from "../components/Button";
@@ -68,17 +68,13 @@ const LandingPage = () => {
             capturados, tem mais chances de ganhar as batalhas! Além disso, você
             pode capturar pokemons mais fracos selecionando o filtro - fácil.
           </p>
-
-          <p>
-            Preparado para ser produtivo e se divertir ao mesmo tempo? Boraaaa!!
-          </p>
         </div>
         <h2 className="text-xl font-bold">
-          Onde encontrar, para que serve e onde usar items?
+          Onde encontrar, para que serve e onde usar itens?
         </h2>
         <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-800 to-purple-500 p-4 rounded-2xl">
           <strong>
-            Existem 3 items no jogo: pokebolas, energias e diamantes.
+            Existem 3 itens no jogo: pokebolas, energias e diamantes.
           </strong>
 
           <div className="flex gap-4 ">
@@ -144,7 +140,7 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4 max-w-200 text-sm">
-          <h2 className="text-xl font-bold text-center">Como eu treino meus pokémons?</h2>
+          <h2 className="text-xl font-bold text-center">Como treino meus pokémons?</h2>
           <p>
             Acesse "Meus pokemons", escolha um pokémon, crie seu checklist em
             marque todos como concluido. Irá aparecer um botão verde para
