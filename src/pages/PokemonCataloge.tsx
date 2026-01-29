@@ -36,15 +36,16 @@ const PokemonCataloge = () => {
     [],
   );
 
-  useEffect(() => {
-    if (
-      state.userStatus.xp >= 1000 &&
-      state.userStatus.xp % 1000 >= 0 &&
-      state.userStatus.xp % 1000 < 30
-    ) {
-      setAlert(true);
-    }
-  }, []);
+useEffect(() => {
+  if (!state?.userStatus) return;
+
+  const xp = state.userStatus.xp;
+
+  if (xp >= 1000 && xp % 1000 < 30) {
+    setAlert(true);
+  }
+}, [state.userStatus?.xp]);
+
   const [captureLevels, setCaptureLevels] = useState([
     { level: "fácil", color: "bg-green-300", selected: false },
     { level: "médio", color: "bg-yellow-300", selected: false },

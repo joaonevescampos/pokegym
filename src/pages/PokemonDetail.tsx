@@ -56,12 +56,16 @@ const PokemonDetail = () => {
     formatDate();
   }, []);
 
-  useEffect(() => {
-    setReactChecklist(
-      state.myPokemons.filter((pokemon) => pokemon.name === pokemonName)[0]
-        .checklist,
-    );
-  }, [setChecklist, deleteChecklist, addChecklist]);
+useEffect(() => {
+  const pokemon = state.myPokemons.find(
+    (p) => p.name === pokemonName
+  );
+
+  if (!pokemon) return;
+
+  setReactChecklist(pokemon.checklist);
+}, [state.myPokemons, pokemonName]);
+
 
   useEffect(() => {
     if (currentPokemon) {
