@@ -35,7 +35,7 @@ const Home = () => {
           <h1 className="text-2xl font-bold z-10">Bem vindo ao POKEGYM</h1>
           <p className="text-center max-w-150 text-sm z-10">
             Seja o maior dos mestres pokemon e embarque na maior aventura!
-            Batalhar, capturar e treinar todos os 68 pokémons sendo produtivo!
+            Batalhar, capturar e treinar todos os pokémons sendo produtivo!
           </p>
           <ul className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 w-full z-10">
             {menu.map((item, index) => (

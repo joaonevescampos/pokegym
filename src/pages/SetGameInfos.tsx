@@ -55,18 +55,19 @@ const SetGameInfos = () => {
           />
           <h1 className="text-2xl font-bold z-10">Bem vindo ao POKEGYM</h1>
           <p className="text-center max-w-150 text-sm z-10">
-            Seja o maior dos mestres pokemon e embarque na maior aventura!
+            Seja o maior dos mestres pokemon e embarque nessa aventura!
           </p>
-          <p className="text-center max-w-150 text-sm z-10">
+          <p className="text-center font-bold z-10">
             Queremos te conhecer melhor!
           </p>
+          <p className="text-center text-sm z-10">Apelido ou primeiro nome:</p>
           <input
             type="text"
             placeholder="digite seu primeiro nome ou apelido"
-            className="bg-white text-black py-2 px-4 rounded-2xl z-30 w-full max-w-100"
+            className="bg-white text-black py-2 px-4 rounded-2xl z-30 w-full max-w-80 text-center"
             onChange={(e) => handleChange(e)}
           />
-          <p>Qual seu gênero?</p>
+          <p className="text-center max-w-150 text-sm z-10">Qual seu gênero?</p>
           <div className="flex gap-4 pb-4 z-30">
             <span
               className={`${genderReact === "masculino" ? "bg-bt-purple" : "bg-white text-black"} px-4 py-2 rounded-2xl cursor-pointer font-bold`}

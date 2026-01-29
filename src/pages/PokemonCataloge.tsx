@@ -4,6 +4,9 @@ import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
 import maleProfile from "../assets/male-profile.png";
 import femaleProfile from "../assets/female-profile.png";
+import Button from "../components/Button";
+import xIcon from "../assets/x.png";
+import generation from "../assets/generation.png";
 
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
@@ -27,10 +30,21 @@ type Generation = {
 
 const PokemonCataloge = () => {
   const { state } = usePokemon();
+  const [alert, setAlert] = useState(false);
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
   const [pokemonFilteredList, setPokemonFilteredList] = useState<BasePokemon[]>(
     [],
   );
+
+  useEffect(() => {
+    if (
+      state.userStatus.xp >= 1000 &&
+      state.userStatus.xp % 1000 >= 0 &&
+      state.userStatus.xp % 1000 < 30
+    ) {
+      setAlert(true);
+    }
+  }, []);
   const [captureLevels, setCaptureLevels] = useState([
     { level: "fácil", color: "bg-green-300", selected: false },
     { level: "médio", color: "bg-yellow-300", selected: false },
@@ -107,7 +121,6 @@ const PokemonCataloge = () => {
   const isEvolutionChainCaptured = async (speciesUrl: string) => {
     const speciesRes = await fetch(speciesUrl);
     const speciesData = await speciesRes.json();
-
     const chainRes = await fetch(speciesData.evolution_chain.url);
     const chainData = await chainRes.json();
 
@@ -356,7 +369,7 @@ const PokemonCataloge = () => {
           <ul className="flex flex-wrap gap-2 py-4 max-lg:max-w-80">
             {generationList.map((item, index) => (
               <li
-                className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer ${item.selected ? "border-2 border-white bg-transparent! text-white" : "border-none"} ${!item.released ? "pointer-events-none opacity-50" : ""}`}
+                className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer ${item.selected ? "border-2 border-white bg-transparent! text-white" : "border-none"} ${!item.released ? "pointer-events-none opacity-30" : "opacity-100"}`}
                 onClick={() => handleSelectGeneration(item.generationNumber)}
                 key={index}
               >
@@ -403,6 +416,41 @@ const PokemonCataloge = () => {
             ))}
           </div>
         </section>
+        {alert && (
+          <div className="absolute h-full w-full top-0 left-0 bg-[#000000d3] z-20">
+            <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
+              <span
+                className="absolute top-2 right-2 cursor-pointer
+              "
+                onClick={() => setAlert(false)}
+              >
+                <img src={xIcon} alt="x" className="w-4" />
+              </span>
+              <h1 className="font-bold text-xl text-center">
+                {state.userStatus.xp % 1000 > 0
+                  ? "Lembrete"
+                  : "Oba, você liberou uma nova geração!"}
+              </h1>
+              <p className="font-bold text-green-400 text-sm">
+                Você atingiu experiência{" "}
+                {state.userStatus.xp % 1000 === 0
+                  ? `de ${state.userStatus.xp}`
+                  : `acima de ${Math.floor(state.userStatus.xp / 1000)}000`}{" "}
+                XP!
+              </p>
+              <p className="font-bold">
+                Você liberou a Geração{" "}
+                {Math.floor(state.userStatus.xp / 1000) + 1}!
+              </p>
+              <img src={generation} alt="generations" className="w-full" />
+              <p className="text-sm text-center">
+                Parabéns! Agora você pode explorar novos pokémons clicando no
+                filtro com o número da geração desejada!
+              </p>
+              <Button text="Entendido" onClick={() => setAlert(false)} />
+            </div>
+          </div>
+        )}
       </main>
     </>
   );

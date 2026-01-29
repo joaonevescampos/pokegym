@@ -149,7 +149,7 @@ const LandingPage = () => {
           </p>
           <p>
             <strong>XP</strong> - É a experiência que você jogador ganha ao
-            treinar um pokémon.
+            treinar um pokémon. Quando seu pokémon muda de level, evolui ou chega no level máximo você ganha muito mais XP: 10, 30 e 100, respectivamente!
           </p>
           <p>
             <strong>HP</strong> - É a força que seu pokémon ganhar ao ser

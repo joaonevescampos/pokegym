@@ -79,14 +79,14 @@ const PokemonEvolution = () => {
   return (
     <main className="h-screen w-full">
       <section className="relative h-full p-4">
+        {isEvolving === true ? (
+          <>
         <h1 className="text-white text-center px-4 py-4 pb-24 font-bold text-2xl">
           {pokemonName.slice(0, 1).toUpperCase() +
             pokemonName.slice(1, pokemonName.length)}{" "}
           está evoluindo!
         </h1>
-        {isEvolving === true ? (
-          <>
-            <div className="absolute top-1/2 left-1/2 -translate-1/2 z-12 h-fit">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-10 z-12 h-fit">
               <img
                 src={light}
                 alt="light"
@@ -97,7 +97,7 @@ const PokemonEvolution = () => {
               <img
                 src={prevPokemon}
                 alt={prevPokemon}
-                className="w-52 m-auto animate-desapearing opacity-0"
+                className="w-52 max-lg:w-42 m-auto animate-desapearing opacity-0"
               />
             </div>
           </>
@@ -117,7 +117,7 @@ const PokemonEvolution = () => {
                 {pokemonEvolvedName.toUpperCase()}!
               </span>
               <h1 className="font-bold text-center text-green-400">
-                Você ganhou +3 pokebolas!
+                Você ganhou +3 pokebolas, +1 HP e +30 XP!
               </h1>
               <div className="flex items-center gap-2 top-4 right-4">
                 <span className="text-sm font-bold opacity-70">+ 3</span>

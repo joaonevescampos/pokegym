@@ -15,7 +15,7 @@ export const initialPokemonState: PokemonState = {
     pokeball: 3,
     energy: 1,
     xp: 0,
-    diamond: 20,
+    diamond: 0,
     userName: "",
     gender: "",
     dashboard: [

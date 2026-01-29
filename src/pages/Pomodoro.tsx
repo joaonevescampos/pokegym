@@ -95,7 +95,7 @@ export default function Pomodoro() {
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-6 bg-gray-900 text-white">
+    <main className="min-h-screen flex flex-col items-center justify-center gap-6 text-white">
       <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
         <div
           onClick={() => navigate(-1)}

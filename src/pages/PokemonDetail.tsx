@@ -52,9 +52,6 @@ const PokemonDetail = () => {
   const limitCaractere = 10;
   const [caractere, setCaractere] = useState(currentPokemon?.tag.length);
 
-  // const [createRandom, setCreateRandom] = useState(false)
-
-
   useEffect(() => {
     formatDate();
   }, []);
@@ -116,7 +113,7 @@ const PokemonDetail = () => {
     const evolved = await gainHp(currentPokemon.name, 1);
     if (evolved) {
       gainPokeball(3);
-      gainXp(5);
+      gainXp(30);
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
       if (
@@ -129,11 +126,11 @@ const PokemonDetail = () => {
         hp === 89
       ) {
         gainPokeball(1);
-        gainXp(5);
+        gainXp(10);
       } else if (hp === 99) {
         gainPokeball(5);
         gainDiamond(1);
-        gainXp(10);
+        gainXp(100);
       } else {
         gainXp(1);
       }
@@ -229,6 +226,20 @@ const PokemonDetail = () => {
       deleteTimeToRest(pokemonName!);
     }
   }
+
+  const [resultTask, setResultTask] = useState("");
+
+  const randomTask = () => {
+    console.log(currentPokemon?.checklist);
+    const nonCheckedTask = currentPokemon?.checklist.filter(
+      (task) => task.checked === false,
+    );
+    const total = nonCheckedTask?.length;
+    if (total) {
+      const randomIndex = Math.round(Math.random() * total);
+      setResultTask(nonCheckedTask[randomIndex].task);
+    }
+  };
 
   return (
     <>
@@ -369,6 +380,11 @@ const PokemonDetail = () => {
             </div>
           </section>
           <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
+            <Button
+              path="/dashboard"
+              text="Ver progresso"
+              style="w-36 text-white mb-4"
+            />
             <div className="flex flex-col gap-4 w-full max-w-150 max-lg:max-w-100">
               <span className="text-white text-sm opacity-50 font-medium">
                 {date}
@@ -381,28 +397,42 @@ const PokemonDetail = () => {
               <div className="flex flex-col gap-2 text-white">
                 <p className="text-sm opacity-75 text-center">
                   Habilidades de pokémons especiais -{" "}
-                  <Link to="/special-pokemons" className="underline">
+                  <Link to="/special-pokemons" className="underline font-bold">
                     Saiba mais
                   </Link>
                 </p>
                 <ul className="flex justify-center gap-2">
                   <li
-                    className={`flex items-center justify-center font-bold bg-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.snorlaxStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`} onClick={() => navigate("/snorlax-note")}
+                    className={`flex items-center justify-center font-bold border-2 border-teal-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.snorlaxStatus === false && "opacity-50 pointer-events-none bg-gray-600! border-none"}`}
+                    onClick={() => navigate("/snorlax-note")}
                   >
-                    NOTAS { state.userStatus.snorlaxStatus===false && "🔒"}
+                    NOTAS {state.userStatus.snorlaxStatus === false && "🔒"}
                   </li>
                   <li
-                    className={`flex items-center justify-center font-bold bg-orange-500 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.victiniStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`}
+                    className={`flex items-center justify-center font-bold border-2 border-orange-600 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.victiniStatus === false && "opacity-50 pointer-events-none bg-gray-600! border-none"}`}
+                    onClick={() => randomTask()}
                   >
-                    SORTEIO { state.userStatus.victiniStatus===false && "🔒"}
+                    SORTEIO {state.userStatus.victiniStatus === false && "🔒"}
                   </li>
                   <li
-                    className={`flex items-center justify-center font-bold bg-green-700 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.celebiStatus===false && "opacity-50 pointer-events-none bg-gray-500!"}`} onClick={() => navigate("/pomodoro")}
+                    className={`flex items-center justify-center font-bold border-2 border-green-700 w-30 h-8 rounded-2xl text-xs cursor-pointer ${state.userStatus.celebiStatus === false && "opacity-50 pointer-events-none bg-gray-600! border-none"}`}
+                    onClick={() => navigate("/pomodoro")}
                   >
-                    POMODORO { state.userStatus.celebiStatus===false && "🔒"}
+                    POMODORO {state.userStatus.celebiStatus === false && "🔒"}
                   </li>
                 </ul>
               </div>
+
+              {resultTask.length > 0 && (
+                <div className="text-white text-center transition-all font-bold">
+                  <h3 className="pb-2">
+                    Resultado do sorteio de uma tarefa não concluída:{" "}
+                  </h3>
+                  <p className="text-white text-center border-orange-600 border-2 opacity-80 rounded-2xl px-4 py-2 font-bold">
+                    {resultTask}
+                  </p>
+                </div>
+              )}
 
               <div className="flex flex-col gap-2 ">
                 {caractere === 0 ? (
@@ -459,11 +489,6 @@ const PokemonDetail = () => {
                 )}
               </div>
 
-              <Button
-                path="/dashboard"
-                text="Ver progresso mensal"
-                style="w-full text-white mb-4"
-              />
               <ul className="flex flex-col gap-4 w-full">
                 {reactChecklist?.map((item, index) => (
                   <li className="flex items-center gap-2" key={index}>
@@ -535,7 +560,7 @@ const PokemonDetail = () => {
                       Excelente! Você atingiu o nível {level}
                     </h2>
                     <h1 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +1 pokebola, +1 HP e +5 XP!
+                      Oba! Você ganhou +1 pokebola, +1 HP e +10 XP!
                     </h1>
                     <div className="flex items-end gap-2 top-4 right-4">
                       <span className="text-sm font-bold opacity-70">+ 1</span>
@@ -552,7 +577,8 @@ const PokemonDetail = () => {
                       UAUUU! Você atingiu o nível máximo: {level}
                     </h1>
                     <h2 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +5 pokebolas, +10 XP, +1HP e +1 diamante!
+                      Oba! Você ganhou +5 pokebolas, +100 XP, +1HP e +1
+                      diamante!
                     </h2>
                     <div className="flex items-center justify-center gap-4">
                       <div className="flex items-end gap-2">

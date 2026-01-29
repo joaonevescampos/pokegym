@@ -96,7 +96,7 @@ const Seetings = () => {
             />
             {habilitButton && (
               <button
-                className="text-white font-extrabold py-2 px-4 bg-red-600 text-center rounded-2xl my-4"
+                className="text-white text-sm cursor-pointer font-extrabold py-2 px-4 bg-red-600 text-center rounded-2xl my-4"
                 onClick={() => handleDeleteGame()}
               >
                 APAGAR JOGO

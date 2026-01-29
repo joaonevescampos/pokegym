@@ -8,7 +8,7 @@ import type {
 } from "@/context/pokemonTypes";
 import { usePokemon } from "@/context/usePokemon";
 import { useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function isSameDay(a: Date, b: Date) {
   return (
@@ -70,6 +70,7 @@ function generateBlockedDates(
 
 const DashboardPage = () => {
   const { state } = usePokemon();
+  const navigate = useNavigate()
 
   const [selected, setSelected] = useState<Date | undefined>(new Date());
   const [month, setMonth] = useState<Date>(new Date());
@@ -182,7 +183,7 @@ const DashboardPage = () => {
             </span>
           </div>
         </div>
-        <Button text="voltar" path="/home" style="text-white!" />
+        <Button text="voltar" onClick={() => navigate(-1)} style="text-white! bg-bt-purple!" />
       </main>
     </>
   );

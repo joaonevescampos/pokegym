@@ -21,7 +21,7 @@ const specialPokemons = [
   },
   {
     name: "victini",
-    hability: "Sortear números ou nomes.",
+    hability: "Sortear uma tarefa que ainda não concluiu.",
     image:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/494.png",
     cost: 5,
