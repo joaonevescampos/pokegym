@@ -25,7 +25,7 @@ const SnorlaxNote = () => {
         <img
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/143.png"
           alt="snorlax"
-          className="w-72 m-auto"
+          className="w-52 m-auto animate-pokemon"
         />
         <h1 className="text-white font-bold text-2xl text-center py-4">
           Bloco de Notas

@@ -30,7 +30,7 @@ export default function Pomodoro() {
       totalSecondsRef.current = total;
       setSecondsLeft(total);
     }
-  }, [taskTime, breakTime, cycles, isRunning]);
+  }, [taskTime, breakTime, cycles]);
 
   const start = () => {
     if (taskTime != 0 && cycles !== 0 && breakTime != 0) {
@@ -107,7 +107,7 @@ export default function Pomodoro() {
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/251.png"
         alt="celebi"
-        className="w-24"
+        className="w-24 animate-pokemon"
       />
       <h1 className="text-2xl font-bold">Pomodoro</h1>
 
