@@ -1,3 +1,4 @@
+import { usePokemon } from "@/context/usePokemon";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +12,7 @@ export default function Pomodoro() {
   const [taskTime, setTaskTime] = useState(0);
   const [breakTime, setBreakTime] = useState(0);
   const [cycles, setCycles] = useState(0);
-
+  const { state } = usePokemon();
   const [phase, setPhase] = useState<Phase>("task");
   const [currentCycle, setCurrentCycle] = useState(1);
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -19,6 +20,12 @@ export default function Pomodoro() {
   const navigate = useNavigate();
 
   const totalSecondsRef = useRef(0);
+
+  useEffect(() => {
+    if (state.userStatus.celebiStatus === false) {
+      navigate("/home");
+    }
+  }, []);
 
   useEffect(() => {
     if (isRunning) return;
