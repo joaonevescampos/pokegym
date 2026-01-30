@@ -111,9 +111,10 @@ const SetGameInfos = () => {
             <div>
               <Button
                 text="Continuar"
-                path="/choose-pokemon"
                 style="bg-gray-400! pointer-events-none!"
               />
+              <p className="text-red-400 text-xs text-center pt-2">Preencha seu nome</p>
+
             </div>
           )}
         </div>
