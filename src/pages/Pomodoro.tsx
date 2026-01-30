@@ -117,7 +117,6 @@ export default function Pomodoro() {
             className="p-2 rounded bg-gray-800"
             onChange={(e) => {
               setTaskTime(+e.target.value);
-              console.log("teste", +e.target.value);
             }}
           >
             <option value={0}>Tempo da tarefa</option>

@@ -119,6 +119,10 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_GENDER", payload: { gender } });
   }
 
+    function setNote(note: string) {
+    dispatch({ type: "SET_NOTE", payload: { note } });
+  }
+
   function activeNote(status: boolean) {
     dispatch({ type: "ACTIVE_NOTE", payload: { status } });
   }
@@ -209,6 +213,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         setTag,
         deleteTag,
         setGender,
+        setNote,
         activeNote,
         activePomodoro,
         activeRandom,

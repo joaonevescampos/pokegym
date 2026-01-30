@@ -145,9 +145,9 @@ const SpecialPokemons = () => {
           Treine um pokémon até o level 10 para ganhar 1 diamante
         </h3>
         <div className="flex flex-col gap-4 items-center justify-center w-full p-4">
-          {specialPokemons.map((pokemon) => (
+          {specialPokemons.map((pokemon, index) => (
             <section
-              className={`flex justify-between gap-4 items-center w-full max-w-120 h-52 rounded-2xl p-4 ${pokemon.color}`}
+              className={`flex justify-between gap-4 items-center w-full max-w-120 h-52 rounded-2xl p-4 ${pokemon.color}`} key={index}
             >
               <div className="flex-2 flex flex-col items-center gap-2 w-60">
                 <img
@@ -164,7 +164,7 @@ const SpecialPokemons = () => {
                   <strong>Habilidade: </strong> {pokemon.hability}
                 </span>
                 {activePokemon.map(
-                  (item) =>
+                  (item, index) =>
                     pokemon.name === item.name &&
                     (item.active ? (
                       <Button
@@ -175,6 +175,7 @@ const SpecialPokemons = () => {
                           pokemon.name === "celebi" && navigate("/pomodoro");
                         }}
                         style="text-white! bg-bt-purple!"
+                        key={index}
                       />
                     ) : (
                       <button
@@ -182,6 +183,7 @@ const SpecialPokemons = () => {
                         onClick={() =>
                           involquePokemon(pokemon.name, pokemon.cost)
                         }
+                        key={index}
                       >
                         <span className="font-bold">x {pokemon.cost}</span>
                         <img src={diamond} alt="diamond" className="w-6" />

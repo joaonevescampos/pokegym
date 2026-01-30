@@ -1,7 +1,16 @@
+import { usePokemon } from "@/context/usePokemon";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SnorlaxNote = () => {
   const navigate = useNavigate();
+  const {state, setNote} = usePokemon()
+
+  useEffect(() => {
+    if(state.userStatus.snorlaxStatus === false) {
+      navigate("/home")
+    }
+  }, [])
   return (
     <main className="p-4 h-screen">
       <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
@@ -26,6 +35,10 @@ const SnorlaxNote = () => {
         <textarea
           className="h-full w-full max-w-300 bg-white m-auto p-4 rounded-2xl"
           maxLength={5000}
+          value={state.userStatus.note}
+          onChange={(e: any) => {
+            setNote(String(e.target.value))
+          }}
         />
       </div>
     </main>

@@ -138,11 +138,9 @@ useEffect(() => {
 
   const getPokemonList = async (generation: number) => {
     try {
-      console.log("GEN", generation);
       const genRes = await fetch(
         `https://pokeapi.co/api/v2/generation/${generation}`,
       );
-      console.log(`https://pokeapi.co/api/v2/generation/${generation}`);
       const genData = await genRes.json();
 
       const basePokemons = await Promise.all(

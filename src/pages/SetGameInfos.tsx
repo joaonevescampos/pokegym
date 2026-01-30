@@ -13,6 +13,7 @@ const SetGameInfos = () => {
   const [userNameReact, setUserNameReact] = useState<
     "masculino" | "feminino" | ""
   >("");
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const { state, setUserName, setGender } = usePokemon();
   const navigate = useNavigate();
@@ -24,12 +25,15 @@ const SetGameInfos = () => {
   }, []);
 
   const handleChange = (e: any) => {
-    e.preventDefault();
-    setUserNameReact(e.target.value);
+    if (e.target.value.length <= 10) {
+      setUserNameReact(e.target.value);
+      setShowAlert(false);
+    } else {
+      setShowAlert(true);
+    }
   };
 
   const handleSetInformations = () => {
-    // console.log(userNameReact, genderReact);
     setUserName(userNameReact);
     setGender(genderReact);
   };
@@ -67,6 +71,11 @@ const SetGameInfos = () => {
             className="bg-white text-black py-2 px-4 rounded-2xl z-30 w-full max-w-80 text-center"
             onChange={(e) => handleChange(e)}
           />
+          {showAlert && (
+            <p className="text-center text-red-400 text-sm z-10">
+              O nome deve ter no máximo de 10 caracteres
+            </p>
+          )}
           <p className="text-center max-w-150 text-sm z-10">Qual seu gênero?</p>
           <div className="flex gap-4 pb-4 z-30">
             <span
@@ -94,9 +103,19 @@ const SetGameInfos = () => {
               Outro
             </span>
           </div>
-          <div onClick={() => handleSetInformations()}>
-            <Button text="Continuar" path="/choose-pokemon" />
-          </div>
+          {!showAlert && userNameReact.length != 0 ? (
+            <div onClick={() => handleSetInformations()}>
+              <Button text="Continuar" path="/choose-pokemon" />
+            </div>
+          ) : (
+            <div>
+              <Button
+                text="Continuar"
+                path="/choose-pokemon"
+                style="bg-gray-400! pointer-events-none!"
+              />
+            </div>
+          )}
         </div>
       </section>
     </main>

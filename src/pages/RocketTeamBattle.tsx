@@ -66,8 +66,6 @@ const RocketTeamBattle = () => {
   const calculateWinner = async () => {
     const total = 1;
     const randomNumberToWin: number = Math.round(Math.random() * total);
-    console.log("randomNumberToWin", randomNumberToWin);
-    console.log("randomNumber", Math.round(Math.random()));
 
     if (randomNumberToWin === 0) {
       setWonBattle(true);
@@ -80,14 +78,11 @@ const RocketTeamBattle = () => {
   const calculateReward = async () => {
     const total = 5;
     const randomNumberToWinPokeball: number = Math.round(Math.random() * total);
-    console.log("random number", randomNumberToWinPokeball);
 
     if (randomNumberToWinPokeball === 2) {
-      console.log("ganhar pokebola");
       setReward("pokebola");
       gainPokeball(1);
     } else {
-      console.log("ganhar energy");
       setReward("energy");
       gainEnergy(1);
     }
@@ -122,7 +117,7 @@ const RocketTeamBattle = () => {
               <img
                 src={rocketTeam}
                 alt=""
-                className={`absolute left-1/2 top-3/7 w-60 -translate-1/2 z-0 ${
+                className={`absolute left-1/2 top-3/7 w-64 -translate-1/2 z-0 ${
                   isFighting
                     ? attacker === "top"
                       ? "animate-attack-down"
@@ -150,7 +145,7 @@ const RocketTeamBattle = () => {
                 <img
                   src={rocketTeam}
                   alt=""
-                  className={`w-36 h-36 z-20 mb-8`}
+                  className={`w-48 h-48 z-20 mb-8`}
                 />
                 <h1 className="text-2xl font-bold top-8 text-center z-50 text-green-400">
                   Parabéns! Você ganhou da equipe Rocket!
@@ -188,7 +183,7 @@ const RocketTeamBattle = () => {
                 <img
                   src={rocketTeam}
                   alt=""
-                  className={`w-36 h-36 z-20 animate-pokemon-scape opacity-0`}
+                  className={`w-48 h-48 z-20 animate-pokemon-scape opacity-0`}
                 />
                 <h1 className="text-2xl font-bold top-8 text-center z-50 text-red-400">
                   Poxa... Você perdeu!

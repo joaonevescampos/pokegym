@@ -24,12 +24,12 @@ body {
   --color-gd-fire2: #7b0b0b;
   --color-gd-grass1: #0cf387;
   --color-gd-grass2: #00542d;
-
   --animate-attack-down: attack-down 0.25s ease-in-out;
   --animate-attack-up: attack-up 0.25s ease-in-out;
   --animate-hit-left: hit-left 0.2s ease-out;
   --animate-hit-right: hit-right 0.2s ease-out;
   --animate-float: float 2.5s ease-in-out infinite;
+  --animate-pokemon: float-pokemon 5s ease-in-out infinite;
   --animate-pokeball-hit: pokeball-hit 3s ease-out;
   --animate-circle-effect: circle-effect 0.5s ease-in-out;
   --animate-pokeball-captured: pokeball-captured 8s ease-in-out;
@@ -98,6 +98,18 @@ body {
     50% {
       transform: translateY(-10px);
       opacity: 20%;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+    @keyframes float-pokemon {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
     }
     100% {
       transform: translateY(0);

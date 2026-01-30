@@ -234,7 +234,6 @@ useEffect(() => {
   const [resultTask, setResultTask] = useState("");
 
   const randomTask = () => {
-    console.log(currentPokemon?.checklist);
     const nonCheckedTask = currentPokemon?.checklist.filter(
       (task) => task.checked === false,
     );

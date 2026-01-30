@@ -15,7 +15,7 @@ export const initialPokemonState: PokemonState = {
     pokeball: 3,
     energy: 1,
     xp: 0,
-    diamond: 0,
+    diamond: 20,
     userName: "",
     gender: "",
     dashboard: [
@@ -41,7 +41,7 @@ export const initialPokemonState: PokemonState = {
     snorlaxStatus: false,
     victiniStatus: false,
     celebiStatus: false,
-    time_to_rest_rocket: null
+    time_to_rest_rocket: null,
   },
   myPokemons: [],
 };
@@ -202,6 +202,15 @@ export function pokemonReducer(
         userStatus: {
           ...state.userStatus,
           gender: action.payload.gender,
+        },
+      };
+
+    case "SET_NOTE":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          note: action.payload.note,
         },
       };
 

@@ -94,6 +94,7 @@ export type PokemonAction =
   | { type: "DELETE_TAG"; payload: { name: string } }
   | { type: "SET_GENDER"; payload: { gender: string } }
   | { type: "SET_USERNAME"; payload: { userName: string } }
+  | { type: "SET_NOTE"; payload: { note: string } }
   | { type: "ACTIVE_NOTE"; payload: { status: boolean } }
   | { type: "ACTIVE_RANDOM"; payload: { status: boolean } }
   | { type: "ACTIVE_POMODORO"; payload: { status: boolean } }

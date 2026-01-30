@@ -2,18 +2,19 @@ import florestImage from "../assets/florest.png";
 import pokeball from "../assets/pokeball-animation.png";
 import lightCircle from "../assets/light-circle.png";
 import energy from "../assets/energy.png";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { usePokemon } from "../context/usePokemon";
 import Button from "../components/Button";
 
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
   const [myPokemon, setMyPokemon] = useState("");
-  const { state, capturePokemon, gainEnergy } = usePokemon();
+  const { state, capturePokemon, gainEnergy, usePokeball } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
   const [pokemonReward, setPokemonReward] = useState<number>(1);
+  const navigate = useNavigate();
 
   const param = useParams();
 
@@ -55,6 +56,18 @@ const PokemonBattle = () => {
 
   const [isFighting, setIsFighting] = useState(true);
   const [isCapturing, setIsCapturing] = useState(true);
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+
+    if (state.userStatus.pokeball <= 0) {
+      navigate("/capture-pokemon");
+    } else {
+      usePokeball(1);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -172,13 +185,6 @@ const PokemonBattle = () => {
               className={`absolute left-1/2 top-3/7 w-24 opacity-0 -translate-1/2 z-0 animate-circle-effect`}
             />
           )}
-          {isFighting && (
-            <div
-              className={`flex flex-col items-center absolute left-1/2 bottom-[28%] -translate-1/2 z-0 ${
-                isFighting ? "animate-float" : ""
-              }`}
-            ></div>
-          )}
           {myPokemon && isFighting && (
             <img
               src={myPokemon}
@@ -256,7 +262,17 @@ const PokemonBattle = () => {
               <p className="text-sm top-32 text-center ">
                 Continue treinando seu pokemon para ter mais chances de captura.
               </p>
-              <Button text="Capturar pokémon" path="/capture-pokemon" />
+              {state.userStatus.pokeball > 0 && (
+                <Button
+                  text="Tentar novamente"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                />
+              )}
+              <div className="flex gap-4">
+                <Button text="Sair" path="/capture-pokemon" />
+              </div>
             </div>
           )}
         </section>

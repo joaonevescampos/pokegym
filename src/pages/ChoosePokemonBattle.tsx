@@ -8,7 +8,7 @@ import pokebola from "../assets/pokeball.png";
 import xIcon from "../assets/x.png";
 
 const ChoosePokemonBattle = () => {
-  const { state, usePokeball } = usePokemon();
+  const { state} = usePokemon();
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState<
     number | undefined
   >(undefined);
@@ -16,8 +16,6 @@ const ChoosePokemonBattle = () => {
   const param = useParams();
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
-
-  console.log(state);
 
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"
@@ -43,14 +41,11 @@ const ChoosePokemonBattle = () => {
   const startBattle = () => {
     if (state.userStatus.pokeball === 0) {
       setAlert(true);
-      console.log("proibido");
     } else {
       setAlert(false);
-      usePokeball(1);
       navigate(
         `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`,
       );
-      console.log("liberado");
     }
   };
 
@@ -77,7 +72,7 @@ const ChoosePokemonBattle = () => {
             <img
               src={imageURL}
               alt="florest"
-              className="absolute left-1/2 top-1/2 w-48 h-48 -translate-1/2 z-0"
+              className="absolute left-1/2 top-1/2 w-48 h-48 -translate-1/2 z-0 animate-pokemon"
             />
           )}
         </section>

@@ -22,11 +22,11 @@ const Home = () => {
       <img
         src={backgroundImage}
         alt="home"
-        className="absolute left-0 w-full object-cover h-full opacity-25 z-0"
+        className="absolute left-0 w-full object-cover h-full opacity-60 z-0"
       />
       <section className="flex flex-col items-center justify-center w-full h-full">
         <div className="flex flex-col gap-4 items-center justify-center text-white px-4 z-10">
-          <img src={charizardImage} alt="charizard" className="z-10 max-lg:w-48" />
+          <img src={charizardImage} alt="charizard" className="z-10 max-lg:w-48 animate-pokemon" />
           <img
             src={pokeballImage}
             alt="pokeball"
@@ -40,7 +40,7 @@ const Home = () => {
           <ul className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 w-full z-10">
             {menu.map((item, index) => (
               <li
-                className="w-full min-w-36 min-h-24 bg-bt-purple rounded-2xl"
+                className="w-full min-w-36 min-h-18 bg-[#00000080]  text-sm hover:bg-bt-purple hover:opacity-100 hover:border-none rounded-2xl"
                 key={index}
               >
                 <Link
