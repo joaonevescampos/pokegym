@@ -193,16 +193,16 @@ const PokemonBattle = () => {
                 : oponentType === "fire"
                   ? lavaImage
                   : oponentType === "poison"
-                  ? jungleImage
-                  : oponentType === "ground"
-                    ? caveImage
-                    : oponentType === "rock"
-                      ? rockImage
-                      : oponentType === "ghost" || oponentType === "psychic"
-                        ? ghostImage
-                        : oponentType === "water"
-                          ? lakeImage
-                          : florestImage
+                    ? jungleImage
+                    : oponentType === "ground"
+                      ? caveImage
+                      : oponentType === "rock"
+                        ? rockImage
+                        : oponentType === "ghost" || oponentType === "psychic"
+                          ? ghostImage
+                          : oponentType === "water"
+                            ? lakeImage
+                            : florestImage
             }
             alt="enviroment"
             className="absolute w-full h-full z-0 object-cover"
@@ -283,10 +283,10 @@ const PokemonBattle = () => {
           )}
 
           {wonBattle === false && !isCapturing && showResult && (
-            <div className="absolute flex flex-col gap-4 items-center justify-center w-full h-full bg-black opacity-80 z-10 px-4">
+            <div className="absolute flex flex-col gap-4 items-center justify-center w-full h-full bg-[#000000b2] z-10 px-4">
               <img
                 src={pokemonOponent}
-                alt=""
+                alt="pokemon"
                 className={`w-36 h-36 z-20 animate-pokemon-scape opacity-0`}
               />
               <img
@@ -297,22 +297,22 @@ const PokemonBattle = () => {
               <h1 className="text-2xl font-bold top-8 text-center z-50 text-red-400">
                 Ops! {param.pokemonOponent?.toUpperCase()} escapou!
               </h1>
-              <p className="text-xl font-bold top-32 text-center ">
+              <p className="text-xl font-bold top-32 text-center">
                 O {param.pokemonOponent?.toUpperCase()} foi muito forte e não
                 foi possível capturá-lo.
               </p>
               <p className="text-sm top-32 text-center ">
                 Continue treinando seu pokemon para ter mais chances de captura.
               </p>
-              {state.userStatus.pokeball > 0 && (
-                <Button
-                  text="Tentar novamente"
-                  onClick={() => {
-                    window.location.reload();
-                  }}
-                />
-              )}
               <div className="flex gap-4">
+                {state.userStatus.pokeball > 0 && (
+                  <Button
+                    text="Tentar novamente"
+                    onClick={() => {
+                      window.location.reload();
+                    }}
+                  />
+                )}
                 <Button text="Sair" path="/capture-pokemon" />
               </div>
             </div>
