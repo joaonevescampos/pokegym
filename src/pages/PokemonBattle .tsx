@@ -7,6 +7,16 @@ import ghostImage from "../assets/ghost.png";
 import lakeImage from "../assets/lake.png";
 import iceImage from "../assets/ice.png";
 
+import grassAttack from "../assets/grass-attack.png";
+import fireAttack from "../assets/fire-attack.png";
+import iceAttack from "../assets/ice-attack.png";
+import waterAttack from "../assets/water-attack.png";
+import rockAttack from "../assets/rock-attack.png";
+import poisonAttack from "../assets/poison-attack.png";
+import psychicAttack from "../assets/psychic-attack.png";
+import thunderAttack from "../assets/thunder-attack.png";
+import genericAttack from "../assets/generic-attack.png";
+
 import pokeball from "../assets/pokeball-animation.png";
 import lightCircle from "../assets/light-circle.png";
 import energy from "../assets/energy.png";
@@ -18,6 +28,7 @@ import Button from "../components/Button";
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
   const [oponentType, setOponentType] = useState<string>("");
+  const [myPokemonType, setMyPokemonType] = useState<string>("");
   const [myPokemon, setMyPokemon] = useState("");
   const { state, capturePokemon, gainEnergy, usePokeball } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
@@ -32,10 +43,12 @@ const PokemonBattle = () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await response.json();
       if (isOponent) {
+        setOponentType(data.types[0].type.name)
         setPokemonOponent(
           `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
         );
       } else {
+        setMyPokemonType(data.types[0].type.name)
         setMyPokemon(
           `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
         );
@@ -78,9 +91,10 @@ const PokemonBattle = () => {
     }
   }, []);
 
-  useEffect(() => {
-    getOponentType();
-  }, []);
+  // useEffect(() => {
+  //   getOponentType();
+  //   getMyPokemonType()
+  // }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -99,18 +113,31 @@ const PokemonBattle = () => {
     }
   }, [isFighting]);
 
-  const getOponentType = async () => {
-    try {
-      const responseId = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
-      );
-      const data1 = await responseId.json();
-      const type: string = data1.types[0].type.name;
-      setOponentType(type);
-    } catch (error) {
-      console.log("Cannot get the oponent type.", error);
-    }
-  };
+  // const getOponentType = async () => {
+  //   try {
+  //     const responseId = await fetch(
+  //       `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
+  //     );
+  //     const data1 = await responseId.json();
+  //     const type: string = data1.types[0].type.name;
+  //     setOponentType(type);
+  //   } catch (error) {
+  //     console.log("Cannot get the oponent type.", error);
+  //   }
+  // };
+
+  //     const getMyPokemonType = async () => {
+  //   try {
+  //     const responseId = await fetch(
+  //       `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
+  //     );
+  //     const data1 = await responseId.json();
+  //     const type: string = data1.types[0].type.name;
+  //     setMyPokemonType(type);
+  //   } catch (error) {
+  //     console.log("Cannot get the my pokemon type.", error);
+  //   }
+  // };
 
   const calculateWinner = async () => {
     try {
@@ -130,18 +157,20 @@ const PokemonBattle = () => {
       const maxCaptureRate = 255;
       const maxLevel = 100;
       const maxPokemons = 541;
-      const maxCapturePorcentage = 100
+      const maxCapturePorcentage = 100;
       const userTotalPokemon = state.myPokemons.length;
-      const capturedPorcentage = Math.ceil(userTotalPokemon*100/maxPokemons)
-      
+      const capturedPorcentage = Math.ceil(
+        (userTotalPokemon * 100) / maxPokemons,
+      );
+
       const pokemonChose = state.myPokemons.filter(
         (pokemon) => pokemon.name === param.pokemonChose,
       )[0];
       const pokemonChoseHP = pokemonChose.hp;
-      
+
       const winRate = captureRate + capturedPorcentage + pokemonChoseHP;
       const total = maxCaptureRate + maxLevel + maxCapturePorcentage;
-      
+
       const randomNumberToWin: number = Math.ceil(Math.random() * total);
 
       if (randomNumberToWin <= winRate) {
@@ -218,8 +247,66 @@ const PokemonBattle = () => {
                   ? attacker === "top"
                     ? "animate-attack-down"
                     : "animate-hit-right"
-                  : ""
+                  : "animate-pulse"
               }`}
+            />
+          )}
+          {attacker === "top" && isFighting && (
+            <span className="absolute left-1/2 top-3/7 -translate-x-1/2 -translate-y-30 text-white font-bold">AAAARRRGG!! NHAC!</span>
+          )}
+          {attacker === "bottom" && isFighting && (
+            <span className="absolute left-1/2 bottom-40 -translate-x-1/2 translate-y-30 text-white font-bold">Whooshh!! GRRRRR!</span>
+          )}
+          {attacker === "top" && isFighting && (
+            <img
+              src={
+                oponentType === "grass"
+                  ? grassAttack
+                  : oponentType === "water"
+                    ? waterAttack
+                    : oponentType === "ice"
+                      ? iceAttack
+                      : oponentType === "fire"
+                        ? fireAttack
+                        : oponentType === "rock" || oponentType === "ground"
+                          ? rockAttack
+                          : oponentType === "bug" || oponentType === "poison"
+                            ? poisonAttack
+                            : oponentType === "psychic" ||
+                                oponentType === "ghost"
+                              ? psychicAttack
+                              : oponentType === "electric"
+                                ? thunderAttack
+                                : genericAttack
+              }
+              alt="attack"
+              className={`absolute left-1/2 top-1/2 -translate-1/2 w-28 animate-power-attack-down opacity-0`}
+            />
+          )}
+          {attacker === "bottom" && isFighting && (
+            <img
+              src={
+                myPokemonType === "grass"
+                  ? grassAttack
+                  : myPokemonType === "water"
+                    ? waterAttack
+                    : myPokemonType === "ice"
+                      ? iceAttack
+                      : myPokemonType === "fire"
+                        ? fireAttack
+                        : myPokemonType === "rock" || myPokemonType === "ground"
+                          ? rockAttack
+                          : myPokemonType === "bug" || myPokemonType === "poison"
+                            ? poisonAttack
+                            : myPokemonType === "psychic" ||
+                                myPokemonType === "ghost"
+                              ? psychicAttack
+                              : myPokemonType === "electric"
+                                ? thunderAttack
+                                : genericAttack
+              }
+              alt="attack"
+              className={`absolute left-1/2 bottom-40 -translate-x-1/2 w-28 animate-power-attack-up opacity-0`}
             />
           )}
           {!isCapturing && (

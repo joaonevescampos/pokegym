@@ -5,7 +5,7 @@
 
 html,
 body {
-  background: linear-gradient(to bottom, #000000, #010F40);
+  background: linear-gradient(to bottom, #000000, #010f40);
   box-sizing: border-box;
   overflow-x: hidden;
   height: 100%;
@@ -26,8 +26,10 @@ body {
   --color-gd-grass2: #00542d;
   --animate-attack-down: attack-down 0.25s ease-in-out;
   --animate-attack-up: attack-up 0.25s ease-in-out;
-  --animate-hit-left: hit-left 0.2s ease-out;
-  --animate-hit-right: hit-right 0.2s ease-out;
+  --animate-power-attack-down: power-attack-down 0.8s ease-in-out;
+  --animate-power-attack-up: power-attack-up 0.8s ease-in-out;
+  --animate-hit-left: hit-left 0.4s ease-out;
+  --animate-hit-right: hit-right 0.4s ease-out;
   --animate-float: float 2.5s ease-in-out infinite;
   --animate-pokemon: float-pokemon 5s ease-in-out infinite;
   --animate-pokeball-hit: pokeball-hit 3s ease-out;
@@ -61,13 +63,68 @@ body {
     }
   }
 
+  @keyframes power-attack-down {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+      scale: 1.5;
+    }
+    70% {
+      opacity: 0.2;
+    }
+    80% {
+      opacity: 1;
+      scale: 1.2;
+    }
+    90% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: rotate(180deg) translateY(-300px) scale(1.5);
+      opacity: 1;
+    }
+  }
+
+  @keyframes power-attack-up {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+      scale: 1.5;
+    }
+    70% {
+      opacity: 0.2;
+    }
+    80% {
+      opacity: 1;
+      scale: 1.2;
+    }
+    90% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: rotate(180deg) translateY(300px) scale(1.5);
+      opacity: 0.7;
+    }
+  }
+
   @keyframes hit-left {
     0% {
       transform: translateX(0);
       opacity: 1;
     }
     50% {
-      transform: translateX(-10px);
+      transform: translateX(-20px);
+      opacity: 0.85;
+    }
+
+    70% {
+      transform: translateX(20px);
       opacity: 0.85;
     }
     100% {
@@ -83,6 +140,10 @@ body {
     }
     50% {
       transform: translateX(20px);
+      opacity: 0.85;
+    }
+    70% {
+      transform: translateX(-20px);
       opacity: 0.85;
     }
     100% {
@@ -104,7 +165,7 @@ body {
     }
   }
 
-    @keyframes float-pokemon {
+  @keyframes float-pokemon {
     0% {
       transform: translateY(0);
     }
