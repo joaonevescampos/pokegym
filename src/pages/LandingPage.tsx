@@ -178,8 +178,8 @@ const LandingPage = () => {
             <ul className="flex flex-col gap-2 font-bold items-center py-4">
               <li className="text-green-400">fácil: 1 energia;</li>
               <li className="text-yellow-400">médio: 3 energias;</li>
-              <li className="text-red-300">difícil: 5 energias;</li>
-              <li className="text-purple-300"> insano: 10 energias </li>
+              <li className="text-red-300">difícil: 10 energias;</li>
+              <li className="text-purple-300"> insano: 50 energias </li>
             </ul>
           </div>
         </div>

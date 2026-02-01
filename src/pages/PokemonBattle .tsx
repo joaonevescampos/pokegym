@@ -130,28 +130,29 @@ const PokemonBattle = () => {
       const maxCaptureRate = 255;
       const maxLevel = 100;
       const maxPokemons = 541;
+      const maxCapturePorcentage = 100
       const userTotalPokemon = state.myPokemons.length;
-      const capturedPorcentage = Math.ceil(userTotalPokemon/maxPokemons)*100
-
+      const capturedPorcentage = Math.ceil(userTotalPokemon*100/maxPokemons)
+      
       const pokemonChose = state.myPokemons.filter(
         (pokemon) => pokemon.name === param.pokemonChose,
       )[0];
       const pokemonChoseHP = pokemonChose.hp;
-
+      
       const winRate = captureRate + capturedPorcentage + pokemonChoseHP;
-      const total = maxCaptureRate + maxLevel + maxPokemons;
-
+      const total = maxCaptureRate + maxLevel + maxCapturePorcentage;
+      
       const randomNumberToWin: number = Math.ceil(Math.random() * total);
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
         capturePokemon(param.pokemonOponent!, oponentType);
         if (captureRate <= 3) {
+          gainEnergy(50);
+          setPokemonReward(50);
+        } else if (captureRate > 3 && captureRate <= 45) {
           gainEnergy(10);
           setPokemonReward(10);
-        } else if (captureRate > 3 && captureRate <= 45) {
-          gainEnergy(5);
-          setPokemonReward(5);
         } else if (captureRate > 45 && captureRate <= 190) {
           gainEnergy(3);
           setPokemonReward(3);
@@ -258,7 +259,7 @@ const PokemonBattle = () => {
             />
           )}
           {wonBattle === true && !isCapturing && showResult && (
-            <div className="absolute flex flex-col gap-4 items-center justify-center w-full h-full bg-black opacity-80 z-10 px-4">
+            <div className="absolute flex flex-col gap-4 items-center justify-center w-full h-full bg-[#000000b2] z-10 px-4">
               <img
                 src={pokemonOponent}
                 alt="pokemon"
