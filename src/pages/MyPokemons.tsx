@@ -6,6 +6,7 @@ import maleProfile from "../assets/male-profile.png";
 import femaleProfile from "../assets/female-profile.png";
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
+import Button from "@/components/Button";
 
 const MyPokemons = () => {
   const { state } = usePokemon();
@@ -62,17 +63,18 @@ const MyPokemons = () => {
             <h1 className="text-2xl text-center font-extrabold">
               Meus Pokémons
             </h1>
-            <p className="text-sm font-medium text-center">
-              Treine seu time de pokémons!
-            </p>
           </div>
         </section>
-        <section className="flex flex-col gap-2 p-4 opacity-70 text-sm">
-          <span>Pokemons capturados: {state.myPokemons.length}</span>
-          <span>
-            Total para serem capturados: {612 - state.myPokemons.length}
+        <section className="flex flex-col items-center gap-2 p-4 text-sm">
+          <span className="opacity-70">Pokemons capturados: {state.myPokemons.length}</span>
+          <span className="opacity-70">
+            Total para serem capturados: {541 - state.myPokemons.length}
           </span>
-          <hr className="opacity-40" />
+          <span className="opacity-70">
+            Total de pokémon no jogo: {541}
+          </span>
+          <Button text="Capturar pokemon" path="/capture-pokemon" />
+          <hr className="opacity-40 w-full" />
         </section>
       </header>
       <main className="flex flex-col items-center justify-center h-[calc(100vh-233px)] max-lg:h-full max-lg:min-h-100 text-white">

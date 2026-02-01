@@ -41,7 +41,7 @@ useEffect(() => {
 
   const xp = state.userStatus.xp;
 
-  if (xp >= 1000 && xp % 1000 < 30) {
+  if (xp >= 1000 && xp % 1000 < 30 && xp<=9000) {
     setAlert(true);
   }
 }, [state.userStatus?.xp]);
@@ -239,11 +239,13 @@ useEffect(() => {
           : { ...item, released: true },
       );
       setGenerationList(newGenerationList);
-    } else {
+    } else if (userXP >= 8000 && userXP < 9000) {
       const newGenerationList: Generation[] = generationList.map((item) => {
         return { ...item, released: true };
       });
       setGenerationList(newGenerationList);
+    } else {
+      return
     }
   }, []);
 
@@ -428,7 +430,7 @@ useEffect(() => {
               <h1 className="font-bold text-xl text-center">
                 {state.userStatus.xp % 1000 > 0
                   ? "Lembrete"
-                  : "Oba, você liberou uma nova geração!"}
+                  : "Oba! Você liberou uma nova geração!"}
               </h1>
               <p className="font-bold text-green-400 text-sm">
                 Você atingiu experiência{" "}

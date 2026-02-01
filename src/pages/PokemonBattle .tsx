@@ -1,4 +1,12 @@
 import florestImage from "../assets/florest.png";
+import caveImage from "../assets/cave.png";
+import rockImage from "../assets/rock-cave.png";
+import jungleImage from "../assets/jungle.png";
+import lavaImage from "../assets/lava.png";
+import ghostImage from "../assets/ghost.png";
+import lakeImage from "../assets/lake.png";
+import iceImage from "../assets/ice.png";
+
 import pokeball from "../assets/pokeball-animation.png";
 import lightCircle from "../assets/light-circle.png";
 import energy from "../assets/energy.png";
@@ -9,6 +17,7 @@ import Button from "../components/Button";
 
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
+  const [oponentType, setOponentType] = useState<string>("");
   const [myPokemon, setMyPokemon] = useState("");
   const { state, capturePokemon, gainEnergy, usePokeball } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
@@ -70,6 +79,10 @@ const PokemonBattle = () => {
   }, []);
 
   useEffect(() => {
+    getOponentType();
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsFighting(false);
     }, 12000);
@@ -86,13 +99,26 @@ const PokemonBattle = () => {
     }
   }, [isFighting]);
 
+  const getOponentType = async () => {
+    try {
+      const responseId = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
+      );
+      const data1 = await responseId.json();
+      const type: string = data1.types[0].type.name;
+      setOponentType(type);
+    } catch (error) {
+      console.log("Cannot get the oponent type.", error);
+    }
+  };
+
   const calculateWinner = async () => {
     try {
       const responseId = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
       );
       const data1 = await responseId.json();
-      const type = data1.types[0].type.name;
+      // const type: string = data1.types[0].type.name;
 
       const responseCaptureRate: any = await fetch(
         `https://pokeapi.co/api/v2/pokemon-species/${data1.id}`,
@@ -118,7 +144,7 @@ const PokemonBattle = () => {
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
-        capturePokemon(param.pokemonOponent!, type);
+        capturePokemon(param.pokemonOponent!, oponentType);
         if (captureRate <= 3) {
           gainEnergy(10);
           setPokemonReward(10);
@@ -161,8 +187,24 @@ const PokemonBattle = () => {
       <main className="flex flex-col items-center justify-center h-screen max-lg:h-full max-lg:min-h-100 text-white">
         <section className="relative w-full h-screen">
           <img
-            src={florestImage}
-            alt="florest"
+            src={
+              oponentType === "ice"
+                ? iceImage
+                : oponentType === "fire"
+                  ? lavaImage
+                  : oponentType === "poison"
+                  ? jungleImage
+                  : oponentType === "ground"
+                    ? caveImage
+                    : oponentType === "rock"
+                      ? rockImage
+                      : oponentType === "ghost" || oponentType === "psychic"
+                        ? ghostImage
+                        : oponentType === "water"
+                          ? lakeImage
+                          : florestImage
+            }
+            alt="enviroment"
             className="absolute w-full h-full z-0 object-cover"
           />
           {pokemonOponent && isCapturing && (
@@ -188,7 +230,7 @@ const PokemonBattle = () => {
           {myPokemon && isFighting && (
             <img
               src={myPokemon}
-              alt="florest"
+              alt="pokemon"
               className={`absolute left-1/2 bottom-0 w-48 h-48 -translate-1/2 z-0 ${
                 isFighting
                   ? attacker === "top"
@@ -201,7 +243,7 @@ const PokemonBattle = () => {
           {!isFighting && (
             <img
               src={pokeball}
-              alt="florest"
+              alt="pokeball"
               className={`absolute left-1/2 bottom-0 opacity-0 w-12 -translate-1/2 z-0 ${
                 !isFighting ? "animate-pokeball-hit" : ""
               }`}
@@ -210,7 +252,7 @@ const PokemonBattle = () => {
           {!isCapturing && (
             <img
               src={pokeball}
-              alt="florest"
+              alt="pokeball"
               className={`absolute left-1/2 bottom-75 w-12 -translate-1/2 z-0 animate-pokeball-captured`}
             />
           )}
@@ -218,7 +260,7 @@ const PokemonBattle = () => {
             <div className="absolute flex flex-col gap-4 items-center justify-center w-full h-full bg-black opacity-80 z-10 px-4">
               <img
                 src={pokemonOponent}
-                alt=""
+                alt="pokemon"
                 className={`w-36 h-36 z-20 mb-8`}
               />
               <h1 className="text-2xl font-bold top-8 text-center z-50 text-green-400">

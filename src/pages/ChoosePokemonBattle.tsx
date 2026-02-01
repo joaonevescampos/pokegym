@@ -1,5 +1,12 @@
 import PokemonCard from "../components/PokemonCard";
 import florestImage from "../assets/florest.png";
+import caveImage from "../assets/cave.png";
+import rockImage from "../assets/rock-cave.png";
+import jungleImage from "../assets/jungle.png";
+import lavaImage from "../assets/lava.png";
+import ghostImage from "../assets/ghost.png";
+import lakeImage from "../assets/lake.png";
+import iceImage from "../assets/ice.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
@@ -8,7 +15,7 @@ import pokebola from "../assets/pokeball.png";
 import xIcon from "../assets/x.png";
 
 const ChoosePokemonBattle = () => {
-  const { state} = usePokemon();
+  const { state } = usePokemon();
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState<
     number | undefined
   >(undefined);
@@ -16,6 +23,11 @@ const ChoosePokemonBattle = () => {
   const param = useParams();
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
+  const [oponentType, setOponentType] = useState("");
+
+  useEffect(() => {
+    getOponentType();
+  }, []);
 
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"
@@ -35,6 +47,19 @@ const ChoosePokemonBattle = () => {
       );
     } catch (error) {
       console.log("cannot get pokemon image");
+    }
+  };
+
+  const getOponentType = async () => {
+    try {
+      const responseId = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
+      );
+      const data1 = await responseId.json();
+      const type: string = data1.types[0].type.name;
+      setOponentType(type);
+    } catch (error) {
+      console.log("Cannot get the oponent type.", error);
     }
   };
 
@@ -59,8 +84,24 @@ const ChoosePokemonBattle = () => {
       <main className="flex flex-col items-center justify-center h-full max-lg:h-full max-lg:min-h-100 text-white">
         <section className="relative w-full h-72">
           <img
-            src={florestImage}
-            alt="florest"
+            src={
+              oponentType === "ice"
+                ? iceImage
+                : oponentType === "fire"
+                  ? lavaImage
+                  : oponentType === "poison"
+                    ? jungleImage
+                    : oponentType === "ground"
+                      ? caveImage
+                      : oponentType === "rock"
+                        ? rockImage
+                        : oponentType === "ghost" || oponentType === "psychic"
+                          ? ghostImage
+                          : oponentType === "water"
+                            ? lakeImage
+                            : florestImage
+            }
+            alt="enviroment"
             className="absolute w-full h-full z-0 object-cover pointer-events-none"
           />
           <div className="absolute flex items-end gap-2 top-4 left-4">
@@ -130,8 +171,8 @@ const ChoosePokemonBattle = () => {
               <p className="text-sm text-center">
                 Você não tem pokebolas para batalhar e capturar um novo pokemon!
                 Lamento muito! Para conseguir pokebolas você deve treinar seu
-                pokemon concluindo todastarefas no seu checklist. Com tempo, você irá
-                ganhar pokébolas e poderá batalhar!
+                pokemon concluindo todastarefas no seu checklist. Com tempo,
+                você irá ganhar pokébolas e poderá batalhar!
               </p>
               <Button text="treinar pokemons" path="/my-pokemons" />
             </div>
