@@ -129,16 +129,17 @@ const PokemonBattle = () => {
       const captureRate = data2.capture_rate;
       const maxCaptureRate = 255;
       const maxLevel = 100;
-      const maxCapturedPokemons = 68;
+      const maxPokemons = 541;
       const userTotalPokemon = state.myPokemons.length;
+      const capturedPorcentage = Math.ceil(userTotalPokemon/maxPokemons)*100
 
       const pokemonChose = state.myPokemons.filter(
         (pokemon) => pokemon.name === param.pokemonChose,
       )[0];
-      const pokemonChoseLevel = pokemonChose.hp;
+      const pokemonChoseHP = pokemonChose.hp;
 
-      const winRate = captureRate + userTotalPokemon + pokemonChoseLevel;
-      const total = maxCaptureRate + maxLevel + maxCapturedPokemons;
+      const winRate = captureRate + capturedPorcentage + pokemonChoseHP;
+      const total = maxCaptureRate + maxLevel + maxPokemons;
 
       const randomNumberToWin: number = Math.ceil(Math.random() * total);
 
