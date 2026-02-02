@@ -120,7 +120,7 @@ body {
     }
     50% {
       transform: translateX(-20px);
-      opacity: 0.85;
+      opacity: 0.5;
     }
 
     70% {
@@ -140,7 +140,7 @@ body {
     }
     50% {
       transform: translateX(20px);
-      opacity: 0.85;
+      opacity: 0.5;
     }
     70% {
       transform: translateX(-20px);
