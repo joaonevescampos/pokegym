@@ -10,10 +10,8 @@ const menu = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Pokémons especiais", path: "/special-pokemons" },
   { name: "Loja", path: "/store" },
-  { name: "Tutorial", path: "/" },
+  { name: "Liga Pokémon", path: "/pokemon-league" },
   { name: "Configurações", path: "/seetings" },
-
-
 ];
 
 const Home = () => {
@@ -25,6 +23,7 @@ const Home = () => {
         className="absolute left-0 w-full object-cover h-full opacity-60 z-0"
       />
       <section className="flex flex-col items-center justify-center w-full h-full">
+        <Link to="/" className="text-white font-bold absolute top-4 right-4 text-sm">Guia tutorial</Link>
         <div className="flex flex-col gap-4 items-center justify-center text-white px-4 z-10">
           <img src={charizardImage} alt="charizard" className="z-10 max-lg:w-48 animate-pokemon" />
           <img

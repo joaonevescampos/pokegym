@@ -21,6 +21,8 @@ import Store from "./pages/Store";
 import Seetings from "./pages/Seetings";
 import SnorlaxNote from "./pages/SnorlaxNote";
 import Pomodoro from "./pages/Pomodoro";
+import ChoosePokemonLeague from "./pages/ChoosePokemonLeague";
+import { PokemonLeague } from "./pages/PokemonLeague";
 
 function AppRoutes() {
   return (
@@ -69,7 +71,8 @@ function AppRoutes() {
         <Route path="/seetings" element={<Seetings />} />
         <Route path="/snorlax-note" element={<SnorlaxNote />} />
         <Route path="/pomodoro" element={<Pomodoro />} />
-
+        <Route path="/pokemon-league" element={<PokemonLeague />} />
+        <Route path="/choose-pokemon-league/:oponnent" element={<ChoosePokemonLeague />} />
       </Routes>
     </Router>
   );
