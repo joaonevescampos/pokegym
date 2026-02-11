@@ -56,16 +56,13 @@ const PokemonDetail = () => {
     formatDate();
   }, []);
 
-useEffect(() => {
-  const pokemon = state.myPokemons.find(
-    (p) => p.name === pokemonName
-  );
+  useEffect(() => {
+    const pokemon = state.myPokemons.find((p) => p.name === pokemonName);
 
-  if (!pokemon) return;
+    if (!pokemon) return;
 
-  setReactChecklist(pokemon.checklist);
-}, [state.myPokemons, pokemonName]);
-
+    setReactChecklist(pokemon.checklist);
+  }, [state.myPokemons, pokemonName]);
 
   useEffect(() => {
     if (currentPokemon) {
@@ -113,8 +110,18 @@ useEffect(() => {
 
   const handleFinish = async () => {
     if (!currentPokemon) return;
+
     registerMission(currYear, currMonth, currDate);
+
+    const uncheckTasks = currentPokemon.checklist.map((item, index) => {
+      setChecklist(currentPokemon.name, item.task, false, index);
+      return { task: item.task, checked: false };
+    });
+
+    setReactChecklist(uncheckTasks);
+
     const evolved = await gainHp(currentPokemon.name, 1);
+
     if (evolved) {
       gainPokeball(3);
       gainXp(30);
@@ -140,6 +147,15 @@ useEffect(() => {
       }
       setAlert(true);
     }
+  };
+
+  const deleteAllTasks = () => {
+    reactChecklist.map((_item) => {
+      if (currentPokemon) {
+        deleteChecklist(currentPokemon.name, 0);
+      }
+    });
+    setReactChecklist([{ task: "", checked: false }]);
   };
 
   const handleChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -383,11 +399,19 @@ useEffect(() => {
             </div>
           </section>
           <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
-            <Button
-              path="/dashboard"
-              text="Ver progresso"
-              style="w-36 text-white mb-4"
-            />
+            <div className="flex gap-4 items-center justify-center mb-4">
+              <Button
+                path="/dashboard"
+                text="Ver progresso"
+                style="w-36 text-white"
+              />
+              <button
+                className="text-white bg-red-800 px-4 py-3 text-xs rounded-2xl font-bold cursor-pointer"
+                onClick={() => deleteAllTasks()}
+              >
+                Apagar todas tarefas
+              </button>
+            </div>
             <div className="flex flex-col gap-4 w-full max-w-150 max-lg:max-w-100">
               <span className="text-white text-sm opacity-50 font-medium">
                 {date}
@@ -527,7 +551,7 @@ useEffect(() => {
                 style="w-full text-black! bg-gray-400! hover:bg-gray-200!"
                 onClick={() => handleClick()}
               />
-              {reactChecklist.every((item) => item.checked) && (
+              {reactChecklist.every((item) => item.checked) && reactChecklist.length > 0 && (
                 <Button
                   text="Finalizar treino"
                   style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
