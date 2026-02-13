@@ -295,7 +295,7 @@ export function PokemonLeague() {
                           />
                         </div>
                       ) : (
-                        <div className="absolute flex flex-col items-center gap-2 bottom-35 left-1/2 -translate-x-1/2 w-full">
+                        <div className="absolute flex flex-col items-center gap-2 bottom-20 left-1/2 -translate-x-1/2 w-full">
                           <div className="flex gap-2 font-bold text-white text-center justify-center w-full">
                             <p className="text-sm">Custo para batalhar:</p>
                             <div className="flex gap-2 items-center justify-center">
