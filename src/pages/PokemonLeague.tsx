@@ -42,131 +42,131 @@ const league = [
     gym: gym3,
     oponnentName: "Brock",
     oponnentImage: brock,
-    rewards: { pokeballs: 5 },
+    rewards: { pokeballs: 3 },
     battleLevel: "iniciante",
     xp: 0,
     active: true,
-    cost: 10,
+    cost: 5,
   },
   {
     gym: gym5,
     oponnentName: "Misty",
     oponnentImage: misty,
-    rewards: { pokeballs: 10 },
+    rewards: { pokeballs: 5 },
     battleLevel: "iniciante",
     xp: 200,
     active: false,
-    cost: 15,
+    cost: 7,
   },
   {
     gym: gym2,
     oponnentName: "Surge",
     oponnentImage: surge,
-    rewards: { pokeballs: 20 },
+    rewards: { pokeballs: 10 },
     battleLevel: "iniciante",
     xp: 400,
     active: false,
-    cost: 20,
+    cost: 10,
   },
   {
     gym: gym1,
     oponnentName: "Erika",
     oponnentImage: erika,
-    rewards: { pokeballs: 30 },
+    rewards: { pokeballs: 15 },
     battleLevel: "intermediário",
     xp: 600,
     active: false,
-    cost: 25,
+    cost: 12,
   },
   {
     gym: gym4,
     oponnentName: "Koga",
     oponnentImage: koga,
-    rewards: { diamond: 1 },
+    rewards: { pokeballs: 20 },
     battleLevel: "intermediário",
     xp: 800,
     active: false,
-    cost: 30,
+    cost: 15,
   },
   {
     gym: gym6,
     oponnentName: "Sabrina",
     oponnentImage: sabrina,
-    rewards: { pokeballs: 15, diamond: 1 },
+    rewards: { diamond: 1, pokeballs: 20 },
     battleLevel: "intermediário",
     xp: 1000,
     active: false,
-    cost: 35,
+    cost: 20,
   },
   {
     gym: gym7,
     oponnentName: "Blaine",
     oponnentImage: blaine,
-    rewards: { pokeballs: 30, diamond: 1 },
+    rewards: { pokeballs: 20, diamond: 2 },
     battleLevel: "intermediário",
     xp: 1200,
     active: false,
-    cost: 40,
+    cost: 25,
   },
   {
     gym: gym8,
     oponnentName: "giovanni",
     oponnentImage: giovanni,
-    rewards: { diamond: 2 },
+    rewards: { pokeballs: 20, diamond: 3 },
     battleLevel: "Difícil",
     xp: 1400,
     active: false,
-    cost: 50,
+    cost: 30,
   },
   {
     gym: gym9,
     oponnentName: "Lorelei",
     oponnentImage: lorelei,
-    rewards: { pokeballs: 15, diamond: 2 },
+    rewards: { diamond: 4, pokeballs: 20 },
     battleLevel: "Difícil",
     xp: 1600,
     active: false,
-    cost: 60,
+    cost: 35,
   },
   {
     gym: gym9,
     oponnentName: "bruno",
     oponnentImage: bruno,
-    rewards: { pokeballs: 30, diamond: 2 },
+    rewards: { pokeballs: 20, diamond: 5 },
     battleLevel: "Difícil",
     xp: 1800,
     active: false,
-    cost: 70,
+    cost: 40,
   },
   {
     gym: gym9,
     oponnentName: "agatha",
     oponnentImage: agatha,
-    rewards: { diamond: 3 },
+    rewards: { pokeballs: 20, diamond: 6 },
     battleLevel: "Difícil",
     xp: 2000,
     active: false,
-    cost: 80,
+    cost: 45,
   },
   {
     gym: gym9,
     oponnentName: "Lance",
     oponnentImage: lance,
-    rewards: { pokeballs: 30, diamond: 3 },
+    rewards: { pokeballs: 20, diamond: 7 },
     battleLevel: "Difícil",
     xp: 2200,
     active: false,
-    cost: 90,
+    cost: 50,
   },
   {
     gym: gym9,
     oponnentName: "Gary",
     oponnentImage: gary,
-    rewards: { pokeballs: 50, diamond: 5 },
+    rewards: { pokeballs: 30, diamond: 10 },
     battleLevel: "Insano",
     xp: 2400,
     active: false,
-    cost: 100,
+    cost: 50,
   },
 ];
 
@@ -228,20 +228,20 @@ export function PokemonLeague() {
           <div className="absolute flex flex-col items-end gap-2 top-4 right-4"></div>
         </section>
       </header>
-      <main className="flex flex-col gap-4 items-center justify-center h-screen pt-12">
+      <main className="flex flex-col gap-4 items-center justify-center h-screen pt-20">
         <Carousel className="w-full h-180" orientation="vertical">
           <CarouselContent className="w-full h-180">
             {league.map((oponnent, index) => (
-              <CarouselItem key={index}>
-                <div className="flex-none! px-2 w-full h-180">
-                  <Card className="relative w-full h-200 bg-transparent border-none p-0">
+              <CarouselItem key={index} className="h-180! pt-8!">
+                <div className="flex-none! px-2 w-full h-180!">
+                  <Card className="relative w-full h-180! bg-transparent border-none p-0">
                     <img
                       src={oponnent.gym}
                       alt="gym"
                       className={`absolute top-0 left-0 rounded-2xl w-full h-170 object-cover ${oponnent.active ? "opacity-30" : "opacity-30"}`}
                     />
-                    <CardContent className="flex rounded-4xl items-center justify-center p-0! m-0! w-full h-full">
-                      <div className="absolute flex flex-col gap-4 items-center justify-center top-24 left-1/2 -translate-1/2 text-white font-bold">
+                    <CardContent className="flex rounded-4xl items-center justify-center">
+                      <div className="absolute flex flex-col gap-4 items-center justify-center top-24 left-1/2 -translate-1/2 text-white font-bold mt-0!">
                         <h1 className="text-4xl">Ginásio {index + 1}</h1>
                         <h2 className="text-xl">{oponnent.oponnentName}</h2>
                         <div className="flex flex-col gap-2">
@@ -280,7 +280,7 @@ export function PokemonLeague() {
                         className={`absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl h-70 object-cover`}
                       />
                       {state.userStatus.xp >= oponnent.xp ? (
-                        <div className="flex flex-col gap-2 items-center absolute bottom-40 left-1/2 -translate-x-1/2 w-full">
+                        <div className="flex flex-col gap-2 items-center absolute bottom-20 left-1/2 -translate-x-1/2 w-full">
                           <div className="flex gap-2 font-bold text-white text-center justify-center w-full">
                             <p className="text-sm">Custo para batalhar:</p>
                             <div className="flex gap-2 items-center justify-center">
@@ -291,7 +291,7 @@ export function PokemonLeague() {
                           <Button
                             text="batalhar"
                             style="text-white! bg-bt-purple!"
-                            path="/choose-pokemon-league/brock"
+                            path={`/choose-pokemon-league/${oponnent.oponnentName.toLowerCase()}`}
                           />
                         </div>
                       ) : (

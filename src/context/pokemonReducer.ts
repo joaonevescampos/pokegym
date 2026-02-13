@@ -12,9 +12,9 @@ const currYear = date.getFullYear();
 
 export const initialPokemonState: PokemonState = {
   userStatus: {
-    pokeball: 3,
-    energy: 1,
-    xp: 0,
+    pokeball: 300,
+    energy: 1000,
+    xp: 3000,
     diamond: 0,
     userName: "",
     gender: "",
