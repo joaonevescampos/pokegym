@@ -131,7 +131,7 @@ const DashboardPage = () => {
     <>
       <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
         <Link to="/home" className="text-sm  font-bold opacity-70">
-          Pokegym
+          HOME
         </Link>
       </div>
       

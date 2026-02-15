@@ -16,6 +16,7 @@ export const initialPokemonState: PokemonState = {
     energy: 1000,
     xp: 3000,
     diamond: 0,
+    token: 0,
     userName: "",
     gender: "",
     dashboard: [
@@ -70,8 +71,8 @@ export function pokemonReducer(
           {
             name: action.payload.name,
             type: action.payload.type,
-            hp: 0,
-            level: 0,
+            hp: 98,
+            level: 2,
             checklist: [{ task: "crie sua tarefa aqui", checked: false }],
             tag: "",
             time_to_rest: null,
@@ -129,6 +130,24 @@ export function pokemonReducer(
         userStatus: {
           ...state.userStatus,
           energy: state.userStatus.energy - action.payload.lose,
+        },
+      };
+
+    case "GAIN_TOKEN":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          token: state.userStatus.token + action.payload.gain,
+        },
+      };
+
+    case "USE_TOKEN":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          token: state.userStatus.token - action.payload.lose,
         },
       };
 

@@ -91,6 +91,14 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "USE_ENERGY", payload: { lose } });
   }
 
+  function gainToken(gain: number) {
+    dispatch({ type: "GAIN_TOKEN", payload: { gain } });
+  }
+
+  function useToken(lose: number) {
+    dispatch({ type: "USE_TOKEN", payload: { lose } });
+  }
+
   function gainDiamond(gain: number) {
     dispatch({ type: "GAIN_DIAMOND", payload: { gain } });
   }
@@ -119,7 +127,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_GENDER", payload: { gender } });
   }
 
-    function setNote(note: string) {
+  function setNote(note: string) {
     dispatch({ type: "SET_NOTE", payload: { note } });
   }
 
@@ -166,7 +174,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
   function setTimeToRestRocket(time_to_rest_rocket: number | null) {
     dispatch({
       type: "SET_TIME_TO_REST_ROCKET",
-      payload: {time_to_rest_rocket },
+      payload: { time_to_rest_rocket },
     });
   }
 
@@ -207,6 +215,8 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         gainEnergy,
         useEnergy,
         gainDiamond,
+        gainToken,
+        useToken,
         useDiamond,
         gainXp,
         setUserName,

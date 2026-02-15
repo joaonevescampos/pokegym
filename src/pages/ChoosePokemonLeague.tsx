@@ -31,7 +31,6 @@ import gary from "../assets/league/gary.png";
 const trainers = [
   {
     trainer: "Brock",
-    level: 1,
     pokemons: [
       { id: 74, name: "Geodude", type: "rock" },
       { id: 95, name: "Onix", type: "rock" },
@@ -42,7 +41,6 @@ const trainers = [
   },
   {
     trainer: "Misty",
-    level: 1,
     pokemons: [
       { id: 120, name: "Staryu", type: "water" },
       { id: 121, name: "Starmie", type: "water" },
@@ -53,7 +51,6 @@ const trainers = [
   },
   {
     trainer: "Surge",
-    level: 2,
     pokemons: [
       { id: 26, name: "Raichu", type: "electric" },
       { id: 101, name: "Electrode", type: "electric" },
@@ -64,7 +61,6 @@ const trainers = [
   },
   {
     trainer: "Erika",
-    level: 2,
     pokemons: [
       { id: 71, name: "Victreebel", type: "grass" },
       { id: 45, name: "Vileplume", type: "grass" },
@@ -75,7 +71,6 @@ const trainers = [
   },
   {
     trainer: "Koga",
-    level: 3,
     pokemons: [
       { id: 110, name: "Weezing", type: "poison" },
       { id: 89, name: "Muk", type: "poison" },
@@ -86,7 +81,6 @@ const trainers = [
   },
   {
     trainer: "Sabrina",
-    level: 3,
     pokemons: [
       { id: 65, name: "Alakazam", type: "psychic" },
       { id: 122, name: "Mr. Mime", type: "psychic" },
@@ -97,7 +91,6 @@ const trainers = [
   },
   {
     trainer: "Blaine",
-    level: 3,
     pokemons: [
       { id: 59, name: "Arcanine", type: "fire" },
       { id: 126, name: "Magmar", type: "fire" },
@@ -108,7 +101,6 @@ const trainers = [
   },
   {
     trainer: "Giovanni",
-    level: 4,
     pokemons: [
       { id: 34, name: "Nidoking", type: "poison" },
       { id: 31, name: "Nidoqueen", type: "poison" },
@@ -119,7 +111,6 @@ const trainers = [
   },
   {
     trainer: "Lorelei",
-    level: 4,
     pokemons: [
       { id: 131, name: "Lapras", type: "water" },
       { id: 91, name: "Cloyster", type: "water" },
@@ -130,7 +121,6 @@ const trainers = [
   },
   {
     trainer: "Bruno",
-    level: 4,
     pokemons: [
       { id: 68, name: "Machamp", type: "fighting" },
       { id: 106, name: "Hitmonlee", type: "fighting" },
@@ -141,7 +131,6 @@ const trainers = [
   },
   {
     trainer: "Agatha",
-    level: 4,
     pokemons: [
       { id: 94, name: "Gengar", type: "ghost" },
       { id: 93, name: "Haunter", type: "ghost" },
@@ -152,7 +141,6 @@ const trainers = [
   },
   {
     trainer: "Lance",
-    level: 4,
     pokemons: [
       { id: 149, name: "Dragonite", type: "dragon" },
       { id: 130, name: "Gyarados", type: "water" },
@@ -163,7 +151,6 @@ const trainers = [
   },
   {
     trainer: "Gary",
-    level: 5,
     pokemons: [
       { id: 18, name: "Pidgeot", type: "normal" },
       { id: 65, name: "Alakazam", type: "psychic" },
@@ -198,9 +185,7 @@ const ChoosePokemonLeague = () => {
   };
 
   const startBattle = async () => {
-    if (state.userStatus.pokeball === 0) {
-      setAlert(true);
-    } else {
+    
       setAlert(false);
       const pokemonsOponnentId = trainerChoosed?.pokemons
         .map((pokemon) => pokemon.id)
@@ -224,7 +209,7 @@ const ChoosePokemonLeague = () => {
       navigate(
         `/pokemon-league-battle/${oponnentName}/${pokemonsOponnentId}/${myPokemonsIds}`,
       );
-    }
+    
   };
 
   return (

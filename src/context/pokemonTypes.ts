@@ -65,6 +65,7 @@ export type UserStatus = {
   pokeball: number;
   energy: number;
   diamond: number;
+  token: number;
   dashboard: Dashboard;
   xp: number;
   note: string;
@@ -87,6 +88,8 @@ export type PokemonAction =
   | { type: "USE_POKEBALL"; payload: { lose: number } }
   | { type: "GAIN_ENERGY"; payload: { gain: number } }
   | { type: "USE_ENERGY"; payload: { lose: number } }
+   | { type: "GAIN_TOKEN"; payload: { gain: number } }
+  | { type: "USE_TOKEN"; payload: { lose: number } }
   | { type: "GAIN_DIAMOND"; payload: { gain: number } }
   | { type: "USE_DIAMOND"; payload: { lose: number } }
   | { type: "GAIN_XP"; payload: { gain: number } }

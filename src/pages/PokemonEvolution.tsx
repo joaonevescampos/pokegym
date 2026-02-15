@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import light from "../assets/light.png";
 import Button from "../components/Button";
 import pokebola from "../assets/pokeball.png";
+import token from "../assets/token.png";
 
 const PokemonEvolution = () => {
   const [prevPokemon, setPrevPokemon] = useState("");
@@ -81,11 +82,11 @@ const PokemonEvolution = () => {
       <section className="relative h-full p-4">
         {isEvolving === true ? (
           <>
-        <h1 className="text-white text-center px-4 py-4 pb-24 font-bold text-2xl">
-          {pokemonName.slice(0, 1).toUpperCase() +
-            pokemonName.slice(1, pokemonName.length)}{" "}
-          está evoluindo!
-        </h1>
+            <h1 className="text-white text-center px-4 py-4 pb-24 font-bold text-2xl">
+              {pokemonName.slice(0, 1).toUpperCase() +
+                pokemonName.slice(1, pokemonName.length)}{" "}
+              está evoluindo!
+            </h1>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-10 z-12 h-fit">
               <img
                 src={light}
@@ -117,11 +118,17 @@ const PokemonEvolution = () => {
                 {pokemonEvolvedName.toUpperCase()}!
               </span>
               <h1 className="font-bold text-center text-green-400">
-                Você ganhou +3 pokebolas, +1 HP e +30 XP!
+                Você ganhou +3 pokebolas, +1 HP, +30 XP e 30 fichas de batalha!
               </h1>
-              <div className="flex items-center gap-2 top-4 right-4">
-                <span className="text-sm font-bold opacity-70">+ 3</span>
-                <img src={pokebola} alt="pokebola" width={28} />
+              <div className="flex gap-4 items-center">
+                <div className="flex items-center gap-1 top-4 right-4">
+                  <span className="text-sm font-bold opacity-70">+ 3</span>
+                  <img src={pokebola} alt="pokebola" width={28} />
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-sm font-bold opacity-70">+ 30</span>
+                  <img src={token} alt="token" width={28} />
+                </div>
               </div>
               <Button text="Meus pokémons" path="/my-pokemons" />
             </div>

@@ -2,6 +2,7 @@ import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
+import token from "../assets/token.png";
 import maleProfile from "../assets/male-profile.png";
 import femaleProfile from "../assets/female-profile.png";
 import Button from "../components/Button";
@@ -292,41 +293,19 @@ useEffect(() => {
 
   return (
     <>
-      <header className="relative w-full h-fit text-white pt-4">
+      <header className="relative w-full h-fit text-white text-xs">
         <section>
           <div className="absolute flex items-end gap-2 top-4 left-4">
-            <Link to="/home" className="text-sm  font-bold opacity-70">
-              Pokegym
+            <Link to="/home" className="font-bold opacity-70 z-20">
+              HOME
             </Link>
           </div>
           <section className="absolute flex flex-col items-end gap-2 top-4 right-4">
-            <div className="flex gap-4 items-center pb-2">
-              <div className="flex items-end gap-2">
-                <div className="flex items-end gap-1">
-                  <span className="text-sm font-bold opacity-70">
-                    x {state.userStatus.pokeball}{" "}
-                  </span>
-                  <img src={pokebola} alt="pokebola" width={20} />
-                </div>
-                <div className="flex items-end gap-1">
-                  <span className="text-sm font-bold opacity-70">
-                    x {state.userStatus.energy}{" "}
-                  </span>
-                  <img src={energy} alt="energy" width={20} />
-                </div>
-                <div className="flex items-end gap-1">
-                  <span className="text-sm font-bold opacity-70">
-                    x {state.userStatus.diamond}{" "}
-                  </span>
-                  <img src={diamond} alt="diamond" width={20} />
-                </div>
-              </div>
-              <div className="flex gap-2">
+            <div className="flex flex-col gap-4 items-end pb-2">
+              <div className="flex gap-2 ">
                 <div className="flex flex-col items-end">
-                  <span className="font-bold text-xs">
-                    {state.userStatus.userName}
-                  </span>
-                  <span className="opacity-60 font-bold text-xs">
+                  <span className="font-bold">{state.userStatus.userName}</span>
+                  <span className="opacity-60 font-bold ">
                     {" "}
                     {state.userStatus.xp} XP
                   </span>
@@ -341,10 +320,38 @@ useEffect(() => {
                   className="w-8 h-8 rounded-full object-cover"
                 />
               </div>
+              <div className="flex items-end gap-2">
+                <div className="flex items-end gap-1">
+                  <span className="text-xs font-bold opacity-70">
+                    x {state.userStatus.token}{" "}
+                  </span>
+                  <img src={token} alt="token" width={20} />
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className="text-xs font-bold opacity-70">
+                    x {state.userStatus.pokeball}{" "}
+                  </span>
+                  <img src={pokebola} alt="pokebola" width={20} />
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className="text-xs font-bold opacity-70">
+                    x {state.userStatus.energy}{" "}
+                  </span>
+                  <img src={energy} alt="energy" width={20} />
+                </div>
+                <div className="flex items-end gap-1">
+                  <span className="text-xs font-bold opacity-70">
+                    x {state.userStatus.diamond}{" "}
+                  </span>
+                  <img src={diamond} alt="diamond" width={20} />
+                </div>
+              </div>
+              <hr className="border-white w-screen opacity-20"/>
             </div>
           </section>
-          <div className="absolute flex flex-col items-end gap-2 top-4 right-4"></div>
         </section>
+      </header>
+      <section className="relative w-full h-fit text-white pt-12">
         <section className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120 px-4">
             <h1 className="text-2xl text-center font-extrabold">Pokedex</h1>
@@ -394,7 +401,7 @@ useEffect(() => {
           </ul>
         </section>
         <hr className="opacity-40" />
-      </header>
+      </section>
       <main className="flex flex-col items-center justify-center h-[calc(100vh-233px)] max-lg:h-full max-lg:min-h-100 text-white">
         <section className="flex flex-col gap-8 items-center justify-center px-4 py-8 h-full">
           <div className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 items-center justify-center text-xl h-full max-w-300 m-auto">

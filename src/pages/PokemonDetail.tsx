@@ -5,6 +5,7 @@ import { usePokemon } from "../context/usePokemon";
 import pokebola from "../assets/pokeball.png";
 import diamond from "../assets/diamond.png";
 import energy from "../assets/energy.png";
+import token from "../assets/token.png";
 import xIcon from "../assets/x.png";
 interface ChecklistType {
   task: string;
@@ -16,6 +17,7 @@ const PokemonDetail = () => {
     state,
     gainHp,
     gainXp,
+    gainToken,
     gainPokeball,
     gainDiamond,
     registerMission,
@@ -125,6 +127,7 @@ const PokemonDetail = () => {
     if (evolved) {
       gainPokeball(3);
       gainXp(30);
+      gainToken(30);
       navigate(`/pokemon-evolution/${currentPokemon.name}`);
     } else {
       if (
@@ -138,12 +141,15 @@ const PokemonDetail = () => {
       ) {
         gainPokeball(1);
         gainXp(10);
+        gainToken(10);
       } else if (hp === 99) {
         gainPokeball(5);
         gainDiamond(1);
         gainXp(100);
+        gainToken(100);
       } else {
         gainXp(1);
+        gainToken(1);
       }
       setAlert(true);
     }
@@ -551,13 +557,14 @@ const PokemonDetail = () => {
                 style="w-full text-black! bg-gray-400! hover:bg-gray-200!"
                 onClick={() => handleClick()}
               />
-              {reactChecklist.every((item) => item.checked) && reactChecklist.length > 0 && (
-                <Button
-                  text="Finalizar treino"
-                  style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
-                  onClick={() => handleFinish()}
-                />
-              )}
+              {reactChecklist.every((item) => item.checked) &&
+                reactChecklist.length > 0 && (
+                  <Button
+                    text="Finalizar treino"
+                    style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
+                    onClick={() => handleFinish()}
+                  />
+                )}
             </div>
           </section>
           {alert && (
@@ -587,15 +594,29 @@ const PokemonDetail = () => {
                       Excelente! Você atingiu o nível {level}
                     </h2>
                     <h1 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +1 pokebola, +1 HP e +10 XP!
+                      Oba! Você ganhou +1 pokebola, +1 HP, +10 XP e +10 Ficha de
+                      batalha!
                     </h1>
-                    <div className="flex items-end gap-2 top-4 right-4">
-                      <span className="text-sm font-bold opacity-70">+ 1</span>
-                      <img src={pokebola} alt="pokebola" width={28} />
+                    <div className="flex gap-4 items-center">
+                      <div className="flex items-center gap-1 top-4 right-4">
+                        <span className="text-sm font-bold opacity-70">
+                          + 1
+                        </span>
+                        <img src={pokebola} alt="pokebola" width={28} />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm font-bold opacity-70">
+                          + 10
+                          
+                        </span>
+                        <img src={token} alt="token" width={28} />
+                      </div>
                     </div>
                     <p className="text-sm text-center">
                       Com a pokebola, você pode batalhar contra um pokemon e
-                      capturá-lo para fazer parte do seu time!
+                      capturá-lo para fazer parte do seu time! Com ficha de
+                      batalha, se tiver o suiciente, você pode participar de uma
+                      batalha na liga pokémon!
                     </p>
                   </>
                 ) : hp === 100 ? (
@@ -604,8 +625,8 @@ const PokemonDetail = () => {
                       UAUUU! Você atingiu o nível máximo: {level}
                     </h1>
                     <h2 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +5 pokebolas, +100 XP, +1HP e +1
-                      diamante!
+                      Oba! Você ganhou +5 pokebolas, +100 XP, +1HP, +1 diamante
+                      e +100 Ficha de batalha!
                     </h2>
                     <div className="flex items-center justify-center gap-4">
                       <div className="flex items-end gap-2">
@@ -613,6 +634,12 @@ const PokemonDetail = () => {
                           + 5
                         </span>
                         <img src={pokebola} alt="pokebola" width={28} />
+                      </div>
+                      <div className="flex items-end gap-2">
+                        <span className="text-sm font-bold opacity-70">
+                          + 100
+                        </span>
+                        <img src={token} alt="token" width={28} />
                       </div>
                       <div className="flex items-end gap-2">
                         <span className="text-sm font-bold opacity-70">
@@ -639,7 +666,7 @@ const PokemonDetail = () => {
                       Parabéns! Continue sendo produtivo assim!
                     </h1>
                     <h2 className="font-bold text-sm text-center text-green-400">
-                      Oba! Você ganhou +1 XP e +1 HP!
+                      Oba! Você ganhou +1 XP, +1 HP e +1 Ficha de batalha!
                     </h2>
 
                     {hp > 100 ? (
