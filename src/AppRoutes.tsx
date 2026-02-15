@@ -23,6 +23,7 @@ import SnorlaxNote from "./pages/SnorlaxNote";
 import Pomodoro from "./pages/Pomodoro";
 import ChoosePokemonLeague from "./pages/ChoosePokemonLeague";
 import { PokemonLeague } from "./pages/PokemonLeague";
+import PokemonBattleLeague from "./pages/PokemonBattleLeague";
 
 function AppRoutes() {
   return (
@@ -73,6 +74,7 @@ function AppRoutes() {
         <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/pokemon-league" element={<PokemonLeague />} />
         <Route path="/choose-pokemon-league/:oponnent" element={<ChoosePokemonLeague />} />
+        <Route path="pokemon-league-battle/:oponnentName/:oponnentPokemons/:myPokemons" element={<PokemonBattleLeague />} />
       </Routes>
     </Router>
   );
