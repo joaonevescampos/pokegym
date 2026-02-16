@@ -367,7 +367,7 @@ export function PokemonLeague() {
               <p className="font-bold text-sm">Quantidade atual:</p>
               <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1 top-4 right-4">
-                  <span className={`text-sm font-bold opacity-70 ${state.myPokemons.length >= 5 ? "text-red-400" : "text-green-400"}`}>
+                  <span className={`text-sm font-bold opacity-70 ${state.userStatus.token < 10 ? "text-red-400" : ""}`}>
                     x {state.userStatus.token}{" "}
                   </span>
                   <img src={token} alt="token" width={28} />
