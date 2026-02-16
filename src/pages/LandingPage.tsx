@@ -4,22 +4,28 @@ import bgPokeball from "../assets/pokeball-background.png";
 import pokeball from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
+import token from "../assets/token.png";
+import pokemonCover from "../assets/background-home.png";
 import Button from "../components/Button";
-
 
 const LandingPage = () => {
   return (
     <main className="relative flex flex-col justify-center items-center h-full text-white overflow-x-hidden">
-      <section className="  max-lg:flex-none flex items-center justify-center h-70 max-lg:h-130 w-full max-lg:overflow-x-hidden bg-linear-to-br from-blue-800 to-purple-500">
+      <section className="relative max-lg:flex-none flex items-center justify-center h-70 max-lg:h-130 w-full max-lg:overflow-hidden">
+        <img
+          src={pokemonCover}
+          alt="pokeball"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-30"
+        />
         <img
           src={bgPokeball}
           alt="pokeball"
-          className="absolute bottom-12 left-0 max-lg:w-52"
+          className="absolute bottom-12 left-0 max-lg:w-52 z-10"
         />
         <img
           src={charizardImage}
           alt="charizard"
-          className="absolute top-0 left-0 w-60 max-lg:w-50"
+          className="absolute top-0 left-0 w-60 max-lg:w-50 z-10"
         />
         <img
           src={ivysaurImage}
@@ -69,10 +75,10 @@ const LandingPage = () => {
             pode capturar pokemons mais fracos selecionando o filtro - fácil.
           </p>
         </div>
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl font-bold text-center">
           Onde encontrar, para que serve e onde usar itens?
         </h2>
-        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-800 to-purple-500 p-4 rounded-2xl">
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-900 to-purple-600 p-4 rounded-2xl">
           <strong>
             Existem 3 itens no jogo: pokebolas, energias e diamantes.
           </strong>
@@ -114,7 +120,7 @@ const LandingPage = () => {
               <p>
                 <strong>Como usar?</strong> Ao treinar um pokémon, ele
                 automaticamente entra em estado e exaustão. Você pode usar uma
-                energia para revigorá-lo. Você ir na "loja" para trocá-los.
+                energia para revigorá-lo. Você pode ir na "loja" para trocá-los.
               </p>
             </div>
           </div>
@@ -138,9 +144,28 @@ const LandingPage = () => {
               </p>
             </div>
           </div>
+          <div className="flex gap-4">
+            <img src={token} alt="diamond" className="w-16 h-16 object-cover" />
+            <div className="flex flex-col gap-2">
+              <p>
+                <strong>Para que servem?</strong> Batalhar na Liga pokémon.
+              </p>
+              <p>
+                <strong>Como consigo?</strong> Treinando um pokémon. Aumentar de
+                level, evoluir e chegar no nível máximo ganha mais fichas de
+                batalha.
+              </p>
+              <p>
+                <strong>Como usar?</strong> Em "Liga Pokémon" você usa fichas de
+                batalha para competir.
+              </p>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col gap-4 max-w-200 text-sm">
-          <h2 className="text-xl font-bold text-center">Como treino meus pokémons?</h2>
+          <h2 className="text-xl font-bold text-center">
+            Como treino meus pokémons?
+          </h2>
           <p>
             Acesse "Meus pokemons", escolha um pokémon, crie seu checklist em
             marque todos como concluido. Irá aparecer um botão verde para
@@ -149,7 +174,9 @@ const LandingPage = () => {
           </p>
           <p>
             <strong>XP</strong> - É a experiência que você jogador ganha ao
-            treinar um pokémon. Quando seu pokémon muda de level, evolui ou chega no level máximo você ganha muito mais XP: 10, 30 e 100, respectivamente!
+            treinar um pokémon. Quando seu pokémon muda de level, evolui ou
+            chega no level máximo você ganha muito mais XP: 10, 30 e 100,
+            respectivamente!
           </p>
           <p>
             <strong>HP</strong> - É a força que seu pokémon ganhar ao ser
@@ -158,7 +185,7 @@ const LandingPage = () => {
           </p>
         </div>
         <h2 className="text-xl font-bold">Como funcionam as batalhas?</h2>
-        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-800 to-purple-500 p-4 rounded-2xl">
+        <div className="flex flex-col gap-4 max-w-200 text-sm bg-linear-to-br from-blue-900 to-purple-600 p-4 rounded-2xl">
           <strong>Existem 2 modos de batalha no jogo:</strong>
 
           <div className="flex flex-col gap-2">
@@ -182,18 +209,32 @@ const LandingPage = () => {
               <li className="text-purple-300"> insano: 50 energias </li>
             </ul>
           </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-xl font-bold">Liga Pokémon</h3>
+            <p>
+              Em "Liga Pokémon", você pode usar fichas de batalha para ganhar
+              recompensas ao batalhar contra um treinador. Cada treinador tem um
+              nível de dificuldade de batalha. Quanto mais difícil, mais
+              recompensas pode ganhar!
+            </p>
+            <p>
+              Você só pode batalhar, se tiver fichas o suficiente e pelo menos 5
+              pokémons capturados. Cada treinador é liberado a medida que vai
+              aumentando sua experiência no jogo - XP.
+            </p>
+          </div>
         </div>
-          <h3 className="text-center font-bold text-xl">
-            Para que servem os pokémons especiais?
-          </h3>
-          <p>
-            Os pokémons especiais não são treináveis nem capturáveis, eles são
-            invocados para que possa usar suas habilidades.
-          </p>
-          <p>
-            Existem 3 pokémons: Snorlax, Victini e Celebi com suas respectivas
-            habilidades: bloco de notas, sorteio e pomodoro
-          </p>
+        <h3 className="text-center font-bold text-xl">
+          Para que servem os pokémons especiais?
+        </h3>
+        <p>
+          Os pokémons especiais não são treináveis nem capturáveis, eles são
+          invocados para que possa usar suas habilidades.
+        </p>
+        <p>
+          Existem 3 pokémons: Snorlax, Victini e Celebi com suas respectivas
+          habilidades: bloco de notas, sorteio e pomodoro
+        </p>
         <p className="font-bold text-center">
           Mais dúvidas? Que tal ir jogando e aprendendo na prática? Vamos lá!
           Clique em "Começar"
