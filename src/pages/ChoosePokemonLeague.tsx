@@ -27,139 +27,7 @@ import bruno from "../assets/league/bruno.png";
 import agatha from "../assets/league/agatha.png";
 import lance from "../assets/league/lance.png";
 import gary from "../assets/league/gary.png";
-
-const trainers = [
-  {
-    trainer: "Brock",
-    pokemons: [
-      { id: 74, name: "Geodude", type: "rock" },
-      { id: 95, name: "Onix", type: "rock" },
-      { id: 37, name: "Vulpix", type: "fire" },
-      { id: 138, name: "Omanyte", type: "rock" },
-      { id: 111, name: "Rhyhorn", type: "ground" },
-    ],
-  },
-  {
-    trainer: "Misty",
-    pokemons: [
-      { id: 120, name: "Staryu", type: "water" },
-      { id: 121, name: "Starmie", type: "water" },
-      { id: 55, name: "Golduck", type: "water" },
-      { id: 131, name: "Lapras", type: "water" },
-      { id: 130, name: "Gyarados", type: "water" },
-    ],
-  },
-  {
-    trainer: "Surge",
-    pokemons: [
-      { id: 26, name: "Raichu", type: "electric" },
-      { id: 101, name: "Electrode", type: "electric" },
-      { id: 82, name: "Magneton", type: "electric" },
-      { id: 125, name: "Electabuzz", type: "electric" },
-      { id: 135, name: "Jolteon", type: "electric" },
-    ],
-  },
-  {
-    trainer: "Erika",
-    pokemons: [
-      { id: 71, name: "Victreebel", type: "grass" },
-      { id: 45, name: "Vileplume", type: "grass" },
-      { id: 114, name: "Tangela", type: "grass" },
-      { id: 103, name: "Exeggutor", type: "grass" },
-      { id: 47, name: "Parasect", type: "bug/grass" },
-    ],
-  },
-  {
-    trainer: "Koga",
-    pokemons: [
-      { id: 110, name: "Weezing", type: "poison" },
-      { id: 89, name: "Muk", type: "poison" },
-      { id: 169, name: "Crobat", type: "poison" },
-      { id: 49, name: "Venomoth", type: "bug" },
-      { id: 73, name: "Tentacruel", type: "water" },
-    ],
-  },
-  {
-    trainer: "Sabrina",
-    pokemons: [
-      { id: 65, name: "Alakazam", type: "psychic" },
-      { id: 122, name: "Mr. Mime", type: "psychic" },
-      { id: 97, name: "Hypno", type: "psychic" },
-      { id: 80, name: "Slowbro", type: "water" },
-      { id: 196, name: "Espeon", type: "psychic" },
-    ],
-  },
-  {
-    trainer: "Blaine",
-    pokemons: [
-      { id: 59, name: "Arcanine", type: "fire" },
-      { id: 126, name: "Magmar", type: "fire" },
-      { id: 78, name: "Rapidash", type: "fire" },
-      { id: 38, name: "Ninetales", type: "fire" },
-      { id: 6, name: "Charizard", type: "fire" },
-    ],
-  },
-  {
-    trainer: "Giovanni",
-    pokemons: [
-      { id: 34, name: "Nidoking", type: "poison" },
-      { id: 31, name: "Nidoqueen", type: "poison" },
-      { id: 112, name: "Rhydon", type: "ground" },
-      { id: 51, name: "Dugtrio", type: "ground" },
-      { id: 53, name: "Persian", type: "normal" },
-    ],
-  },
-  {
-    trainer: "Lorelei",
-    pokemons: [
-      { id: 131, name: "Lapras", type: "water" },
-      { id: 91, name: "Cloyster", type: "water" },
-      { id: 124, name: "Jynx", type: "ice" },
-      { id: 87, name: "Dewgong", type: "water" },
-      { id: 80, name: "Slowbro", type: "water" },
-    ],
-  },
-  {
-    trainer: "Bruno",
-    pokemons: [
-      { id: 68, name: "Machamp", type: "fighting" },
-      { id: 106, name: "Hitmonlee", type: "fighting" },
-      { id: 107, name: "Hitmonchan", type: "fighting" },
-      { id: 95, name: "Onix", type: "rock" },
-      { id: 57, name: "Primeape", type: "fighting" },
-    ],
-  },
-  {
-    trainer: "Agatha",
-    pokemons: [
-      { id: 94, name: "Gengar", type: "ghost" },
-      { id: 93, name: "Haunter", type: "ghost" },
-      { id: 24, name: "Arbok", type: "poison" },
-      { id: 169, name: "Crobat", type: "poison" },
-      { id: 200, name: "Misdreavus", type: "ghost" },
-    ],
-  },
-  {
-    trainer: "Lance",
-    pokemons: [
-      { id: 149, name: "Dragonite", type: "dragon" },
-      { id: 130, name: "Gyarados", type: "water" },
-      { id: 142, name: "Aerodactyl", type: "rock" },
-      { id: 6, name: "Charizard", type: "fire" },
-      { id: 230, name: "Kingdra", type: "water" },
-    ],
-  },
-  {
-    trainer: "Gary",
-    pokemons: [
-      { id: 18, name: "Pidgeot", type: "normal" },
-      { id: 65, name: "Alakazam", type: "psychic" },
-      { id: 112, name: "Rhydon", type: "ground" },
-      { id: 59, name: "Arcanine", type: "fire" },
-      { id: 103, name: "Exeggutor", type: "grass" },
-    ],
-  },
-];
+import { trainers } from "../data/trainers";
 
 const ChoosePokemonLeague = () => {
   const { state } = usePokemon();
@@ -185,31 +53,28 @@ const ChoosePokemonLeague = () => {
   };
 
   const startBattle = async () => {
-    
-      setAlert(false);
-      const pokemonsOponnentId = trainerChoosed?.pokemons
-        .map((pokemon) => pokemon.id)
-        .toString()
-        .replaceAll(",", "&");
-      let myPokemonsIds = "";
-      try {
-        for (let i = 0; i < selectedPokemonsIndex.length; i++) {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${state.myPokemons[selectedPokemonsIndex[i]].name}`,
-          );
-          const data = await response.json();
-          myPokemonsIds += "&" + data?.id.toString();
-        }
-      } catch (error) {
-        console.log("cannot get pokemon id");
+    const pokemonsOponnentId = trainerChoosed?.pokemons
+      .map((pokemon) => pokemon.id)
+      .toString()
+      .replaceAll(",", "&");
+    let myPokemonsIds = "";
+    try {
+      for (let i = 0; i < selectedPokemonsIndex.length; i++) {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${state.myPokemons[selectedPokemonsIndex[i]].name}`,
+        );
+        const data = await response.json();
+        myPokemonsIds += "&" + data?.id.toString();
       }
+    } catch (error) {
+      console.log("cannot get pokemon id");
+    }
 
-      myPokemonsIds = myPokemonsIds.slice(1, myPokemonsIds.length)
+    myPokemonsIds = myPokemonsIds.slice(1, myPokemonsIds.length);
 
-      navigate(
-        `/pokemon-league-battle/${oponnentName}/${pokemonsOponnentId}/${myPokemonsIds}`,
-      );
-    
+    navigate(
+      `/pokemon-league-battle/${oponnentName}/${pokemonsOponnentId}/${myPokemonsIds}`,
+    );
   };
 
   return (

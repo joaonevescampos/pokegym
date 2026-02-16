@@ -10,10 +10,11 @@ import pokebola from "../assets/pokeball.png";
 import energy from "../assets/energy.png";
 import diamond from "../assets/diamond.png";
 import token from "../assets/token.png";
+import xIcon from "../assets/x.png";
 import maleProfile from "../assets/male-profile.png";
 import femaleProfile from "../assets/female-profile.png";
 import { usePokemon } from "@/context/usePokemon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import gym1 from "../assets/gym/gym-1.png";
 import gym2 from "../assets/gym/gym-2.png";
 import gym3 from "../assets/gym/gym-3.png";
@@ -37,6 +38,7 @@ import agatha from "../assets/league/agatha.png";
 import lance from "../assets/league/lance.png";
 import gary from "../assets/league/gary.png";
 import Button from "@/components/Button";
+import { useState } from "react";
 
 const league = [
   {
@@ -63,7 +65,7 @@ const league = [
     gym: gym2,
     oponnentName: "Surge",
     oponnentImage: surge,
-    rewards: { pokeballs: 10 },
+    rewards: { pokeballs: 8 },
     battleLevel: "fácil 3",
     xp: 400,
     active: false,
@@ -93,7 +95,7 @@ const league = [
     gym: gym6,
     oponnentName: "Sabrina",
     oponnentImage: sabrina,
-    rewards: { diamond: 1, pokeballs: 20 },
+    rewards: { pokeballs: 25 },
     battleLevel: "médio 3",
     xp: 1000,
     active: false,
@@ -103,7 +105,7 @@ const league = [
     gym: gym7,
     oponnentName: "Blaine",
     oponnentImage: blaine,
-    rewards: { pokeballs: 20, diamond: 2 },
+    rewards: { pokeballs: 20, diamond: 1 },
     battleLevel: "médio 4",
     xp: 1200,
     active: false,
@@ -113,7 +115,7 @@ const league = [
     gym: gym8,
     oponnentName: "giovanni",
     oponnentImage: giovanni,
-    rewards: { pokeballs: 20, diamond: 3 },
+    rewards: { pokeballs: 20, diamond: 2 },
     battleLevel: "médio 5",
     xp: 1400,
     active: false,
@@ -123,7 +125,7 @@ const league = [
     gym: gym9,
     oponnentName: "Lorelei",
     oponnentImage: lorelei,
-    rewards: { diamond: 4, pokeballs: 20 },
+    rewards: { diamond: 3, pokeballs: 20 },
     battleLevel: "dificil 1",
     xp: 1600,
     active: false,
@@ -133,7 +135,7 @@ const league = [
     gym: gym9,
     oponnentName: "bruno",
     oponnentImage: bruno,
-    rewards: { pokeballs: 20, diamond: 6 },
+    rewards: { pokeballs: 20, diamond: 4 },
     battleLevel: "dificil 2",
     xp: 1800,
     active: false,
@@ -143,7 +145,7 @@ const league = [
     gym: gym9,
     oponnentName: "agatha",
     oponnentImage: agatha,
-    rewards: { pokeballs: 20, diamond: 9 },
+    rewards: { pokeballs: 20, diamond: 5 },
     battleLevel: "dificil 3",
     xp: 2000,
     active: false,
@@ -153,7 +155,7 @@ const league = [
     gym: gym9,
     oponnentName: "Lance",
     oponnentImage: lance,
-    rewards: { pokeballs: 20, diamond: 13 },
+    rewards: { pokeballs: 20, diamond: 6 },
     battleLevel: "dificil 4",
     xp: 2200,
     active: false,
@@ -163,7 +165,7 @@ const league = [
     gym: gym9,
     oponnentName: "Gary",
     oponnentImage: gary,
-    rewards: { pokeballs: 30, diamond: 20 },
+    rewards: { pokeballs: 30, diamond: 10 },
     battleLevel: "insano",
     xp: 2400,
     active: false,
@@ -173,6 +175,17 @@ const league = [
 
 export function PokemonLeague() {
   const { state } = usePokemon();
+  const [alert, setAlert] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleBattle = (cost: number, oponnentName: string) => {
+    if (state.myPokemons.length < 5 || state.userStatus.token < cost) {
+      setAlert(true);
+    } else {
+      navigate(`/choose-pokemon-league/${oponnentName.toLowerCase()}`);
+    }
+  };
+
   return (
     <>
       <header className="relative w-full h-fit text-white text-xs">
@@ -228,7 +241,7 @@ export function PokemonLeague() {
                   <img src={diamond} alt="diamond" width={20} />
                 </div>
               </div>
-              <hr className="border-white w-screen opacity-20"/>
+              <hr className="border-white w-screen opacity-20" />
             </div>
           </section>
         </section>
@@ -293,15 +306,17 @@ export function PokemonLeague() {
                         <div className="flex flex-col gap-2 items-center absolute bottom-15 left-1/2 -translate-x-1/2 w-full">
                           <div className="flex gap-2 font-bold text-white text-center justify-center w-full">
                             <p className="text-sm">Custo para batalhar:</p>
-                            <div className="flex gap-2 items-center justify-center">
+                            <div className="flex gap-1 items-center justify-center">
                               <span>-{oponnent.cost}</span>
-                              <img src={energy} alt="energy" className="w-5" />
+                              <img src={token} alt="energy" className="w-5" />
                             </div>
                           </div>
                           <Button
                             text="batalhar"
                             style="text-white! bg-bt-purple!"
-                            path={`/choose-pokemon-league/${oponnent.oponnentName.toLowerCase()}`}
+                            onClick={() =>
+                              handleBattle(oponnent.cost, oponnent.oponnentName)
+                            }
                           />
                         </div>
                       ) : (
@@ -331,6 +346,45 @@ export function PokemonLeague() {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+        {alert && (
+          <div className="absolute h-full w-full top-0 left-0 bg-[#000000d3] z-20">
+            <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
+              <span
+                className="absolute top-2 right-2 cursor-pointer
+              "
+                onClick={() => setAlert(false)}
+              >
+                <img src={xIcon} alt="x" className="w-4" />
+              </span>
+              <h1 className="font-bold text-xl text-center">
+                Poxa, você não pode batalhar!
+              </h1>
+
+              <p className="text-sm text-center text-red-400">
+                Você deve ter no mínimo <strong>5 pokémons</strong> capturados e{" "}
+                <strong>fichas</strong> suficientes para batalhar.
+              </p>
+              <p className="font-bold text-sm">Quantidade atual:</p>
+              <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-1 top-4 right-4">
+                  <span className={`text-sm font-bold opacity-70 ${state.myPokemons.length >= 5 ? "text-red-400" : "text-green-400"}`}>
+                    x {state.userStatus.token}{" "}
+                  </span>
+                  <img src={token} alt="token" width={28} />
+                </div>
+                <p className={`text-sm font-bold opacity-90 ${state.myPokemons.length < 5 ? "text-red-400" : "text-green-400"}`}>Pokémon: {state.myPokemons.length}</p>
+              </div>
+              <p className="text-sm text-center opacity-70">
+                Treine seus pokémons e conclua todas tarefas diárias para ganhar
+                fichas de batalha. Passar de nível, evoluir e chegar no nível
+                máximo dão mais fichas. Caso ainda não tenha pelo menos 5
+                pokémons, use pokébolas e capture-os. Pokébolas são adquiridas
+                treinando seus pokémons ou comprando na Loja.
+              </p>
+              <Button text="treinar pokemons" path="/my-pokemons" />
+            </div>
+          </div>
+        )}
       </main>
     </>
   );

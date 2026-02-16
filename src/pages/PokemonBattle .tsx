@@ -43,12 +43,12 @@ const PokemonBattle = () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await response.json();
       if (isOponent) {
-        setOponentType(data.types[0].type.name)
+        setOponentType(data.types[0].type.name);
         setPokemonOponent(
           `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
         );
       } else {
-        setMyPokemonType(data.types[0].type.name)
+        setMyPokemonType(data.types[0].type.name);
         setMyPokemon(
           `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
         );
@@ -91,11 +91,6 @@ const PokemonBattle = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   getOponentType();
-  //   getMyPokemonType()
-  // }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFighting(false);
@@ -112,32 +107,6 @@ const PokemonBattle = () => {
       return () => clearTimeout(timer);
     }
   }, [isFighting]);
-
-  // const getOponentType = async () => {
-  //   try {
-  //     const responseId = await fetch(
-  //       `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
-  //     );
-  //     const data1 = await responseId.json();
-  //     const type: string = data1.types[0].type.name;
-  //     setOponentType(type);
-  //   } catch (error) {
-  //     console.log("Cannot get the oponent type.", error);
-  //   }
-  // };
-
-  //     const getMyPokemonType = async () => {
-  //   try {
-  //     const responseId = await fetch(
-  //       `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
-  //     );
-  //     const data1 = await responseId.json();
-  //     const type: string = data1.types[0].type.name;
-  //     setMyPokemonType(type);
-  //   } catch (error) {
-  //     console.log("Cannot get the my pokemon type.", error);
-  //   }
-  // };
 
   const calculateWinner = async () => {
     try {
@@ -252,10 +221,14 @@ const PokemonBattle = () => {
             />
           )}
           {attacker === "top" && isFighting && (
-            <span className="absolute left-1/2 top-3/7 -translate-x-1/2 -translate-y-30 text-white font-bold">AAAARRRGG!! NHAC!</span>
+            <span className="absolute left-1/2 top-3/7 -translate-x-1/2 -translate-y-30 text-white font-bold">
+              AAAARRRGG!! NHAC!
+            </span>
           )}
           {attacker === "bottom" && isFighting && (
-            <span className="absolute left-1/2 bottom-40 -translate-x-1/2 translate-y-30 text-white font-bold">Whooshh!! GRRRRR!</span>
+            <span className="absolute left-1/2 bottom-40 -translate-x-1/2 translate-y-30 text-white font-bold">
+              Whooshh!! GRRRRR!
+            </span>
           )}
           {attacker === "top" && isFighting && (
             <img
@@ -296,7 +269,8 @@ const PokemonBattle = () => {
                         ? fireAttack
                         : myPokemonType === "rock" || myPokemonType === "ground"
                           ? rockAttack
-                          : myPokemonType === "bug" || myPokemonType === "poison"
+                          : myPokemonType === "bug" ||
+                              myPokemonType === "poison"
                             ? poisonAttack
                             : myPokemonType === "psychic" ||
                                 myPokemonType === "ghost"

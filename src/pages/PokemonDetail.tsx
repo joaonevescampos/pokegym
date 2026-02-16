@@ -286,21 +286,21 @@ const PokemonDetail = () => {
               Tempo restante
             </p>
             <span>{formatTime(timeLeft)}</span>
-            {state.userStatus.energy >= 5 && (
+            {state.userStatus.energy >= 10 && (
               <div className="flex flex-col gap-2 items-center justify-center pb-12">
                 <div className="flex items-center justify-center gap-2 pb-4">
                   <span className="text-center opacity-70 font-semibold">
-                    Você tem um total de x {state.userStatus.energy}
+                    Você tem um total de {state.userStatus.energy}
                   </span>
                   <img src={energy} alt="energy" className="w-6" />
                 </div>
                 <span className="text-sm font-bold text-center">
-                  Deseja usar 5x energias para acordar seu pokémon?
+                  Deseja usar 10 energias para acordar seu pokémon?
                 </span>
                 <Button
-                  text="Usar 5x energia"
+                  text="Usar 10 energias"
                   onClick={() => {
-                    useEnergy(5);
+                    useEnergy(10);
                     deleteTimeToRest(pokemonName!);
                     window.location.reload();
                   }}
@@ -607,7 +607,6 @@ const PokemonDetail = () => {
                       <div className="flex items-center gap-1">
                         <span className="text-sm font-bold opacity-70">
                           + 10
-                          
                         </span>
                         <img src={token} alt="token" width={28} />
                       </div>

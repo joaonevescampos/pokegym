@@ -47,7 +47,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     const newLevel = Math.floor(newXp / 10);
 
     // Evolui a cada 3 levels
-    if (newLevel > previousLevel && newLevel % 3 === 0) {
+    if (newLevel > previousLevel && newLevel % 3 === 0 && newLevel != 9) {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon-species/${pokemon!.name}`,
       );

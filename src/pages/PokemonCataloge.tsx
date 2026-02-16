@@ -351,7 +351,7 @@ useEffect(() => {
           </section>
         </section>
       </header>
-      <section className="relative w-full h-fit text-white pt-12">
+      <section className="relative w-full h-fit text-white pt-16">
         <section className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120 px-4">
             <h1 className="text-2xl text-center font-extrabold">Pokedex</h1>
@@ -400,7 +400,6 @@ useEffect(() => {
             ))}
           </ul>
         </section>
-        <hr className="opacity-40" />
       </section>
       <main className="flex flex-col items-center justify-center h-[calc(100vh-233px)] max-lg:h-full max-lg:min-h-100 text-white">
         <section className="flex flex-col gap-8 items-center justify-center px-4 py-8 h-full">
