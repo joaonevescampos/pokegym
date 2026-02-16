@@ -205,7 +205,6 @@ const PokemonBattleLeague = () => {
     setOponnentPokemonWinners(opponent);
     const everyIsFalse = my.every((item) => item === false);
     everyIsFalse ? setWonBattle(false) : setWonBattle(true);
-    console.log(my, opponent);
   };
 
   useEffect(() => {

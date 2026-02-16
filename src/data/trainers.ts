@@ -146,8 +146,8 @@ export const trainers = [
     name: "lorelei",
     image: lorelei,
     cost: 26,
-    winRate: 54,
-    loseRate: 35,
+    winRate: 48,
+    loseRate: 38,
     rewards: { diamond: 3, pokeballs: 20 },
     pokemons: [
       { id: 131, name: "Lapras", type: "water" },
@@ -162,8 +162,8 @@ export const trainers = [
     name: "bruno",
     image: bruno,
     cost: 27,
-    winRate: 52,
-    loseRate: 32,
+    winRate: 46,
+    loseRate: 36,
     rewards: { pokeballs: 20, diamond: 4 },
     pokemons: [
       { id: 68, name: "Machamp", type: "fighting" },
@@ -178,8 +178,8 @@ export const trainers = [
     name: "agatha",
     image: agatha,
     cost: 28,
-    winRate: 50,
-    loseRate: 30,
+    winRate: 44,
+    loseRate: 34,
     rewards: { pokeballs: 20, diamond: 5 },
     pokemons: [
       { id: 94, name: "Gengar", type: "ghost" },
@@ -194,8 +194,8 @@ export const trainers = [
     name: "lance",
     image: lance,
     cost: 29,
-    winRate: 47,
-    loseRate: 27,
+    winRate: 42,
+    loseRate: 32,
     rewards: { pokeballs: 20, diamond: 6 },
     pokemons: [
       { id: 149, name: "Dragonite", type: "dragon" },
@@ -212,7 +212,7 @@ export const trainers = [
     cost: 30,
     winRate: 35,
     loseRate: 15,
-    rewards: { pokeballs: 30, diamond: 10 },
+    rewards: { pokeballs: 30, diamond: 15 },
     pokemons: [
       { id: 18, name: "Pidgeot", type: "normal" },
       { id: 65, name: "Alakazam", type: "psychic" },
