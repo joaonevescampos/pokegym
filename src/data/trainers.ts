@@ -12,6 +12,16 @@ import agatha from "../assets/league/agatha.png";
 import lance from "../assets/league/lance.png";
 import gary from "../assets/league/gary.png";
 
+import gym1 from "../assets/gym/gym-1.png";
+import gym2 from "../assets/gym/gym-2.png";
+import gym3 from "../assets/gym/gym-3.png";
+import gym4 from "../assets/gym/gym-4.png";
+import gym5 from "../assets/gym/gym-5.png";
+import gym6 from "../assets/gym/gym-6.png";
+import gym7 from "../assets/gym/gym-7.png";
+import gym8 from "../assets/gym/gym-8.png";
+import gym9 from "../assets/gym/gym-9.png";
+
 export const trainers = [
   {
     trainer: "Brock",
@@ -21,6 +31,9 @@ export const trainers = [
     winRate: 75,
     loseRate: 65,
     rewards: { pokeballs: 3 },
+    battleLevel: "fácil 1",
+    xp: 0,
+    gym: gym1,
     pokemons: [
       { id: 74, name: "Geodude", type: "rock" },
       { id: 95, name: "Onix", type: "rock" },
@@ -37,6 +50,9 @@ export const trainers = [
     winRate: 70,
     loseRate: 60,
     rewards: { pokeballs: 5 },
+    battleLevel: "fácil 2",
+    xp: 200,
+    gym: gym2,
     pokemons: [
       { id: 120, name: "Staryu", type: "water" },
       { id: 121, name: "Starmie", type: "water" },
@@ -53,6 +69,9 @@ export const trainers = [
     winRate: 67,
     loseRate: 57,
     rewards: { pokeballs: 8 },
+    battleLevel: "fácil 3",
+    xp: 400,
+    gym: gym3,
     pokemons: [
       { id: 26, name: "Raichu", type: "electric" },
       { id: 101, name: "Electrode", type: "electric" },
@@ -69,6 +88,9 @@ export const trainers = [
     winRate: 65,
     loseRate: 50,
     rewards: { pokeballs: 15 },
+    battleLevel: "médio 1",
+    xp: 600,
+    gym: gym4,
     pokemons: [
       { id: 71, name: "Victreebel", type: "grass" },
       { id: 45, name: "Vileplume", type: "grass" },
@@ -85,6 +107,9 @@ export const trainers = [
     winRate: 63,
     loseRate: 47,
     rewards: { pokeballs: 20 },
+    battleLevel: "médio 2",
+    xp: 800,
+    gym: gym5,
     pokemons: [
       { id: 110, name: "Weezing", type: "poison" },
       { id: 89, name: "Muk", type: "poison" },
@@ -101,6 +126,9 @@ export const trainers = [
     winRate: 60,
     loseRate: 45,
     rewards: { pokeballs: 25 },
+    battleLevel: "médio 3",
+    xp: 1000,
+    gym: gym6,
     pokemons: [
       { id: 65, name: "Alakazam", type: "psychic" },
       { id: 122, name: "Mr. Mime", type: "psychic" },
@@ -117,6 +145,9 @@ export const trainers = [
     winRate: 58,
     loseRate: 42,
     rewards: { pokeballs: 20, diamond: 1 },
+    battleLevel: "médio 4",
+    xp: 1200,
+    gym: gym7,
     pokemons: [
       { id: 59, name: "Arcanine", type: "fire" },
       { id: 126, name: "Magmar", type: "fire" },
@@ -133,6 +164,9 @@ export const trainers = [
     winRate: 56,
     loseRate: 40,
     rewards: { pokeballs: 20, diamond: 2 },
+    battleLevel: "médio 5",
+    xp: 1400,
+    gym: gym8,
     pokemons: [
       { id: 34, name: "Nidoking", type: "poison" },
       { id: 31, name: "Nidoqueen", type: "poison" },
@@ -149,6 +183,9 @@ export const trainers = [
     winRate: 48,
     loseRate: 38,
     rewards: { diamond: 3, pokeballs: 20 },
+    battleLevel: "dificil",
+    xp: 1600,
+    gym: gym9,
     pokemons: [
       { id: 131, name: "Lapras", type: "water" },
       { id: 91, name: "Cloyster", type: "water" },
@@ -165,6 +202,9 @@ export const trainers = [
     winRate: 46,
     loseRate: 36,
     rewards: { pokeballs: 20, diamond: 4 },
+    battleLevel: "dificil 1",
+    xp: 1800,
+    gym: gym9,
     pokemons: [
       { id: 68, name: "Machamp", type: "fighting" },
       { id: 106, name: "Hitmonlee", type: "fighting" },
@@ -181,6 +221,9 @@ export const trainers = [
     winRate: 44,
     loseRate: 34,
     rewards: { pokeballs: 20, diamond: 5 },
+    battleLevel: "dificil 2",
+    xp: 2000,
+    gym: gym9,
     pokemons: [
       { id: 94, name: "Gengar", type: "ghost" },
       { id: 93, name: "Haunter", type: "ghost" },
@@ -197,6 +240,9 @@ export const trainers = [
     winRate: 42,
     loseRate: 32,
     rewards: { pokeballs: 20, diamond: 6 },
+    battleLevel: "dificil 3",
+    xp: 2200,
+    gym: gym9,
     pokemons: [
       { id: 149, name: "Dragonite", type: "dragon" },
       { id: 130, name: "Gyarados", type: "water" },
@@ -213,6 +259,9 @@ export const trainers = [
     winRate: 35,
     loseRate: 15,
     rewards: { pokeballs: 30, diamond: 15 },
+    battleLevel: "insano",
+    xp: 2400,
+    gym: gym9,
     pokemons: [
       { id: 18, name: "Pidgeot", type: "normal" },
       { id: 65, name: "Alakazam", type: "psychic" },
