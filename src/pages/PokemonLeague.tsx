@@ -308,7 +308,7 @@ export function PokemonLeague() {
                             <p className="text-sm">Custo para batalhar:</p>
                             <div className="flex gap-1 items-center justify-center">
                               <span>-{oponnent.cost}</span>
-                              <img src={token} alt="energy" className="w-5" />
+                              <img src={token} alt="token" className="w-5" />
                             </div>
                           </div>
                           <Button
@@ -323,9 +323,9 @@ export function PokemonLeague() {
                         <div className="absolute flex flex-col items-center gap-2 bottom-15 left-1/2 -translate-x-1/2 w-full">
                           <div className="flex gap-2 font-bold text-white text-center justify-center w-full">
                             <p className="text-sm">Custo para batalhar:</p>
-                            <div className="flex gap-2 items-center justify-center">
+                            <div className="flex gap-1 items-center justify-center">
                               <span>-{oponnent.cost}</span>
-                              <img src={energy} alt="energy" className="w-5" />
+                              <img src={token} alt="token" className="w-5" />
                             </div>
                           </div>
                           <Button
