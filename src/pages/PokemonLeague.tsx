@@ -14,11 +14,25 @@ import { usePokemon } from "@/context/usePokemon";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import { useState } from "react";
-import {trainers} from "../data/trainers"
+import { trainers1 } from "../data/trainers1";
+import { trainers2 } from "../data/trainers2";
+import { trainers3 } from "../data/trainers3";
+import { trainers4 } from "../data/trainers4";
+
 import Header from "@/components/Header";
+
+const leagues = [
+  { name: "Liga 1", xp: 0 },
+  { name: "Liga 2", xp: 2500 },
+  { name: "Liga 3", xp: 5000 },
+  { name: "Liga 4", xp: 10000 },
+];
+
+const trainers = [trainers1, trainers2, trainers3, trainers4];
 
 export function PokemonLeague() {
   const { state } = usePokemon();
+  const [leagueSelected, setLeagueSelected] = useState<number>(0);
   const [alert, setAlert] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -26,22 +40,41 @@ export function PokemonLeague() {
     if (state.myPokemons.length < 5 || state.userStatus.token < cost) {
       setAlert(true);
     } else {
-      navigate(`/choose-pokemon-league/${oponnentName.toLowerCase()}`);
+      navigate(
+        `/choose-pokemon-league/${leagueSelected}/${oponnentName.toLowerCase()}`,
+      );
     }
+  };
+
+  const handleSelectLeague = (index: number) => {
+    setLeagueSelected(index);
   };
 
   return (
     <>
       <Header />
-      <main className="flex flex-col gap-4 items-center justify-center h-screen pt-30">
+      <section className="text-white pt-30">
+        <ul className="flex justify-center gap-2 px-4 max-w-120 m-auto">
+          {leagues.map((league, index) => (
+            <li
+              className={`flex items-center justify-center h-20 border border-[#FFFFFF80]  w-full rounded-2xl font-bold hover:bg-purple-900 cursor-pointer ${leagueSelected === index ? "bg-bt-purple!" : ""}`}
+              onClick={() => handleSelectLeague(index)}
+              key={index}
+            >
+              {league.name}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <main className="flex flex-col gap-4 items-center justify-center h-fit pt-20">
         <Carousel className="w-full h-150" orientation="vertical">
           <CarouselContent className="w-full h-150">
-            {trainers.map((oponnent, index) => (
+            {trainers[leagueSelected].map((oponnent, index) => (
               <CarouselItem key={index} className="h-150! pt-8!">
                 <div className="flex-none! px-2 w-full h-150!">
                   <Card className="relative w-full h-150! bg-transparent border-none p-0">
                     <span
-                      className={`absolute top-2 right-2 z-20 text-black font-bold text-xs px-2 py-1 rounded-2xl ${oponnent.battleLevel === "fácil 1" ? "bg-green-400" : oponnent.battleLevel === "fácil 2" ? "bg-green-400" : oponnent.battleLevel === "fácil 3" ? "bg-green-500" : oponnent.battleLevel === "médio 1" ? "bg-yellow-300" : oponnent.battleLevel === "médio 2" ? "bg-yellow-400" : oponnent.battleLevel === "médio 3" ? "bg-yellow-500" : oponnent.battleLevel === "médio 4" ? "bg-amber-400" : oponnent.battleLevel === "médio 5" ? "bg-amber-600" : oponnent.battleLevel === "dificil 1" ? "bg-red-400" : oponnent.battleLevel === "dificil 2" ? "bg-red-500" : oponnent.battleLevel === "dificil 3" ? "bg-red-600" : oponnent.battleLevel === "dificil 4" ? "bg-red-700" : "bg-linear-60 from-purple-800 to-red-800 text-white!"}`}
+                      className={`absolute top-2 right-2 z-20 text-black font-bold text-xs px-2 py-1 rounded-2xl ${oponnent.battleLevel === "fácil 1" ? "bg-green-400" : oponnent.battleLevel === "fácil 2" ? "bg-green-400" : oponnent.battleLevel === "fácil 3" ? "bg-green-500" : oponnent.battleLevel === "médio 1" ? "bg-yellow-300" : oponnent.battleLevel === "médio 2" ? "bg-yellow-400" : oponnent.battleLevel === "médio 3" ? "bg-yellow-500" : oponnent.battleLevel === "médio 4" ? "bg-amber-400" : oponnent.battleLevel === "médio 5" ? "bg-amber-600" : oponnent.battleLevel === "dificil 1" ? "bg-red-400" : oponnent.battleLevel === "dificil 2" ? "bg-red-500 text-white" : oponnent.battleLevel === "dificil 3" ? "bg-red-600 text-white" : oponnent.battleLevel === "dificil 4" ? "bg-red-700 text-white" : oponnent.battleLevel === "dificil 5" ? "bg-red-800 text-white" : oponnent.battleLevel === "insano" ? "bg-purple-800 text-white" : oponnent.battleLevel === "mítico" ? "bg-linear-60 from-red-800 to-purple-800 text-white" : oponnent.battleLevel === "divino" ? "bg-linear-60 from-green-800 to-black text-white" : "bg-black shadow-2xs shadow-yellow-300 text-yellow-200"}`}
                     >
                       {oponnent.battleLevel.toUpperCase()}
                     </span>
@@ -55,7 +88,7 @@ export function PokemonLeague() {
                         <h1 className="text-4xl">Ginásio {index + 1}</h1>
                         <h2 className="text-xl">{oponnent.trainer}</h2>
                         <div className="flex flex-col gap-2">
-                          <span>Recompensas</span>
+                          <span className="text-center">Recompensas</span>
                           <div className="flex items-center justify-center gap-2">
                             {oponnent.rewards.pokeballs && (
                               <>
@@ -154,12 +187,18 @@ export function PokemonLeague() {
               <p className="font-bold text-sm">Quantidade atual:</p>
               <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1 top-4 right-4">
-                  <span className={`text-sm font-bold opacity-70 ${state.userStatus.token < 10 ? "text-red-400" : ""}`}>
+                  <span
+                    className={`text-sm font-bold opacity-70 ${state.userStatus.token < 10 ? "text-red-400" : ""}`}
+                  >
                     x {state.userStatus.token}{" "}
                   </span>
                   <img src={token} alt="token" width={28} />
                 </div>
-                <p className={`text-sm font-bold opacity-90 ${state.myPokemons.length < 5 ? "text-red-400" : "text-green-400"}`}>Pokémon: {state.myPokemons.length}</p>
+                <p
+                  className={`text-sm font-bold opacity-90 ${state.myPokemons.length < 5 ? "text-red-400" : "text-green-400"}`}
+                >
+                  Pokémon: {state.myPokemons.length}
+                </p>
               </div>
               <p className="text-sm text-center opacity-70">
                 Treine seus pokémons e conclua todas tarefas diárias para ganhar

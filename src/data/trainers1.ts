@@ -22,7 +22,7 @@ import gym7 from "../assets/gym/gym-7.png";
 import gym8 from "../assets/gym/gym-8.png";
 import gym9 from "../assets/gym/gym-9.png";
 
-export const trainers = [
+export const trainers1 = [
   {
     trainer: "Brock",
     name: "brock",
@@ -183,7 +183,7 @@ export const trainers = [
     winRate: 48,
     loseRate: 38,
     rewards: { diamond: 3, pokeballs: 20 },
-    battleLevel: "dificil",
+    battleLevel: "dificil 1",
     xp: 1600,
     gym: gym9,
     pokemons: [
@@ -202,7 +202,7 @@ export const trainers = [
     winRate: 46,
     loseRate: 36,
     rewards: { pokeballs: 20, diamond: 4 },
-    battleLevel: "dificil 1",
+    battleLevel: "dificil 2",
     xp: 1800,
     gym: gym9,
     pokemons: [
@@ -221,7 +221,7 @@ export const trainers = [
     winRate: 44,
     loseRate: 34,
     rewards: { pokeballs: 20, diamond: 5 },
-    battleLevel: "dificil 2",
+    battleLevel: "dificil 3",
     xp: 2000,
     gym: gym9,
     pokemons: [
@@ -240,7 +240,7 @@ export const trainers = [
     winRate: 42,
     loseRate: 32,
     rewards: { pokeballs: 20, diamond: 6 },
-    battleLevel: "dificil 3",
+    battleLevel: "dificil 4",
     xp: 2200,
     gym: gym9,
     pokemons: [

@@ -73,8 +73,8 @@ function AppRoutes() {
         <Route path="/snorlax-note" element={<SnorlaxNote />} />
         <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/pokemon-league" element={<PokemonLeague />} />
-        <Route path="/choose-pokemon-league/:oponnent" element={<ChoosePokemonLeague />} />
-        <Route path="pokemon-league-battle/:oponnentName/:oponnentPokemons/:myPokemons" element={<PokemonBattleLeague />} />
+        <Route path="/choose-pokemon-league/:league/:oponnent" element={<ChoosePokemonLeague />} />
+        <Route path="pokemon-league-battle/:league/:oponnentName/:oponnentPokemons/:myPokemons" element={<PokemonBattleLeague />} />
       </Routes>
     </Router>
   );

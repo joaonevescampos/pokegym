@@ -27,20 +27,37 @@ import bruno from "../assets/league/bruno.png";
 import agatha from "../assets/league/agatha.png";
 import lance from "../assets/league/lance.png";
 import gary from "../assets/league/gary.png";
-import { trainers } from "../data/trainers";
+import { trainers1 } from "../data/trainers1";
+import { trainers2 } from "../data/trainers2";
+import { trainers3 } from "../data/trainers3";
+import { trainers4 } from "../data/trainers4";
 
 const ChoosePokemonLeague = () => {
   const { state } = usePokemon();
   const oponnentName = useParams().oponnent;
+  const league = Number(useParams().league);
   const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
   const [selectedPokemonsIndex, setSelectedPokemonsIndex] = useState<number[]>(
     [],
   );
 
-  const trainerChoosed = trainers.find(
-    (trainer) => trainer.trainer.toLowerCase() === oponnentName,
-  );
+  const trainerChoosed =
+    league === 0
+      ? trainers1.find(
+          (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+        )
+      : league === 1
+        ? trainers2.find(
+            (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+          )
+        : league === 2
+          ? trainers3.find(
+              (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+            )
+          : trainers4.find(
+              (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+            );
 
   const handleClick = (index: number) => {
     if (selectedPokemonsIndex.some((i) => i === index)) {
@@ -54,7 +71,7 @@ const ChoosePokemonLeague = () => {
 
   const startBattle = async () => {
     const pokemonsOponnentId = trainerChoosed?.pokemons
-      .map((pokemon) => pokemon.id)
+      .map((pokemon: { id: number; name: string; type: string }) => pokemon.id)
       .toString()
       .replaceAll(",", "&");
     let myPokemonsIds = "";
@@ -73,7 +90,7 @@ const ChoosePokemonLeague = () => {
     myPokemonsIds = myPokemonsIds.slice(1, myPokemonsIds.length);
 
     navigate(
-      `/pokemon-league-battle/${oponnentName}/${pokemonsOponnentId}/${myPokemonsIds}`,
+      `/pokemon-league-battle/${league.toString()}/${oponnentName}/${pokemonsOponnentId}/${myPokemonsIds}`,
     );
   };
 
@@ -147,13 +164,15 @@ const ChoosePokemonLeague = () => {
             Pokémons do {oponnentName?.toUpperCase()}
           </h2>
           <div className="flex gap-2">
-            {trainerChoosed?.pokemons.map((pokemon) => (
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-                alt="pokemon"
-                className="max-lg:w-16 w-24 border-2 border-gray-600 rounded-2xl bg-gray-800 p-1"
-              />
-            ))}
+            {trainerChoosed?.pokemons.map(
+              (pokemon: { id: number; name: string; type: string }) => (
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                  alt="pokemon"
+                  className="max-lg:w-16 w-24 border-2 border-gray-600 rounded-2xl bg-gray-800 p-1"
+                />
+              ),
+            )}
           </div>
           <h2 className="text-white font-bold text-xl text-center">
             Escolha 5 pokémons para batalhar contra o{" "}

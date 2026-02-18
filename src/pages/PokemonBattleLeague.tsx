@@ -26,7 +26,10 @@ import { useEffect, useRef, useState } from "react";
 import { usePokemon } from "../context/usePokemon";
 import Button from "../components/Button";
 import type { Pokemon } from "@/context/pokemonTypes";
-import { trainers } from "../data/trainers";
+import { trainers1 } from "../data/trainers1";
+import { trainers2 } from "../data/trainers2";
+import { trainers3 } from "../data/trainers3";
+import { trainers4 } from "../data/trainers4";
 
 const PokemonBattleLeague = () => {
   const { state, useToken, gainPokeball, gainDiamond } = usePokemon();
@@ -56,11 +59,25 @@ const PokemonBattleLeague = () => {
   const pokemonsOponnentId = param.oponnentPokemons;
   const myPokemonsId = param?.myPokemons;
   const oponnentName = param?.oponnentName;
+  const league = Number(param?.league);
   const hasRun = useRef(false);
   const myPokemonsIdArray = myPokemonsId?.split("&").map(Number);
-  const trainerChoosed = trainers.find(
-    (trainer) => trainer.name === oponnentName,
-  );
+   const trainerChoosed =
+      league === 0
+        ? trainers1.find(
+            (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+          )
+        : league === 1
+          ? trainers2.find(
+              (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+            )
+          : league === 2
+            ? trainers3.find(
+                (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+              )
+            : trainers4.find(
+                (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+              );
 
   const oponnentPokemonsIdArray = pokemonsOponnentId?.split("&").map(Number);
   const myPokemonsImages = myPokemonsIdArray?.map((id) => {
@@ -165,7 +182,7 @@ const PokemonBattleLeague = () => {
     let my = [...myPokemonWinners];
     let opponent = [...oponnentPokemonWinners];
 
-    trainers.forEach((trainer) => {
+    trainers1.forEach((trainer) => {
       if (trainer.name === oponnentName) {
         while (true) {
           const myIndex = my.findIndex((v) => v !== false);
