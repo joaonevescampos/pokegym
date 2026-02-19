@@ -1,26 +1,21 @@
-import brock from "../assets/league/brock.png";
-import misty from "../assets/league/misty.png";
-import surge from "../assets/league/surge.png";
-import erika from "../assets/league/erika.png";
-import koga from "../assets/league/koga.png";
-import sabrina from "../assets/league/sabrina.png";
-import blaine from "../assets/league/blaine.png";
-import giovanni from "../assets/league/giovanni.png";
-import lorelei from "../assets/league/lorelei.png";
-import bruno from "../assets/league/bruno.png";
-import agatha from "../assets/league/agatha.png";
-import lance from "../assets/league/lance.png";
-import gary from "../assets/league/gary.png";
 
-import gym1 from "../assets/gym/gym-1.png";
-import gym2 from "../assets/gym/gym-2.png";
-import gym3 from "../assets/gym/gym-3.png";
-import gym4 from "../assets/gym/gym-4.png";
-import gym5 from "../assets/gym/gym-5.png";
-import gym6 from "../assets/gym/gym-6.png";
-import gym7 from "../assets/gym/gym-7.png";
-import gym8 from "../assets/gym/gym-8.png";
-import gym9 from "../assets/gym/gym-9.png";
+import giovanni from "../assets/league/trainers4/giovanni.png";
+import chairman from "../assets/league/trainers4/chairman.png";
+import eternatus from "../assets/league/trainers4/eternatus.png";
+import ghetsis from "../assets/league/trainers4/ghetsis.png";
+import lysandre from "../assets/league/trainers4/lysandadre.png";
+import ultra from "../assets/league/trainers4/ultra.png";
+import creator from "../assets/league/trainers4/the-creator.png";
+import volo from "../assets/league/trainers4/volo.png";
+
+import gym1 from "../assets/arenas/fire-arena.png";
+import gym2 from "../assets/arenas/psychic-arena.png";
+import gym3 from "../assets/arenas/normal-arena.png";
+import gym4 from "../assets/arenas/electric-arena.png";
+import gym5 from "../assets/arenas/grass-arena2.png";
+import gym6 from "../assets/arenas/elite-four-arena.png";
+import gym7 from "../assets/arenas/cassino-arena.png";
+import gym8 from "../assets/arenas/final-arena.png";
 
 export const trainers4 = [
   {
@@ -45,7 +40,7 @@ export const trainers4 = [
   {
     trainer: "Ghetsis",
     name: "ghetsis",
-    // image: ghetsis,
+    image: ghetsis,
     cost: 21,
     winRate: 42,
     loseRate: 32,
@@ -64,7 +59,7 @@ export const trainers4 = [
   {
     trainer: "Lysandre",
     name: "lysandre",
-    // image: lysandre,
+    image: lysandre,
     cost: 22,
     winRate: 40,
     loseRate: 30,
@@ -82,8 +77,8 @@ export const trainers4 = [
   },
   {
     trainer: "Chairman Rose",
-    name: "chairman-rose",
-    // image: rose,
+    name: "chairman",
+    image: chairman,
     cost: 23,
     winRate: 38,
     loseRate: 28,
@@ -102,7 +97,7 @@ export const trainers4 = [
   {
     trainer: "Volo",
     name: "volo",
-    // image: volo,
+    image: volo,
     cost: 24,
     winRate: 35,
     loseRate: 25,
@@ -120,8 +115,8 @@ export const trainers4 = [
   },
   {
     trainer: "Ultra Necrozma",
-    name: "ultra-necrozma",
-    // image: necrozma,
+    name: "ultra",
+    image: ultra,
     cost: 25,
     winRate: 32,
     loseRate: 22,
@@ -140,7 +135,7 @@ export const trainers4 = [
   {
     trainer: "Eternatus",
     name: "eternatus",
-    // image: eternatus,
+    image: eternatus,
     cost: 26,
     winRate: 27,
     loseRate: 17,
@@ -158,15 +153,15 @@ export const trainers4 = [
   },
   {
     trainer: "The Creator",
-    name: "the-creator",
-    // image: creator,
+    name: "creator",
+    image: creator,
     cost: 100,
     winRate: 15,
     loseRate: 5,
     rewards: { pokeballs: 1000, diamond: 1000 },
     battleLevel: "impossível",
     xp: 10000,
-    gym: gym9,
+    gym: gym8,
     pokemons: [
       { id: 493, name: "Arceus", type: "normal" },
       { id: 150, name: "Mewtwo", type: "psychic" },

@@ -27,10 +27,75 @@ import bruno from "../assets/league/bruno.png";
 import agatha from "../assets/league/agatha.png";
 import lance from "../assets/league/lance.png";
 import gary from "../assets/league/gary.png";
+import silver from "../assets/league/trainers2/silver.png";
+import wallace from "../assets/league/trainers2/wallace.png";
+import cynthia from "../assets/league/trainers2/cynthia.png";
+import steven from "../assets/league/trainers2/steven.png";
+import alder from "../assets/league/trainers2/alder.png";
+import leon from "../assets/league/trainers2/leon.png";
+import red from "../assets/league/trainers2/red.png";
+import diantha from "../assets/league/trainers3/diantha.png";
+import iris from "../assets/league/trainers3/iris.png";
+import kukui from "../assets/league/trainers3/kukui.png";
+import geeta from "../assets/league/trainers3/geeta.png";
+import mustard from "../assets/league/trainers3/mustard.png";
+import n from "../assets/league/trainers3/n.png";
+import chairman from "../assets/league/trainers4/chairman.png";
+import eternatus from "../assets/league/trainers4/eternatus.png";
+import ghetsis from "../assets/league/trainers4/ghetsis.png";
+import lysandre from "../assets/league/trainers4/lysandadre.png";
+import ultra from "../assets/league/trainers4/ultra.png";
+import creator from "../assets/league/trainers4/the-creator.png";
+import volo from "../assets/league/trainers4/volo.png";
+
 import { trainers1 } from "../data/trainers1";
 import { trainers2 } from "../data/trainers2";
 import { trainers3 } from "../data/trainers3";
 import { trainers4 } from "../data/trainers4";
+
+const arceus =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/493.png";
+
+const mewtwo =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/150.png";
+
+const trainerImages: any = {
+  brock: brock,
+  misty: misty,
+  surge: surge,
+  erika: erika,
+  koga: koga,
+  sabrina: sabrina,
+  blaine: blaine,
+  giovanni: giovanni,
+  lorelei: lorelei,
+  bruno: bruno,
+  agatha: agatha,
+  lance: lance,
+  ghetsis: ghetsis,
+  lysandre: lysandre,
+  chairman: chairman,
+  volo: volo,
+  ultra: ultra,
+  eternatus: eternatus,
+  creator: creator,
+  diantha: diantha,
+  iris: iris,
+  kukui: kukui,
+  geeta: geeta,
+  mustard: mustard,
+  n: n,
+  arceus: arceus,
+  silver: silver,
+  wallace: wallace,
+  cynthia: cynthia,
+  steven: steven,
+  alder: alder,
+  leon: leon,
+  red: red,
+  mewtwo: mewtwo,
+  gary: gary,
+};
 
 const ChoosePokemonLeague = () => {
   const { state } = usePokemon();
@@ -126,38 +191,13 @@ const ChoosePokemonLeague = () => {
               voltar
             </Link>
           </div>
-
-          <img
-            src={
-              oponnentName === "brock"
-                ? brock
-                : oponnentName === "misty"
-                  ? misty
-                  : oponnentName === "surge"
-                    ? surge
-                    : oponnentName === "erika"
-                      ? erika
-                      : oponnentName === "koga"
-                        ? koga
-                        : oponnentName === "sabrina"
-                          ? sabrina
-                          : oponnentName === "blaine"
-                            ? blaine
-                            : oponnentName === "giovanni"
-                              ? giovanni
-                              : oponnentName === "lorelei"
-                                ? lorelei
-                                : oponnentName === "bruno"
-                                  ? bruno
-                                  : oponnentName === "agatha"
-                                    ? agatha
-                                    : oponnentName === "lance"
-                                      ? lance
-                                      : gary
-            }
-            alt="oponnent"
-            className="absolute left-1/2 top-1/2  h-48 -translate-1/2 z-0"
-          />
+          {oponnentName && (
+            <img
+              src={trainerImages[oponnentName]}
+              alt="oponnent"
+              className="absolute left-1/2 top-1/2  h-48 -translate-1/2 z-0"
+            />
+          )}
         </section>
         <section className="flex flex-col gap-12 items-center justify-start px-4 py-8 h-full">
           <h2 className="text-white font-bold text-xl text-center">

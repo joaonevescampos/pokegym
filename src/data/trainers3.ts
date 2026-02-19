@@ -1,26 +1,20 @@
-import brock from "../assets/league/brock.png";
-import misty from "../assets/league/misty.png";
-import surge from "../assets/league/surge.png";
-import erika from "../assets/league/erika.png";
-import koga from "../assets/league/koga.png";
-import sabrina from "../assets/league/sabrina.png";
-import blaine from "../assets/league/blaine.png";
-import giovanni from "../assets/league/giovanni.png";
-import lorelei from "../assets/league/lorelei.png";
-import bruno from "../assets/league/bruno.png";
-import agatha from "../assets/league/agatha.png";
-import lance from "../assets/league/lance.png";
-import gary from "../assets/league/gary.png";
 
-import gym1 from "../assets/gym/gym-1.png";
-import gym2 from "../assets/gym/gym-2.png";
-import gym3 from "../assets/gym/gym-3.png";
-import gym4 from "../assets/gym/gym-4.png";
-import gym5 from "../assets/gym/gym-5.png";
-import gym6 from "../assets/gym/gym-6.png";
-import gym7 from "../assets/gym/gym-7.png";
-import gym8 from "../assets/gym/gym-8.png";
-import gym9 from "../assets/gym/gym-9.png";
+import lance from "../assets/league/trainers3/lance.png";
+import diantha from "../assets/league/trainers3/diantha.png";
+import iris from "../assets/league/trainers3/iris.png";
+import kukui from "../assets/league/trainers3/kukui.png";
+import geeta from "../assets/league/trainers3/geeta.png";
+import mustard from "../assets/league/trainers3/mustard.png";
+import n from "../assets/league/trainers3/n.png";
+
+import gym1 from "../assets/arenas/fire-arena2.png";
+import gym2 from "../assets/arenas/ghost-arena.png";
+import gym3 from "../assets/arenas/normal2-arena.png";
+import gym4 from "../assets/arenas/electric-arena.png";
+import gym5 from "../assets/arenas/grass-arena2.png";
+import gym6 from "../assets/arenas/fire-arena.png";
+import gym7 from "../assets/arenas/ghost-arena.png";
+import gym8 from "../assets/arenas/elite-four-arena.png";
 
 const arceus = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/493.png"
 
@@ -47,7 +41,7 @@ export const trainers3 = [
   {
     trainer: "Diantha",
     name: "diantha",
-    // image: diantha,
+    image: diantha,
     cost: 21,
     winRate: 46,
     loseRate: 36,
@@ -66,7 +60,7 @@ export const trainers3 = [
   {
     trainer: "Iris",
     name: "iris",
-    // image: iris,
+    image: iris,
     cost: 22,
     winRate: 44,
     loseRate: 34,
@@ -85,7 +79,7 @@ export const trainers3 = [
   {
     trainer: "Kukui",
     name: "kukui",
-    // image: kukui,
+    image: kukui,
     cost: 23,
     winRate: 42,
     loseRate: 32,
@@ -104,7 +98,7 @@ export const trainers3 = [
   {
     trainer: "Geeta",
     name: "geeta",
-    // image: geeta,
+    image: geeta,
     cost: 24,
     winRate: 40,
     loseRate: 30,
@@ -123,7 +117,7 @@ export const trainers3 = [
   {
     trainer: "Mustard",
     name: "mustard",
-    // image: mustard,
+    image: mustard,
     cost: 25,
     winRate: 35,
     loseRate: 25,
@@ -142,7 +136,7 @@ export const trainers3 = [
   {
     trainer: "N",
     name: "n",
-    // image: n,
+    image: n,
     cost: 26,
     winRate: 32,
     loseRate: 22,
@@ -168,7 +162,7 @@ export const trainers3 = [
     rewards: { pokeballs: 50, diamond: 40 },
     battleLevel: "divino",
     xp: 7000,
-    gym: gym9,
+    gym: gym8,
     pokemons: [
       { id: 493, name: "Arceus", type: "normal" },
       { id: 487, name: "Giratina", type: "ghost" },

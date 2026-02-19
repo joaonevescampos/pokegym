@@ -62,22 +62,22 @@ const PokemonBattleLeague = () => {
   const league = Number(param?.league);
   const hasRun = useRef(false);
   const myPokemonsIdArray = myPokemonsId?.split("&").map(Number);
-   const trainerChoosed =
-      league === 0
-        ? trainers1.find(
+  const trainerChoosed =
+    league === 0
+      ? trainers1.find(
+          (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+        )
+      : league === 1
+        ? trainers2.find(
             (trainer) => trainer.trainer.toLowerCase() === oponnentName,
           )
-        : league === 1
-          ? trainers2.find(
+        : league === 2
+          ? trainers3.find(
               (trainer) => trainer.trainer.toLowerCase() === oponnentName,
             )
-          : league === 2
-            ? trainers3.find(
-                (trainer) => trainer.trainer.toLowerCase() === oponnentName,
-              )
-            : trainers4.find(
-                (trainer) => trainer.trainer.toLowerCase() === oponnentName,
-              );
+          : trainers4.find(
+              (trainer) => trainer.trainer.toLowerCase() === oponnentName,
+            );
 
   const oponnentPokemonsIdArray = pokemonsOponnentId?.split("&").map(Number);
   const myPokemonsImages = myPokemonsIdArray?.map((id) => {
@@ -182,41 +182,39 @@ const PokemonBattleLeague = () => {
     let my = [...myPokemonWinners];
     let opponent = [...oponnentPokemonWinners];
 
-    trainers1.forEach((trainer) => {
-      if (trainer.name === oponnentName) {
-        while (true) {
-          const myIndex = my.findIndex((v) => v !== false);
-          const opponentIndex = opponent.findIndex((v) => v !== false);
+    if (trainerChoosed) {
+      while (true) {
+        const myIndex = my.findIndex((v) => v !== false);
+        const opponentIndex = opponent.findIndex((v) => v !== false);
 
-          if (myIndex < 0 || opponentIndex < 0) break;
+        if (myIndex < 0 || opponentIndex < 0) break;
 
-          if (
-            myIndex >= myPokemonsInfos.length ||
-            opponentIndex >= oponnentPokemonsCaptureRate.length
-          )
-            break;
+        if (
+          myIndex >= myPokemonsInfos.length ||
+          opponentIndex >= oponnentPokemonsCaptureRate.length
+        )
+          break;
 
-          const myPower = myPokemonsInfos[myIndex].hp;
-          const opponentPower =
-            100 - (oponnentPokemonsCaptureRate[opponentIndex] * 100) / 255;
+        const myPower = myPokemonsInfos[myIndex].hp;
+        const opponentPower =
+          100 - (oponnentPokemonsCaptureRate[opponentIndex] * 100) / 255;
 
-          const random = Math.random() * 100;
+        const random = Math.random() * 100;
 
-          const iWin =
-            myPower >= opponentPower
-              ? random < trainer.winRate
-              : random < trainer.loseRate;
+        const iWin =
+          myPower >= opponentPower
+            ? random < trainerChoosed.winRate
+            : random < trainerChoosed.loseRate;
 
-          if (iWin) {
-            my[myIndex] = true;
-            opponent[opponentIndex] = false;
-          } else {
-            my[myIndex] = false;
-            opponent[opponentIndex] = true;
-          }
+        if (iWin) {
+          my[myIndex] = true;
+          opponent[opponentIndex] = false;
+        } else {
+          my[myIndex] = false;
+          opponent[opponentIndex] = true;
         }
       }
-    });
+    }
 
     setMyPokemonWinners(my);
     setOponnentPokemonWinners(opponent);
@@ -390,7 +388,7 @@ const PokemonBattleLeague = () => {
 
           <div className="absolute left-1/2 bottom-10 flex gap-2 w-68 -translate-x-1/2 z-0">
             {myPokemonsImages?.map((pokemon, index) => (
-              <div className="relative">
+              <div className="relative" key={index}>
                 <img
                   src={pokemon}
                   alt="pokemon"
@@ -409,7 +407,7 @@ const PokemonBattleLeague = () => {
 
           <div className="absolute left-1/2 top-10 flex gap-2 w-68 -translate-x-1/2 z-0">
             {oponnentPokemonsImages?.map((pokemon, index) => (
-              <div className="relative">
+              <div className="relative" key={index}>
                 <img
                   src={pokemon}
                   alt="pokemon"

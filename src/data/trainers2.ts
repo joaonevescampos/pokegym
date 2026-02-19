@@ -1,26 +1,19 @@
-import brock from "../assets/league/brock.png";
-import misty from "../assets/league/misty.png";
-import surge from "../assets/league/surge.png";
-import erika from "../assets/league/erika.png";
-import koga from "../assets/league/koga.png";
-import sabrina from "../assets/league/sabrina.png";
-import blaine from "../assets/league/blaine.png";
-import giovanni from "../assets/league/giovanni.png";
-import lorelei from "../assets/league/lorelei.png";
-import bruno from "../assets/league/bruno.png";
-import agatha from "../assets/league/agatha.png";
-import lance from "../assets/league/lance.png";
-import gary from "../assets/league/gary.png";
+import silver from "../assets/league/trainers2/silver.png";
+import wallace from "../assets/league/trainers2/wallace.png";
+import cynthia from "../assets/league/trainers2/cynthia.png";
+import steven from "../assets/league/trainers2/steven.png";
+import alder from "../assets/league/trainers2/alder.png";
+import leon from "../assets/league/trainers2/leon.png";
+import red from "../assets/league/trainers2/red.png";
 
-import gym1 from "../assets/gym/gym-1.png";
-import gym2 from "../assets/gym/gym-2.png";
-import gym3 from "../assets/gym/gym-3.png";
-import gym4 from "../assets/gym/gym-4.png";
-import gym5 from "../assets/gym/gym-5.png";
-import gym6 from "../assets/gym/gym-6.png";
-import gym7 from "../assets/gym/gym-7.png";
-import gym8 from "../assets/gym/gym-8.png";
-import gym9 from "../assets/gym/gym-9.png";
+import gym1 from "../assets/arenas/rock-arena2.png";
+import gym2 from "../assets/arenas/water-arena.png";
+import gym3 from "../assets/arenas/ghost-arena.png";
+import gym4 from "../assets/arenas/normal2-arena.png";
+import gym5 from "../assets/arenas/circle-arena.png";
+import gym6 from "../assets/arenas/fire-arena.png";
+import gym7 from "../assets/arenas/grass-arena.png";
+import gym8 from "../assets/arenas/sky-arena.png";
 
 const mewtwo = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/150.png"
 
@@ -28,7 +21,7 @@ export const trainers2 = [
   {
     trainer: "Silver",
     name: "silver",
-    // image: silver,
+    image: silver,
     cost: 20,
     winRate: 65,
     loseRate: 45,
@@ -47,7 +40,7 @@ export const trainers2 = [
   {
     trainer: "Wallace",
     name: "wallace",
-    // image: wallace,
+    image: wallace,
     cost: 15,
     winRate: 60,
     loseRate: 40,
@@ -66,7 +59,7 @@ export const trainers2 = [
   {
     trainer: "Cynthia",
     name: "cynthia",
-    // image: cynthia,
+    image: cynthia,
     cost: 20,
     winRate: 55,
     loseRate: 45,
@@ -85,7 +78,7 @@ export const trainers2 = [
   {
     trainer: "Steven",
     name: "steven",
-    // image: steven,
+    image: steven,
     cost: 21,
     winRate: 50,
     loseRate: 35,
@@ -104,7 +97,7 @@ export const trainers2 = [
   {
     trainer: "Alder",
     name: "alder",
-    // image: alder,
+    image: alder,
     cost: 22,
     winRate: 45,
     loseRate: 32,
@@ -123,7 +116,7 @@ export const trainers2 = [
   {
     trainer: "Leon",
     name: "leon",
-    // image: leon,
+    image: leon,
     cost: 23,
     winRate: 40,
     loseRate: 30,
@@ -142,7 +135,7 @@ export const trainers2 = [
   {
     trainer: "Red",
     name: "red",
-    // image: red,
+    image: red,
     cost: 24,
     winRate: 35,
     loseRate: 25,
@@ -168,7 +161,7 @@ export const trainers2 = [
     rewards: { pokeballs: 40, diamond: 30 },
     battleLevel: "mítico",
     xp: 4600,
-    gym: gym9,
+    gym: gym8,
     pokemons: [
       { id: 150, name: "Mewtwo", type: "psychic" },
       { id: 384, name: "Rayquaza", type: "dragon" },
