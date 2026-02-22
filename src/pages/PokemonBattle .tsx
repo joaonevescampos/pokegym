@@ -24,6 +24,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { usePokemon } from "../context/usePokemon";
 import Button from "../components/Button";
+import BattleIntro from "@/components/BattleIntro";
 
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
@@ -94,7 +95,7 @@ const PokemonBattle = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFighting(false);
-    }, 12000);
+    }, 16000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -169,7 +170,7 @@ const PokemonBattle = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowResult(true);
-    }, 22000);
+    }, 26000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -184,6 +185,7 @@ const PokemonBattle = () => {
 
   return (
     <>
+      <BattleIntro />
       <main className="flex flex-col items-center justify-center h-screen max-lg:h-full max-lg:min-h-100 text-white">
         <section className="relative w-full h-screen">
           <img

@@ -30,6 +30,7 @@ import { trainers1 } from "../data/trainers1";
 import { trainers2 } from "../data/trainers2";
 import { trainers3 } from "../data/trainers3";
 import { trainers4 } from "../data/trainers4";
+import BattleIntro from "@/components/BattleIntro";
 
 const PokemonBattleLeague = () => {
   const { state, useToken, gainPokeball, gainDiamond } = usePokemon();
@@ -253,6 +254,7 @@ const PokemonBattleLeague = () => {
 
   return (
     <>
+      <BattleIntro />
       <main className="flex flex-col items-center justify-center h-screen max-lg:h-full max-lg:min-h-100 text-white">
         <section className="relative w-full h-screen">
           <img

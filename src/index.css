@@ -40,6 +40,30 @@ body {
   --animate-pokemon-scape: pokemon-scape 1s ease-out;
   --animate-pokemon-evolving: pokemon-evolving 10s ease-in-out;
   --animate-desapearing: desapearing 4s ease-in-out;
+  --animate-growing: growing 1s ease-in-out;
+  --animate-decreasing: decreasing 2s ease-in-out;
+
+  @keyframes growing {
+    0% {
+      transform: scale(1);
+      opacity: 100%;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 30%;
+    }
+  }
+
+  @keyframes decreasing {
+    0% {
+      transform: scale(1);
+      opacity: 100%;
+    }
+    100% {
+      transform: scale(0.7);
+      opacity: 30%;
+    }
+  }
 
   @keyframes attack-down {
     0% {

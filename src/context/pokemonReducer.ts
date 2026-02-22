@@ -12,11 +12,11 @@ const currYear = date.getFullYear();
 
 export const initialPokemonState: PokemonState = {
   userStatus: {
-    pokeball: 300,
-    energy: 1000,
-    xp: 5000,
+    pokeball: 3,
+    energy: 10,
+    xp: 0,
     diamond: 0,
-    token: 9000,
+    token: 0,
     userName: "",
     gender: "",
     dashboard: [
@@ -71,8 +71,8 @@ export function pokemonReducer(
           {
             name: action.payload.name,
             type: action.payload.type,
-            hp: 100,
-            level: 10,
+            hp: 0,
+            level: 0,
             checklist: [{ task: "crie sua tarefa aqui", checked: false }],
             tag: "",
             time_to_rest: null,
