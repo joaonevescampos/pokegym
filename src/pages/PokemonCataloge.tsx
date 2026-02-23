@@ -235,13 +235,11 @@ useEffect(() => {
           : { ...item, released: true },
       );
       setGenerationList(newGenerationList);
-    } else if (userXP >= 8000 && userXP < 9000) {
+    } else {
       const newGenerationList: Generation[] = generationList.map((item) => {
         return { ...item, released: true };
       });
       setGenerationList(newGenerationList);
-    } else {
-      return
     }
   }, []);
 
