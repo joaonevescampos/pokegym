@@ -9,10 +9,10 @@ const ChoosePokemon = () => {
   const navigate = useNavigate();
   const [inactive, setinactive] = useState(true);
   const [initialPokemons, setInitialPokemons] = useState([
-    { name: "pichu", type: "electric", level: 0, selected: false },
-    { name: "bulbasaur", type: "grass", level: 0, selected: false },
-    { name: "charmander", type: "fire", level: 0, selected: false },
-    { name: "squirtle", type: "water", level: 0, selected: false },
+    { name: "pichu", type: "electric", level: 0, selected: false, rarity: 2 },
+    { name: "bulbasaur", type: "grass", level: 0, selected: false, rarity: 3 },
+    { name: "charmander", type: "fire", level: 0, selected: false, rarity: 3 },
+    { name: "squirtle", type: "water", level: 0, selected: false, rarity: 3 },
   ]);
   const { state } = usePokemon();
 
@@ -35,7 +35,7 @@ const ChoosePokemon = () => {
     const pokemonChose = initialPokemons.filter(
       (pokemon) => pokemon.selected,
     )[0];
-    capturePokemon(pokemonChose.name, pokemonChose.type);
+    capturePokemon(pokemonChose.name, pokemonChose.type, pokemonChose.rarity);
   };
 
   useEffect(() => {

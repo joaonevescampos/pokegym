@@ -31,13 +31,22 @@ const PokemonBattle = () => {
   const [oponentType, setOponentType] = useState<string>("");
   const [myPokemonType, setMyPokemonType] = useState<string>("");
   const [myPokemon, setMyPokemon] = useState("");
-  const { state, capturePokemon, gainEnergy, usePokeball } = usePokemon();
+  const { state, capturePokemon, gainEnergy, useEnergy, usePokeball } =
+    usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
   const [pokemonReward, setPokemonReward] = useState<number>(1);
+  const [useSpecialAttack, setUseSpecialAttack] = useState<boolean>(false);
   const navigate = useNavigate();
-
   const param = useParams();
+
+  const pokemonChose = state.myPokemons.filter(
+    (pokemon) => pokemon.name === param.pokemonChose,
+  )[0];
+
+  const winRatePorcentage = Math.ceil(
+    (pokemonChose.rarity * pokemonChose.rarity * 400) / 455,
+  );
 
   const getPokemonImage = async (name: string, isOponent: boolean) => {
     try {
@@ -110,15 +119,12 @@ const PokemonBattle = () => {
   }, [isFighting]);
 
   const calculateWinner = async () => {
-    const pokemonChose = state.myPokemons.filter(
-      (pokemon) => pokemon.name === param.pokemonChose,
-    )[0];
     try {
       const responseOpponentId = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
       );
       const responseId = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonChose.name}`,
+        `https://pokeapi.co/api/v2/pokemon/${param.pokemonChose}`,
       );
       const dataOpponent = await responseOpponentId.json();
       const data = await responseId.json();
@@ -132,21 +138,28 @@ const PokemonBattle = () => {
       );
 
       const dataOponnent2 = await responseCaptureRateOpponent.json();
+      const dataMyPokemon = await responseCaptureRate.json();
 
       //calculo de de vitória
-      const myPokemonCaptureRate = responseCaptureRate.capture_rate;
+      const myPokemonCaptureRate = dataMyPokemon.capture_rate;
       let rarity = 0;
 
-      if (myPokemonCaptureRate <= 3) {
+      if (myPokemonCaptureRate <= 4) {
         rarity = 4;
-      } else if (myPokemonCaptureRate > 3 && myPokemonCaptureRate <= 45) {
+      } else if (myPokemonCaptureRate > 4 && myPokemonCaptureRate <= 100) {
         rarity = 3;
-      } else if (myPokemonCaptureRate > 45 && myPokemonCaptureRate <= 190) {
+      } else if (myPokemonCaptureRate > 100 && myPokemonCaptureRate <= 200) {
         rarity = 2;
       } else {
         rarity = 1;
       }
-      console.log(rarity)
+
+      let boost = 0;
+
+      if (useSpecialAttack) {
+        boost = rarity ** 2 * 4;
+        useEnergy(10);
+      }
 
       const captureRate = dataOponnent2.capture_rate;
       const maxCaptureRate = 255;
@@ -160,30 +173,35 @@ const PokemonBattle = () => {
 
       const pokemonChoseHP = pokemonChose.hp;
 
-      const winRate = captureRate + capturedPorcentage + pokemonChoseHP;
+      const winRate = captureRate + capturedPorcentage + pokemonChoseHP + boost;
+
       const total = maxCaptureRate + maxLevel + maxCapturePorcentage;
 
       const randomNumberToWin: number = Math.ceil(Math.random() * total);
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
-        capturePokemon(param.pokemonOponent!, oponentType, rarity);
-        if (captureRate <= 3) {
+        if (captureRate <= 4) {
+          capturePokemon(param.pokemonOponent!, oponentType, 4);
           gainEnergy(50);
           setPokemonReward(50);
-        } else if (captureRate > 3 && captureRate <= 45) {
+        } else if (captureRate > 4 && captureRate <= 100) {
+          capturePokemon(param.pokemonOponent!, oponentType, 3);
           gainEnergy(10);
           setPokemonReward(10);
-        } else if (captureRate > 45 && captureRate <= 190) {
+        } else if (captureRate > 100 && captureRate <= 200) {
+          capturePokemon(param.pokemonOponent!, oponentType, 2);
           gainEnergy(3);
           setPokemonReward(3);
         } else {
+          capturePokemon(param.pokemonOponent!, oponentType, 1);
           gainEnergy(1);
           setPokemonReward(1);
         }
       } else {
         setWonBattle(false);
       }
+      setUseSpecialAttack(false);
     } catch (error) {
       console.log("Cannot get the pokemon oponent.");
     }
@@ -304,7 +322,7 @@ const PokemonBattle = () => {
                                 : genericAttack
               }
               alt="attack"
-              className={`absolute left-1/2 bottom-40 -translate-x-1/2 w-28 animate-power-attack-up opacity-0`}
+              className={`absolute left-1/2 bottom-40 -translate-x-1/2 ${useSpecialAttack ? "w-64" : "w-28"} animate-power-attack-up opacity-0`}
             />
           )}
           {!isCapturing && (
@@ -326,6 +344,32 @@ const PokemonBattle = () => {
                   : ""
               }`}
             />
+          )}
+          {state.userStatus.energy >= 10 && isFighting && (
+            <button
+              className={`absolute right-2 bottom-2 flex flex-col items-center justify-center gap-2 w-28 py-4 z-0 bg-linear-to-bl from-bt-purple to-pink-400 text-white text-xs rounded-3xl px-2 cursor pointer ${useSpecialAttack ? "pointer-events-none opacity-0" : ""}`}
+              onClick={() => {
+                setUseSpecialAttack(true);
+              }}
+            >
+              <div className="flex flex-col gap-1">
+                <span className="font-bold">USAR ESPECIAL</span>
+              </div>
+              <div className="flex gap-2">
+                <span className="font-bold">-10</span>
+                <img src={energy} alt="energy" className="w-4" />
+              </div>
+              {typeof pokemonChose.rarity === "number" && (
+                <span className="text-center">
+                  + {winRatePorcentage}% chance de vitória
+                </span>
+              )}
+            </button>
+          )}
+          {isFighting && useSpecialAttack && (
+            <span className="absolute left-1/2 top-1/2 -translate-1/2 font-bold text-sm animate-growing opacity-0">
+              ATAQUE ESPECIAL!!!
+            </span>
           )}
           {!isFighting && (
             <img

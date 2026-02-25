@@ -245,17 +245,17 @@ useEffect(() => {
 
   const filterCaptureLevel = (captureStatus: string) => {
     if (captureStatus === "fácil") {
-      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel === 255);
+      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel <= 255 && pokemon.captureLevel >= 200);
     } else if (captureStatus === "médio") {
       return pokemonBaseList?.filter(
-        (pokemon) => pokemon.captureLevel < 255 && pokemon.captureLevel >= 190,
+        (pokemon) => pokemon.captureLevel < 200 && pokemon.captureLevel >= 100,
       );
     } else if (captureStatus === "dificil") {
       return pokemonBaseList?.filter(
-        (pokemon) => pokemon.captureLevel < 190 && pokemon.captureLevel >= 35,
+        (pokemon) => pokemon.captureLevel < 100 && pokemon.captureLevel >= 4,
       );
     } else if (captureStatus === "insano") {
-      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel < 35);
+      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel < 4);
     } else {
       return pokemonBaseList;
     }
