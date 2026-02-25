@@ -2,21 +2,9 @@ import { useEffect, useReducer } from "react";
 import { PokemonContext } from "./PokemonContext";
 import { pokemonReducer, initialPokemonState } from "./pokemonReducer";
 import type { DayOfMonth, Month } from "./pokemonTypes";
+import { CURRENT_VERSION, migrations } from "@/version/version";
 
 const STORAGE_KEY = "pokemon_game";
-const CURRENT_VERSION = 2;
-
-//Migrations
-function migrateV1toV2(state: any) {
-  return {
-    ...state,
-    version: 2,
-  };
-}
-
-const migrations: Record<number, (state: any) => any> = {
-  1: migrateV1toV2,
-};
 
 function migrateToLatest(state: any) {
   let version = typeof state.version === "number" ? state.version : 1;

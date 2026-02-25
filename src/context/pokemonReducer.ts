@@ -7,10 +7,12 @@ import type {
   Checklist,
   Pokemon,
 } from "./pokemonTypes";
+import { CURRENT_VERSION } from "@/version/version";
 const date = new Date();
 const currYear = date.getFullYear();
 
 export const initialPokemonState: PokemonState = {
+  version: CURRENT_VERSION,
   userStatus: {
     pokeball: 3,
     energy: 10,
@@ -207,7 +209,7 @@ export function pokemonReducer(
         }),
       };
 
-          case "SET_PASSWORD":
+    case "SET_PASSWORD":
       return {
         ...state,
         userStatus: {
