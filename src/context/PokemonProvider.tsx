@@ -119,6 +119,10 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "DELETE_TAG", payload: { name } });
   }
 
+    function setPassword(password: string) {
+    dispatch({ type: "SET_PASSWORD", payload: { password } });
+  }
+
   function setUserName(userName: string) {
     dispatch({ type: "SET_USERNAME", payload: { userName } });
   }
@@ -222,6 +226,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         setUserName,
         setTag,
         deleteTag,
+        setPassword,
         setGender,
         setNote,
         activeNote,

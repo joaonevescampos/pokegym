@@ -7,6 +7,7 @@ import diamond from "../assets/diamond.png";
 import energy from "../assets/energy.png";
 import token from "../assets/token.png";
 import xIcon from "../assets/x.png";
+import bcrypt from "bcryptjs";
 interface ChecklistType {
   task: string;
   checked: boolean;
@@ -38,6 +39,7 @@ const PokemonDetail = () => {
     useState<ChecklistType[]>(initialList);
   const [date, setDate] = useState("");
   const [alert, setAlert] = useState(false);
+  const [passwordReact, setPasswordReact] = useState<string>("");
   const navigate = useNavigate();
   const currentPokemon = state.myPokemons.find((p) => p.name === pokemonName);
   const name = currentPokemon?.name ?? "";
@@ -53,9 +55,14 @@ const PokemonDetail = () => {
   const timeToWait = 28800;
   const limitCaractere = 10;
   const [caractere, setCaractere] = useState(currentPokemon?.tag.length);
+  const [allowByParents, setAllowByParents] = useState<boolean>(
+    state.userStatus.password.length === 0 ? true : false,
+  );
+  const [error, setError] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     formatDate();
+    // createHash("teste");
   }, []);
 
   useEffect(() => {
@@ -71,6 +78,19 @@ const PokemonDetail = () => {
       getPokemonInfos(currentPokemon.name);
     }
   }, [currentPokemon]);
+
+  const validatePassword = (password: string) => {
+    const hash = state.userStatus.password;
+    console.log(hash);
+    bcrypt.compare(password, hash, function (_, result) {
+      if (result) {
+        setAllowByParents(result);
+        setError(false);
+      } else {
+        setError(true);
+      }
+    });
+  };
 
   const getPokemonInfos = async (name: string) => {
     try {
@@ -558,7 +578,32 @@ const PokemonDetail = () => {
                 onClick={() => handleClick()}
               />
               {reactChecklist.every((item) => item.checked) &&
-                reactChecklist.length > 0 && (
+                reactChecklist.length > 0 &&
+                !allowByParents && (
+                  <div className="flex flex-col gap-1">
+                  <div className="flex gap-2 items-center justify-center">
+                    <input
+                      type="password"
+                      placeholder="Digite a senha"
+                      className="py-1 px-4 rounded-2xl w-full max-w-52 bg-white m-auto text-center"
+                      onChange={(e: any) => {
+                        setPasswordReact(e.target.value);
+                      }}
+                    />
+                    <Button
+                      text="Liberar"
+                      style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white!"
+                      onClick={() => validatePassword(passwordReact)}
+                    />
+                  </div>
+                  {error===true && (
+                    <span className="text-red-400 text-sm">Senha incorreta!</span>
+                  )}
+                  </div>
+                )}
+              {reactChecklist.every((item) => item.checked) &&
+                reactChecklist.length > 0 &&
+                allowByParents && (
                   <Button
                     text="Finalizar treino"
                     style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"

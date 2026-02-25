@@ -67,6 +67,7 @@ export type UserStatus = {
   diamond: number;
   token: number;
   dashboard: Dashboard;
+  password: string;
   xp: number;
   note: string;
   snorlaxStatus: boolean;
@@ -95,6 +96,7 @@ export type PokemonAction =
   | { type: "GAIN_XP"; payload: { gain: number } }
   | { type: "SET_TAG"; payload: { name: string; tag: string } }
   | { type: "DELETE_TAG"; payload: { name: string } }
+   | { type: "SET_PASSWORD"; payload: { password: string } }
   | { type: "SET_GENDER"; payload: { gender: string } }
   | { type: "SET_USERNAME"; payload: { userName: string } }
   | { type: "SET_NOTE"; payload: { note: string } }

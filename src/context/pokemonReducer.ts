@@ -19,6 +19,7 @@ export const initialPokemonState: PokemonState = {
     token: 0,
     userName: "",
     gender: "",
+    password: "",
     dashboard: [
       {
         year: currYear,
@@ -204,6 +205,15 @@ export function pokemonReducer(
             tag: "",
           };
         }),
+      };
+
+          case "SET_PASSWORD":
+      return {
+        ...state,
+        userStatus: {
+          ...state.userStatus,
+          password: action.payload.password,
+        },
       };
 
     case "SET_USERNAME":

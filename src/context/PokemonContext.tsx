@@ -21,6 +21,7 @@ export type PokemonContextType = {
   setTag: (name: string, tag: string) => void;
   deleteTag: (name: string) => void;
   setNote: (note: string) => void;
+  setPassword: (password: string) => void;
   activeNote: (status: boolean) => void;
   activeRandom: (status: boolean) => void;
   activePomodoro: (status: boolean) => void;
