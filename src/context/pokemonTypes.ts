@@ -77,6 +77,7 @@ export type UserStatus = {
 };
 
 export type PokemonState = {
+  version: number;
   userStatus: UserStatus;
   myPokemons: Pokemon[];
 };

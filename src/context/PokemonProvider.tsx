@@ -4,10 +4,51 @@ import { pokemonReducer, initialPokemonState } from "./pokemonReducer";
 import type { DayOfMonth, Month } from "./pokemonTypes";
 
 const STORAGE_KEY = "pokemon_game";
+const CURRENT_VERSION = 2;
+
+//Migrations
+function migrateV1toV2(state: any) {
+  return {
+    ...state,
+    version: 2,
+  };
+}
+
+const migrations: Record<number, (state: any) => any> = {
+  1: migrateV1toV2,
+};
+
+function migrateToLatest(state: any) {
+  let version = typeof state.version === "number" ? state.version : 1;
+
+  while (version < CURRENT_VERSION) {
+    const migrate = migrations[version];
+
+    if (!migrate) {
+      throw new Error(`Missing migration for version ${version}`);
+    }
+
+    state = migrate(state);
+    version = state.version;
+  }
+
+  return state;
+}
+
+//Carregar estado do jogo
 
 function loadState() {
   const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : initialPokemonState;
+
+  if (!stored) return initialPokemonState;
+
+  let parsed = JSON.parse(stored);
+
+  parsed = migrateToLatest(parsed);
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+
+  return parsed;
 }
 
 export function PokemonProvider({ children }: { children: React.ReactNode }) {
@@ -119,7 +160,7 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "DELETE_TAG", payload: { name } });
   }
 
-    function setPassword(password: string) {
+  function setPassword(password: string) {
     dispatch({ type: "SET_PASSWORD", payload: { password } });
   }
 
