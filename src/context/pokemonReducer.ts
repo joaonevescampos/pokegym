@@ -74,6 +74,7 @@ export function pokemonReducer(
           {
             name: action.payload.name,
             type: action.payload.type,
+            rarity: action.payload.rarity,
             hp: 0,
             level: 0,
             checklist: [{ task: "crie sua tarefa aqui", checked: false }],

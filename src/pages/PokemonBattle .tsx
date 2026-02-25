@@ -110,20 +110,45 @@ const PokemonBattle = () => {
   }, [isFighting]);
 
   const calculateWinner = async () => {
+    const pokemonChose = state.myPokemons.filter(
+      (pokemon) => pokemon.name === param.pokemonChose,
+    )[0];
     try {
-      const responseId = await fetch(
+      const responseOpponentId = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
       );
-      const data1 = await responseId.json();
-      // const type: string = data1.types[0].type.name;
+      const responseId = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonChose.name}`,
+      );
+      const dataOpponent = await responseOpponentId.json();
+      const data = await responseId.json();
+
+      const responseCaptureRateOpponent: any = await fetch(
+        `https://pokeapi.co/api/v2/pokemon-species/${dataOpponent.id}`,
+      );
 
       const responseCaptureRate: any = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-species/${data1.id}`,
+        `https://pokeapi.co/api/v2/pokemon-species/${data.id}`,
       );
-      const data2 = await responseCaptureRate.json();
+
+      const dataOponnent2 = await responseCaptureRateOpponent.json();
 
       //calculo de de vitória
-      const captureRate = data2.capture_rate;
+      const myPokemonCaptureRate = responseCaptureRate.capture_rate;
+      let rarity = 0;
+
+      if (myPokemonCaptureRate <= 3) {
+        rarity = 4;
+      } else if (myPokemonCaptureRate > 3 && myPokemonCaptureRate <= 45) {
+        rarity = 3;
+      } else if (myPokemonCaptureRate > 45 && myPokemonCaptureRate <= 190) {
+        rarity = 2;
+      } else {
+        rarity = 1;
+      }
+      console.log(rarity)
+
+      const captureRate = dataOponnent2.capture_rate;
       const maxCaptureRate = 255;
       const maxLevel = 100;
       const maxPokemons = 541;
@@ -133,9 +158,6 @@ const PokemonBattle = () => {
         (userTotalPokemon * 100) / maxPokemons,
       );
 
-      const pokemonChose = state.myPokemons.filter(
-        (pokemon) => pokemon.name === param.pokemonChose,
-      )[0];
       const pokemonChoseHP = pokemonChose.hp;
 
       const winRate = captureRate + capturedPorcentage + pokemonChoseHP;
@@ -145,7 +167,7 @@ const PokemonBattle = () => {
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
-        capturePokemon(param.pokemonOponent!, oponentType);
+        capturePokemon(param.pokemonOponent!, oponentType, rarity);
         if (captureRate <= 3) {
           gainEnergy(50);
           setPokemonReward(50);

@@ -46,8 +46,8 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
 
-  function capturePokemon(name: string, type: string) {
-    dispatch({ type: "CAPTURE_POKEMON", payload: { name, type } });
+  function capturePokemon(name: string, type: string, rarity: number) {
+    dispatch({ type: "CAPTURE_POKEMON", payload: { name, type, rarity } });
   }
 
   function findNextEvolution(chain: any, currentName: string): string | null {

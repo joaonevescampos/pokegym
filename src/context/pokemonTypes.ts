@@ -1,6 +1,7 @@
 export type Pokemon = {
   name: string;
   type: string;
+  rarity: number;
   hp: number;
   level: number;
   checklist: Checklist[];
@@ -83,7 +84,7 @@ export type PokemonState = {
 };
 
 export type PokemonAction =
-  | { type: "CAPTURE_POKEMON"; payload: { name: string; type: string } }
+  | { type: "CAPTURE_POKEMON"; payload: { name: string; type: string, rarity: number } }
   | { type: "GAIN_HP"; payload: { name: string; hp: number } }
   | { type: "EVOLVE_POKEMON"; payload: { name: string; newName: string } }
   | { type: "GAIN_POKEBALL"; payload: { gain: number } }

@@ -4,7 +4,7 @@ import type { PokemonState } from "./pokemonTypes";
 
 export type PokemonContextType = {
   state: PokemonState;
-  capturePokemon: (name: string, type: string) => void;
+  capturePokemon: (name: string, type: string, rarity: number) => void;
   gainHp: (name: string, hp: number) => Promise<boolean>;
   gainPokeball: (gain: number) => void;
   usePokeball: (lose: number) => void;
