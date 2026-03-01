@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { usePokemon } from "../context/usePokemon";
-import pokebola from "../assets/pokeball.png"
+import pokebola from "../assets/pokeball.png";
 
 interface PokemonCard {
   name: string;
@@ -9,6 +9,7 @@ interface PokemonCard {
   buttonText: string;
   buttonStyle?: string;
   level?: number;
+  hp?: number;
   buttonPath?: string;
   inactive?: boolean;
   buttonClick?: () => void;
@@ -21,6 +22,7 @@ const PokemonCard = ({
   buttonStyle,
   buttonPath,
   level,
+  hp,
   inactive,
   buttonClick,
 }: PokemonCard) => {
@@ -153,9 +155,15 @@ const PokemonCard = ({
       >
         {type}
       </span>
-      <span className="z-20 text-xs font-bold opacity-70">
-        level : {level === 10 ? "MAX" : level}
-      </span>
+      <div className="flex gap-1 items-center">
+        <span className="z-20 text-xs font-bold opacity-70">
+          level : {level === 10 ? "MAX" : level}
+        </span>
+        <span>|</span>
+        <span className="z-20 text-xs font-bold opacity-70">
+          HP : {hp === 100 ? "MAX" : hp}
+        </span>
+      </div>
       <Button
         text={buttonText}
         selected={pokemonSelected}

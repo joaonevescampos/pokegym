@@ -233,6 +233,7 @@ const ChoosePokemonLeague = () => {
                   "bg-bt-purple! text-white!"
                 }`}
                 level={pokemon.level}
+                hp={pokemon.hp}
                 inactive={false}
                 buttonClick={() => handleClick(index)}
               />

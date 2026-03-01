@@ -36,6 +36,7 @@ const MyPokemons = () => {
                 name={pokemon.name}
                 buttonText="treinar"
                 level={pokemon.level}
+                hp={pokemon.hp}
                 buttonPath={`/pokemon/${pokemon.name}`}
                 inactive={false}
               />

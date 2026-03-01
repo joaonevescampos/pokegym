@@ -45,7 +45,7 @@ const PokemonBattle = () => {
   )[0];
 
   const winRatePorcentage = Math.ceil(
-    (pokemonChose.rarity * pokemonChose.rarity * 400) / 455,
+    (pokemonChose.rarity * pokemonChose.rarity * 600) / 551,
   );
 
   const getPokemonImage = async (name: string, isOponent: boolean) => {
@@ -157,7 +157,7 @@ const PokemonBattle = () => {
       let boost = 0;
 
       if (useSpecialAttack) {
-        boost = rarity ** 2 * 4;
+        boost = rarity ** 2 * 6;
         useEnergy(10);
       }
 
@@ -170,12 +170,17 @@ const PokemonBattle = () => {
       const capturedPorcentage = Math.ceil(
         (userTotalPokemon * 100) / maxPokemons,
       );
+      const maxBoost = 96;
 
       const pokemonChoseHP = pokemonChose.hp;
 
-      const winRate = captureRate + capturedPorcentage + pokemonChoseHP + boost;
+      let winRate = captureRate + capturedPorcentage + pokemonChoseHP + boost;
 
-      const total = maxCaptureRate + maxLevel + maxCapturePorcentage;
+      if(captureRate <= 4) {
+         winRate = Math.ceil((captureRate + capturedPorcentage + pokemonChoseHP)/3 + boost)
+      }
+
+      const total = maxCaptureRate + maxLevel + maxCapturePorcentage + maxBoost;
 
       const randomNumberToWin: number = Math.ceil(Math.random() * total);
 
@@ -210,7 +215,7 @@ const PokemonBattle = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowResult(true);
-    }, 26000);
+    }, 24000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -253,7 +258,7 @@ const PokemonBattle = () => {
             <img
               src={pokemonOponent}
               alt=""
-              className={`absolute left-1/2 top-3/7 w-36 h-36 -translate-1/2 z-0 ${
+              className={`absolute left-1/2 top-90 w-36 h-36 -translate-1/2 z-0 ${
                 isFighting
                   ? attacker === "top"
                     ? "animate-attack-down"
@@ -263,14 +268,22 @@ const PokemonBattle = () => {
             />
           )}
           {attacker === "top" && isFighting && (
-            <span className="absolute left-1/2 top-3/7 -translate-x-1/2 -translate-y-30 text-white font-bold">
+            <span className="absolute left-1/2 top-90 -translate-x-1/2 -translate-y-30 text-white font-bold">
               AAAARRRGG!! NHAC!
             </span>
           )}
           {attacker === "bottom" && isFighting && (
-            <span className="absolute left-1/2 bottom-40 -translate-x-1/2 translate-y-30 text-white font-bold">
-              Whooshh!! GRRRRR!
-            </span>
+            <>
+              {useSpecialAttack ? (
+                <span className="absolute left-1/2 bottom-60 -translate-x-1/2 translate-y-30 text-white font-bold">
+                  ESPECIAL ATAQUE!
+                </span>
+              ) : (
+                <span className="absolute left-1/2 bottom-60 -translate-x-1/2 translate-y-30 text-white font-bold">
+                  Whooshh!! GRRRRR!
+                </span>
+              )}
+            </>
           )}
           {attacker === "top" && isFighting && (
             <img
@@ -295,7 +308,7 @@ const PokemonBattle = () => {
                                 : genericAttack
               }
               alt="attack"
-              className={`absolute left-1/2 top-1/2 -translate-1/2 w-28 animate-power-attack-down opacity-0`}
+              className={`absolute left-1/2 top-100 -translate-1/2 w-28 animate-power-attack-down opacity-0`}
             />
           )}
           {attacker === "bottom" && isFighting && (
@@ -322,21 +335,21 @@ const PokemonBattle = () => {
                                 : genericAttack
               }
               alt="attack"
-              className={`absolute left-1/2 bottom-40 -translate-x-1/2 ${useSpecialAttack ? "w-64" : "w-28"} animate-power-attack-up opacity-0`}
+              className={`absolute left-1/2 bottom-50 -translate-x-1/2 ${useSpecialAttack ? "w-52" : "w-28"} animate-power-attack-up opacity-0`}
             />
           )}
           {!isCapturing && (
             <img
               src={lightCircle}
               alt=""
-              className={`absolute left-1/2 top-3/7 w-24 opacity-0 -translate-1/2 z-0 animate-circle-effect`}
+              className={`absolute left-1/2 top-90 w-24 opacity-0 -translate-1/2 z-0 animate-circle-effect`}
             />
           )}
           {myPokemon && isFighting && (
             <img
               src={myPokemon}
               alt="pokemon"
-              className={`absolute left-1/2 bottom-0 w-48 h-48 -translate-1/2 z-0 ${
+              className={`absolute left-1/2 bottom-20 w-48 h-48 -translate-1/2 z-0 ${
                 isFighting
                   ? attacker === "top"
                     ? "animate-hit-left"
@@ -347,7 +360,7 @@ const PokemonBattle = () => {
           )}
           {state.userStatus.energy >= 10 && isFighting && (
             <button
-              className={`absolute right-2 bottom-2 flex flex-col items-center justify-center gap-2 w-28 py-4 z-0 bg-linear-to-bl from-bt-purple to-pink-400 text-white text-xs rounded-3xl px-2 cursor pointer ${useSpecialAttack ? "pointer-events-none opacity-0" : ""}`}
+              className={`absolute left-1/2 -translate-x-1/2 bottom-2 flex flex-col items-center justify-center gap-2 w-52 py-4 z-0 bg-bt-purple text-white text-xs rounded-3xl px-2 cursor pointer ${useSpecialAttack ? "pointer-events-none opacity-0" : ""}`}
               onClick={() => {
                 setUseSpecialAttack(true);
               }}
@@ -356,7 +369,7 @@ const PokemonBattle = () => {
                 <span className="font-bold">USAR ESPECIAL</span>
               </div>
               <div className="flex gap-2">
-                <span className="font-bold">-10</span>
+                <span className="font-bold text-sm">-10</span>
                 <img src={energy} alt="energy" className="w-4" />
               </div>
               {typeof pokemonChose.rarity === "number" && (
@@ -375,7 +388,7 @@ const PokemonBattle = () => {
             <img
               src={pokeball}
               alt="pokeball"
-              className={`absolute left-1/2 bottom-0 opacity-0 w-12 -translate-1/2 z-0 ${
+              className={`absolute left-1/2 bottom-30 opacity-0 w-10 -translate-1/2 z-0 ${
                 !isFighting ? "animate-pokeball-hit" : ""
               }`}
             />
@@ -384,7 +397,7 @@ const PokemonBattle = () => {
             <img
               src={pokeball}
               alt="pokeball"
-              className={`absolute left-1/2 bottom-75 w-12 -translate-1/2 z-0 animate-pokeball-captured`}
+              className={`absolute left-1/2 bottom-105 w-10 -translate-1/2 z-0 animate-pokeball-captured`}
             />
           )}
           {wonBattle === true && !isCapturing && showResult && (

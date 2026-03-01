@@ -9,10 +9,14 @@ const ChoosePokemon = () => {
   const navigate = useNavigate();
   const [inactive, setinactive] = useState(true);
   const [initialPokemons, setInitialPokemons] = useState([
-    { name: "pichu", type: "electric", level: 0, selected: false, rarity: 2 },
-    { name: "bulbasaur", type: "grass", level: 0, selected: false, rarity: 3 },
-    { name: "charmander", type: "fire", level: 0, selected: false, rarity: 3 },
-    { name: "squirtle", type: "water", level: 0, selected: false, rarity: 3 },
+    {
+      name: "pichu",
+      type: "electric",
+      level: 0,
+      hp: 0,
+      selected: false,
+      rarity: 3,
+    },
   ]);
   const { state } = usePokemon();
 
@@ -84,6 +88,7 @@ const ChoosePokemon = () => {
                       }`}
                       buttonClick={() => handleClick(index)}
                       level={pokemon.level}
+                      hp={pokemon.hp}
                     />
                   ))}
                 </div>

@@ -346,6 +346,7 @@ useEffect(() => {
                 name={pokemon.name}
                 buttonText={pokemon.captured ? "capturado" : "capturar"}
                 level={0}
+                hp={0}
                 buttonPath={
                   pokemon.captured ? "" : `/pokemon-battle/${pokemon.name}`
                 }
