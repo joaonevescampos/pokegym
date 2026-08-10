@@ -15,11 +15,14 @@ import leagueImage from "../assets/menu-folders/league.png";
 import specialImage from "../assets/menu-folders/special.png";
 import storeImage from "../assets/menu-folders/store.png";
 import configImage from "../assets/menu-folders/config.png";
+import rouletteImage from "../assets/menu-folders/roulette.png";
+
 
 const menu = [
   { name: "Meus pokémons", path: "/my-pokemons", folder: myPokemonsImage },
   { name: "Capturar pokémons", path: "/capture-pokemon", folder: captureImage },
   { name: "Batalha", path: "/rocket-team-battle", folder: battleImage },
+  { name: "Roleta", path: "/roulette", folder: rouletteImage },
   { name: "Dashboard", path: "/dashboard", folder: dashboardImage },
   {
     name: "Pokémons especiais",
@@ -29,6 +32,7 @@ const menu = [
   { name: "Loja", path: "/store", folder: storeImage },
   { name: "Liga Pokémon", path: "/pokemon-league", folder: leagueImage },
   { name: "Configurações", path: "/seetings", folder: configImage },
+
 ];
 
 function CarouselMenu() {

@@ -2,6 +2,7 @@ import PokemonCard from "../components/PokemonCard";
 import Button from "../components/Button";
 import xIcon from "../assets/x.png";
 import generation from "../assets/generation.png";
+import backgroundImage from "../assets/background-home.png";
 
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
@@ -32,15 +33,15 @@ const PokemonCataloge = () => {
     [],
   );
 
-useEffect(() => {
-  if (!state?.userStatus) return;
+  useEffect(() => {
+    if (!state?.userStatus) return;
 
-  const xp = state.userStatus.xp;
+    const xp = state.userStatus.xp;
 
-  if (xp >= 1000 && xp % 1000 < 30 && xp<=9000) {
-    setAlert(true);
-  }
-}, [state.userStatus?.xp]);
+    if (xp >= 1000 && xp % 1000 < 30 && xp <= 9000) {
+      setAlert(true);
+    }
+  }, [state.userStatus?.xp]);
 
   const [captureLevels, setCaptureLevels] = useState([
     { level: "fácil", color: "bg-green-300", selected: false },
@@ -245,7 +246,9 @@ useEffect(() => {
 
   const filterCaptureLevel = (captureStatus: string) => {
     if (captureStatus === "fácil") {
-      return pokemonBaseList?.filter((pokemon) => pokemon.captureLevel <= 255 && pokemon.captureLevel >= 200);
+      return pokemonBaseList?.filter(
+        (pokemon) => pokemon.captureLevel <= 255 && pokemon.captureLevel >= 200,
+      );
     } else if (captureStatus === "médio") {
       return pokemonBaseList?.filter(
         (pokemon) => pokemon.captureLevel < 200 && pokemon.captureLevel >= 100,
@@ -286,8 +289,13 @@ useEffect(() => {
 
   return (
     <>
-     <Header />
-      <section className="relative w-full h-fit text-white pt-16">
+      <Header />
+      <img
+        src={backgroundImage}
+        alt="home"
+        className="absolute left-0 w-full object-cover h-full opacity-20 z-0"
+      />
+      <section className="relative w-full h-full text-white pt-16 z-10">
         <section className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120 px-4">
             <h1 className="text-2xl text-center font-extrabold">Pokedex</h1>

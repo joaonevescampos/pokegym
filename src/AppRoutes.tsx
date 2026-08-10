@@ -13,9 +13,6 @@ import RocketTeamChoose from "./pages/RocketTeamChoose";
 import RocketTeamBattle from "./pages/RocketTeamBattle";
 import DashboardPage from "./pages/DashboardPage";
 import SpecialPokemons from "./pages/SpecialPokemons";
-import SpecialPokemonSnorlax from "./pages/SpecialPokemonSnorlax";
-import SpecialPokemonVictini from "./pages/SpecialPokemonVictini";
-import SpecialPokemonCelebi from "./pages/SpecialPokemonCelebi";
 import SetGameInfos from "./pages/SetGameInfos";
 import Store from "./pages/Store";
 import Seetings from "./pages/Seetings";
@@ -24,6 +21,7 @@ import Pomodoro from "./pages/Pomodoro";
 import ChoosePokemonLeague from "./pages/ChoosePokemonLeague";
 import { PokemonLeague } from "./pages/PokemonLeague";
 import PokemonBattleLeague from "./pages/PokemonBattleLeague";
+import Roulette from "./pages/Roulette";
 
 function AppRoutes() {
   return (
@@ -55,26 +53,21 @@ function AppRoutes() {
         />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/special-pokemons" element={<SpecialPokemons />} />
-        <Route
-          path="/special-pokemon/snorlax"
-          element={<SpecialPokemonSnorlax />}
-        />
-        <Route
-          path="/special-pokemon/victini"
-          element={<SpecialPokemonVictini />}
-        />
-        <Route
-          path="/special-pokemon/celebi"
-          element={<SpecialPokemonCelebi />}
-        />
         <Route path="/set-informations" element={<SetGameInfos />} />
         <Route path="/store" element={<Store />} />
         <Route path="/seetings" element={<Seetings />} />
         <Route path="/snorlax-note" element={<SnorlaxNote />} />
         <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/pokemon-league" element={<PokemonLeague />} />
-        <Route path="/choose-pokemon-league/:league/:oponnent" element={<ChoosePokemonLeague />} />
-        <Route path="pokemon-league-battle/:league/:oponnentName/:oponnentPokemons/:myPokemons" element={<PokemonBattleLeague />} />
+        <Route
+          path="/choose-pokemon-league/:league/:oponnent"
+          element={<ChoosePokemonLeague />}
+        />
+        <Route
+          path="pokemon-league-battle/:league/:oponnentName/:oponnentPokemons/:myPokemons"
+          element={<PokemonBattleLeague />}
+        />
+        <Route path="/roulette" element={<Roulette />} />
       </Routes>
     </Router>
   );

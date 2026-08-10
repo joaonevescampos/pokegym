@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/Button";
 import Header from "@/components/Header";
+import backgroundImage from "../assets/menu-folders/special.png";
 
 const specialPokemons = [
   {
@@ -79,8 +80,13 @@ const SpecialPokemons = () => {
   return (
     <>
       <Header />
-      <main className="flex flex-col items-center justify-center w-full h-full pb-4 pt-30">
-        <h1 className="text-white text-xl font-bold pb-4">
+      <img
+        src={backgroundImage}
+        alt="home"
+        className="absolute left-0 w-full object-cover h-full opacity-15 z-0"
+      />
+      <main className="relative flex flex-col items-center justify-center w-full h-full pb-4 pt-30 z-10">
+        <h1 className="text-white text-xl font-bold pb-4 ">
           Pokemons Especiais
         </h1>
         <h2 className="text-white text-sm text-center opacity-70 max-w-150 px-4 pb-2">

@@ -9,6 +9,7 @@ import type {
 import { usePokemon } from "@/context/usePokemon";
 import { useState, useMemo, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import backgroundImage from "../assets/menu-folders/dashboard.png";
 
 function isSameDay(a: Date, b: Date) {
   return (
@@ -70,7 +71,7 @@ function generateBlockedDates(
 
 const DashboardPage = () => {
   const { state } = usePokemon();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [selected, setSelected] = useState<Date | undefined>(new Date());
   const [month, setMonth] = useState<Date>(new Date());
@@ -129,13 +130,18 @@ const DashboardPage = () => {
 
   return (
     <>
+      <img
+        src={backgroundImage}
+        alt="home"
+        className="absolute left-0 w-full object-cover h-full opacity-10 z-0"
+      />
       <div className="absolute flex items-end gap-2 top-4 left-4 text-white">
         <Link to="/home" className="text-sm  font-bold opacity-70">
           HOME
         </Link>
       </div>
-      
-      <main className="flex flex-col gap-4 items-center justify-center max-w-100 w-full h-screen m-auto px-4">
+
+      <main className="relative flex flex-col gap-4 items-center justify-center max-w-100 w-full h-screen m-auto px-4 z-10">
         <h1 className="font-bold text-xl text-white">Progresso</h1>
         <p className="opacity-70 text-sm text-white">
           Veja seu progresso ao longo dos meses
@@ -183,7 +189,11 @@ const DashboardPage = () => {
             </span>
           </div>
         </div>
-        <Button text="voltar" onClick={() => navigate(-1)} style="text-white! bg-bt-purple!" />
+        <Button
+          text="voltar"
+          onClick={() => navigate(-1)}
+          style="text-white! bg-bt-purple!"
+        />
       </main>
     </>
   );

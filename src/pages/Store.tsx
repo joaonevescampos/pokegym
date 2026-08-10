@@ -6,6 +6,7 @@ import { usePokemon } from "@/context/usePokemon";
 import { useState } from "react";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import backgroundImage from "../assets/menu-folders/store.png";
 
 type Store = {
   item: string;
@@ -16,9 +17,9 @@ type Store = {
 
 const store = [
   { item: "pokeball", text: "+1 pokebola", cost: 5, currency: "energy" },
-  { item: "pokeball", text: "+10 pokebola", cost: 1, currency: "diamond" },
+  { item: "pokeball", text: "+10 pokebolas", cost: 1, currency: "diamond" },
   { item: "diamond", text: "+1 diamante", cost: 50, currency: "energy" },
-  { item: "energy", text: "+50 energia", cost: 1, currency: "diamond" },
+  { item: "energy", text: "+50 energias", cost: 1, currency: "diamond" },
 ];
 
 const Store = () => {
@@ -67,8 +68,13 @@ const Store = () => {
   return (
     <>
       <Header />
-      <main className="flex flex-col items-center justify-center h-screen">
-        <section className="flex flex-col gap-8 px-4 h-fit">
+      <main className="relative flex flex-col items-center justify-center h-screen">
+        <img
+          src={backgroundImage}
+          alt="home"
+          className="absolute left-0 w-full object-cover h-full opacity-20 z-0"
+        />
+        <section className="flex flex-col gap-8 px-4 h-fit z-10">
           <h1 className="text-center text-white font-bold text-2xl">
             Bem vindo a Loja Pokémon!
           </h1>
